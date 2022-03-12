@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 參考網站 https://www.oxxostudio.tw/articles/201503/css-regular-polygon-transform.html */
+        .tri {
+            width: 0px;
+            height: 0px;
+            border-width: 0 50px 87px;
+            border-style: solid;
+            border-color: transparent transparent #095;
+            margin-bottom: 20px;
+        }
+
+        .square {
+            width: 0;
+            height: 0;
+            border-width: 50px;
+            border-style: solid;
+            border-color: #095;
+            margin-bottom: 20px;
+        }
+
+        .square2 {
+            width: 100px;
+            height: 0;
+            border-width: 0 0 100px;
+            border-style: solid;
+            border-color: aquamarine;
+            margin-bottom: 20px;
+        }
+
+        .pentagon {
+            position: relative;
+            width: 0;
+            height: 0;
+            border-width: 0 81px 59px;
+            border-style: solid;
+            border-color: transparent transparent cadetblue;
+            margin-bottom: 150px;
+        }
+
+        .pentagon:before {
+            position: absolute;
+            content: "";
+            top: 59px;
+            left: -81px;
+            width: 100px;
+            height: 100px;
+            background: none;
+            border-width: 95px 31px 0;
+            border-style: solid;
+            border-color: cadetblue transparent transparent;
+        }
+
+        .hexagon {
+            position: relative;
+            width: 100px;
+            height: 0;
+            border-width: 0 50px 87px;
+            border-style: solid;
+            border-color: transparent transparent orange;
+            margin-bottom: 150px;
+        }
+
+        .hexagon::before {
+            position: absolute;
+            content: "";
+            width: 100px;
+            height: 0;
+            top: 87px;
+            left: -50px;
+            border-width: 87px 50px 0;
+            border-style: solid;
+            border-color: orange transparent transparent;
+        }
+
+        /* card hover */
+        .card-wrap {
+            width: 130px;
+            height: 195px;
+            margin-top: 100px;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            background: url("images/1.jpg") no-repeat;
+            background-position: center center;
+            background-size: cover;
+            display: inline-block;
+        }
+
+        .card-wrap:hover .card {
+            background: url("images/1hover.jpg") no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .x-down {
+            width: 0;
+            height: 0;
+            border-width: 25px 50px 0;
+            border-style: solid;
+            border-color: pink transparent transparent;
+        }
+
+        .x-up {
+            width: 0;
+            height: 0;
+            border-width: 0 50px 25px;
+            border-style: solid;
+            border-color: transparent transparent pink;
+        }
+
+        .tri-right {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent #007bff;
+        }
+
+        .tri-left {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #007bff transparent transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="tri"></div>
+        <div class="square"></div>
+        <div class="square2"></div>
+        <div class="pentagon"></div>
+        <div class="hexagon"></div>
+        <div class="x-down"></div>
+        <div class="x-up"></div>
+
+        <div class="tri-right"></div>
+        <div class="tri-left"></div>
+
+        <div class="card-wrap">
+            <div class="card"></div>
+        </div>
+
+        <input type="text" id="text">
+        <button></button>
+    </main>
+
+    <script>
+        var testing = document.getElementById('text').innerHTML;
+        if (button == 1) {
+            button.click();
+        }
+        alert(testing);
+
+    </script>
+</body>
+
+</html>

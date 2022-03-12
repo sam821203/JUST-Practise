@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css" />
+
+    <style>
+      body {
+        background-color: rgb(14, 43, 72);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      section {
+        width: 50%;
+        height: 600px;
+        background: rgb(244, 244, 244);
+        margin: 50px;
+        box-shadow: 0 0 18px rgba(0, 0, 0, 0.651);
+        border-radius: 10px;
+      }
+
+      .visible {
+        animation: scaleup 200ms ease-out;
+      }
+
+      .not-visible {
+        transform: scale(0.5);
+      }
+
+      @keyframes scaleup {
+        0% {
+          transform: scale(0.5);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <section id="section-class first-section"></section>
+    <section id="section-class second-section"></section>
+    <section id="section-class third-section"></section>
+    <section id="section-class fourth-section"></section>
+
+    <script>
+      const intersectionObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          console.log("enter!!");
+        } else {
+          console.log("out!!");
+        }
+      });
+
+      const array1 = ["a", "b", "c"];
+
+      entries.forEach((element) => {
+        console.log(element);
+      });
+
+      intersectionObserver.observe(document.querySelector("section"));
+
+      intersectionObserver.unobserve(document.querySelector("section"));
+    </script>
+  </body>
+</html>

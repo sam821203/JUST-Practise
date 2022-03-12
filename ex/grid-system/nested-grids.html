@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css grid</title>
+    <style>
+      body {
+        color: #fff;
+        text-align: center;
+        font-family: "Nunito Semibold";
+      }
+      #content {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(100px, auto));
+        grid-template-rows: repeat(3, minmax(100px, auto));
+        grid-gap: 10px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      div {
+        border-radius: 4px;
+      }
+
+      #content div {
+        background: #c5deeb;
+        padding: 30px;
+      }
+
+      #content div:nth-child(even) {
+        background: #fb9936;
+      }
+
+      .nested {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+        border: 1px solid black;
+        grid-column: span 2;
+      }
+
+      .nested > p {
+        border: 1px solid #d91b22;
+        border-radius: 4px;
+        padding: 20px;
+        margin: 0;
+        grid-column: span 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div class="nested">
+        <p>4-1</p>
+        <p>4-2</p>
+        <p>4-3</p>
+        <p>4-4</p>
+      </div>
+      <div>5</div>
+      <div>6</div>
+    </div>
+  </body>
+</html>
