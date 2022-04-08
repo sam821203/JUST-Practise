@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bem btn</title>
+    <style>
+      /* block component */
+      .btn {
+        display: inline-block;
+        margin: 5px;
+        padding: 8px 16px;
+        background-color: rgb(214, 214, 214);
+        color: #888;
+        font-family: sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        text-transform: uppercase;
+        border-radius: 5px;
+        text-decoration: none;
+      }
+
+      /* element */
+      .btn__price {
+        background-color: #333;
+        margin-right: -10px;
+        padding-right: 12px;
+        padding-left: 12px;
+        color: #fff;
+        font-weight: 600;
+        opacity: 0.4;
+        border-radius: 5px 0 0 5px;
+      }
+
+      .btn__text {
+        padding: 0 10px;
+        border-radius: 0 5px 5px 0;
+      }
+
+      /* modifier that changes the style of the block*/
+      .btn--red {
+        color: white;
+        background-color: #d91900;
+      }
+
+      .btn--green {
+        color: white;
+        background-color: #0074d9;
+      }
+
+      .btn--blue {
+        color: white;
+        background-color: #98d900;
+      }
+
+      .btn--big {
+        font-size: 28px;
+        padding: 10px;
+        font-weight: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="" class="btn">
+      <span class="btn__text">Standard button</span>
+    </a>
+
+    <a href="" class="btn btn--red btn--big">
+      <span class="btn__price">$3</span>
+      <span class="btn__text">Big button</span>
+    </a>
+
+    <a href="" class="btn btn--green btn--big">
+      <span class="btn__price">$4</span>
+      <span class="btn__text">Big button</span>
+    </a>
+
+    <a href="" class="btn btn--blue btn--big">
+      <span class="btn__price">$9</span>
+      <span class="btn__text">Big button</span>
+    </a>
+  </body>
+</html>
