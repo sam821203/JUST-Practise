@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>scroll top</title>
+    <!-- ICON NEEDS FONT AWESOME FOR CHEVRON UP ICON -->
+    <link
+      href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      h3 {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+
+      h3 i {
+          color: rgba(0, 0, 0, 0.3);
+      }
+
+      #top {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #000;
+        background: rgba(0, 0, 0, 0.7);
+        width: 50px;
+        height: 50px;
+        display: block;
+        text-decoration: none;
+        border-radius: 100%;
+        transition: all 0.3s ease;
+      }
+
+      #top i {
+        color: white;
+        margin: 0;
+        position: relative;
+        left: 16px;
+        top: 13px;
+        font-size: 19px;
+        transition: all 0.3s ease;
+      }
+
+      #top:hover {
+        background: rgba(0, 0, 0, 0.9);
+      }
+
+      #top:hover i {
+        color: #fff;
+        top: 5px;
+      }
+
+      .flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .mt-scroll-down {
+        margin-top: 100px;
+      }
+
+      .screen-height {
+        height: 2500px;
+      }
+    </style>
+  </head>
+  <body class="screen-height">
+    <a href="javascript:;" id="top"><i class="icon-chevron-up"></i></a>
+    <div class="flex mt-scroll-down">
+      <h3>Scroll down</h3>
+      <h3><i class="icon-arrow-down"></i></h3>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(window).scroll(function() {
+            // 當超過 50px，就顯示
+            if ($(this).scrollTop() >= 50) {
+                $('#top').fadeIn("fast");
+            } else {
+                $('#top').fadeOut("fast");
+            }
+        });
+
+        $('#top').click(function() {
+            $('body, html').animate({
+                scrollTop: 0
+            }, 300);
+        });
+    </script>
+  </body>
+</html>
