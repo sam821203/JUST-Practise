@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Hover Effects</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #353540;
+      }
+
+      .container {
+        display: grid;
+
+        /* fr 是分數的意思，這裡指 1/4 */
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 30px;
+        width: 100%;
+        min-width: 1200px;
+        padding: 30px;
+      } 
+
+      .game-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        padding-bottom: 150%;
+        perspective: 1000px;
+      }
+
+      .game-card__cover {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        background-size: cover;
+        perspective-origin: 50% 50%;
+        transform-style: preserve-3d;
+        transform-origin: top center;
+        will-change: transform;
+        transition: transform 0.35s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="game-card">
+        <div
+          class="game-card__cover"
+          style="
+            background-image: url(https://sam821203.github.io/Watcher/images/carousel-1-wrap.jpg);
+          "
+        ></div>
+        <div
+          class="game-card__cover"
+          style="
+            background-image: url(https://sam821203.github.io/Watcher/images/carousel-2-wrap.jpg);
+          "
+        ></div>
+        <div
+          class="game-card__cover"
+          style="
+            background-image: url(https://sam821203.github.io/Watcher/images/carousel-3-wrap.jpg);
+          "
+        ></div>
+        <div
+          class="game-card__cover"
+          style="
+            background-image: url(https://sam821203.github.io/Watcher/images/carousel-5-wrap.jpg);
+          "
+        ></div>
+      </div>
+    </div>
+  </body>
+</html>

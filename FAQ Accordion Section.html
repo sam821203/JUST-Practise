@@ -118,7 +118,7 @@
 
       .ques button[aria-expanded="true"] + .ques-content {
         opacity: 1;
-        max-height: 9em;
+        max-height: 9rem;
         transition: all 200ms linear;
         /* will-change: opacity, max-height; */
       }
@@ -130,10 +130,11 @@
         transition: opacity 200ms linear, max-height 200ms linear;
         /* will-change: opacity, max-height; */
       }
+
       .ques .ques-content p {
         font-size: 1rem;
         font-weight: 300;
-        margin: 2em 0;
+        margin: 2rem 0;
       }
     </style>
   </head>
@@ -215,21 +216,25 @@
         </div>
       </div>
     </div>
-
     <script>
       const items = document.querySelectorAll(".ques button");
-
       function toggleQues() {
         const itemToggle = this.getAttribute("aria-expanded");
 
+        // 先讓全部的 aria-expanded 都為 false
         for (i = 0; i < items.length; i++) {
-            items[i].setAttribute('aria-expanded', 'false');
+          items[i].setAttribute("aria-expanded", "false");
         }
 
-        if (itemToggle == 'false') {
-            this.setAttribute('aria-expanded', 'true');
+        // 當 itemToggle 是 false，點擊的就會被改成 true
+        if (itemToggle == "false") {
+          this.setAttribute("aria-expanded", "true");
         }
       }
+
+      items.forEach((item) => {
+        item.addEventListener("click", toggleQues);
+      });
     </script>
   </body>
 </html>
