@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ Accordion Section</title>
+    <style>
+      :root {
+        --color-primary: #03b5d2;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        color: #4d5974;
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .container {
+        margin: 0 auto;
+        padding: 4rem;
+        width: 48rem;
+      }
+
+      .ques .ques-item {
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      .ques .ques-item button[aria-expand="true"] {
+        border-bottom: 1px solid var(--color-primary);
+      }
+
+      .ques .ques-item button {
+        position: relative;
+        display: block;
+        text-align: left;
+        width: 100%;
+        overflow: 1rem 0;
+        color: #7288a2;
+        font-size: 1.15rem;
+        font-weight: 400;
+        border: none;
+        background: none;
+        outline: none;
+      }
+
+      .ques button:hover,
+      .ques button:focus {
+        cursor: pointer;
+        color: var(--color-primary);
+      }
+
+      .ques button:hover::after,
+      .ques button:focus::after {
+        cursor: pointer;
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary);
+      }
+
+      .ques button .ques-title {
+        display: inline-block;
+        padding: 1rem 1.5rem 1rem 0;
+      }
+
+      .ques button .icon {
+        display: inline-block;
+        position: absolute;
+        top: 18px;
+        right: 0;
+        width: 22px;
+        height: 22px;
+        border: 1px solid;
+        border-radius: 22px;
+      }
+
+      .ques button .icon::before {
+        display: block;
+        position: absolute;
+        content: "";
+        top: 9px;
+        left: 5px;
+        width: 10px;
+        height: 2px;
+        background: currentColor;
+      }
+
+      .ques button .icon::after {
+        display: block;
+        position: absolute;
+        content: "";
+        top: 5px;
+        left: 9px;
+        width: 2px;
+        height: 10px;
+        background: currentColor;
+      }
+
+      .ques button[aria-expanded="true"] {
+        color: #03b5d2;
+      }
+
+      .ques button[aria-expanded="true"] .icon::after {
+        width: 0;
+      }
+
+      .ques button[aria-expanded="true"] + .ques-content {
+        opacity: 1;
+        max-height: 9em;
+        transition: all 200ms linear;
+        /* will-change: opacity, max-height; */
+      }
+
+      .ques .ques-content {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 200ms linear, max-height 200ms linear;
+        /* will-change: opacity, max-height; */
+      }
+      .ques .ques-content p {
+        font-size: 1rem;
+        font-weight: 300;
+        margin: 2em 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="ques">
+        <div class="ques-item">
+          <button id="ques-button-1" aria-expanded="false">
+            <span class="ques-title"
+              >Why is the moon sometimes out during the day?</span
+            >
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="ques-content">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Necessitatibus vero, cum ea aliquam culpa, corrupti enim ratione
+              molestiae, magni commodi possimus ipsa ipsam beatae quibusdam quae
+              provident laborum! Excepturi, cum.
+            </p>
+          </div>
+        </div>
+        <div class="ques-item">
+          <button id="ques-button-2" aria-expanded="false">
+            <span class="ques-title">Why is the sky blue?</span>
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="ques-content">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Necessitatibus vero, cum ea aliquam culpa, corrupti enim ratione
+              molestiae, magni commodi possimus ipsa ipsam beatae quibusdam quae
+              provident laborum! Excepturi, cum.
+            </p>
+          </div>
+        </div>
+        <div class="ques-item">
+          <button id="ques-button-3" aria-expanded="false">
+            <span class="ques-title">Will we ever discover aliens?</span>
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="ques-content">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Necessitatibus vero, cum ea aliquam culpa, corrupti enim ratione
+              molestiae, magni commodi possimus ipsa ipsam beatae quibusdam quae
+              provident laborum! Excepturi, cum.
+            </p>
+          </div>
+        </div>
+        <div class="ques-item">
+          <button id="ques-button-4" aria-expanded="false">
+            <span class="ques-title">How much does the Earth weigh?</span>
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="ques-content">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Necessitatibus vero, cum ea aliquam culpa, corrupti enim ratione
+              molestiae, magni commodi possimus ipsa ipsam beatae quibusdam quae
+              provident laborum! Excepturi, cum.
+            </p>
+          </div>
+        </div>
+        <div class="ques-item">
+          <button id="ques-button-5" aria-expanded="false">
+            <span class="ques-title">How do airplanes stay up?</span>
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="ques-content">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Necessitatibus vero, cum ea aliquam culpa, corrupti enim ratione
+              molestiae, magni commodi possimus ipsa ipsam beatae quibusdam quae
+              provident laborum! Excepturi, cum.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const items = document.querySelectorAll(".ques button");
+
+      function toggleQues() {
+        const itemToggle = this.getAttribute("aria-expanded");
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+      }
+    </script>
+  </body>
+</html>
