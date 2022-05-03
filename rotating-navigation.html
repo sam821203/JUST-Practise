@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rotating navigation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --line-border-fill: #3498db;
+        --line-border-empty: #e0e0e0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Lato", sans-serif;
+        background-color: #333;
+        color: #222;
+        overflow-x: hidden;
+        margin: 0;
+      }
+
+      .container {
+        background-color: #fafafa;
+        transform-origin: top left;
+        transition: transform 0.5s linear;
+        width: 100vw;
+        min-height: 100vh;
+        padding: 50px;
+      }
+
+      .container.show-nav {
+        transform: rotate(-20deg);
+      }
+
+      .circle-container {
+        position: fixed;
+        top: -100px;
+        left: -100px;
+      }
+
+      .circle {
+        background-color: #ff7979;
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        position: relative;
+        transition: transform 0.5 linear;
+      }
+
+      .container.show-nav .circle {
+        transform: rotate(-70deg);
+      }
+
+      .circle button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 100px;
+        background-color: transparent;
+        border: 0;
+        font-size: 26px;
+        color: white;
+      }
+
+      .circle button:focus {
+        outline: none;
+      }
+
+      .circle button#open {
+        left: 60%;
+      }
+
+      .circle button#close {
+        top: 60%;
+        transform: rotate(90deg);
+        transform-origin: top left;
+      }
+
+      .container.show-nav + nav li {
+        transform: translateX(0);
+        transition-delay: 0.3s;
+      }
+
+      nav {
+        position: fixed;
+        bottom: 40px;
+        left: 0;
+        z-index: 100;
+      }
+
+      nav ul {
+        list-style-type: none;
+        padding-left: 30px;
+      }
+
+      nav ul li {
+        text-transform: uppercase;
+        color: #fff;
+        margin: 40px 0;
+        transform: translateX(-120px);
+        transition: transform 0.5s ease-in;
+      }
+
+      nav ul li i {
+        font-size: 20px;
+        margin-right: 10px;
+      }
+
+      nav ul li + li {
+        margin-left: 15px;
+        transform: translateX(-150px);
+      }
+
+      nav ul li + li + li {
+        margin-left: 30px;
+        transform: translateX(-200px);
+      }
+
+      .content img {
+        max-width: 100%;
+      }
+
+      .content {
+        max-width: 1000px;
+        margin: 50px auto;
+      }
+
+      .content h1 {
+        margin: 0;
+      }
+
+      .content small {
+        color: #555;
+        font-style: italic;
+      }
+
+      .content p {
+        color: #333;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="circle-container">
+        <div class="circle">
+          <button id="close">
+            <i class="fas fa-times"></i>
+          </button>
+          <button id="open">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="content">
+        <h1>Amazing Ariticle</h1>
+        <small>Florin Pop</small>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero
+          incidunt cumque nulla hic atque tempora assumenda explicabo? Optio
+          explicabo dolorum exercitationem magnam eaque minima corrupti delectus
+          magni ratione vel natus, tempore, ut temporibus veritatis illum
+          laboriosam cum nihil velit ipsam architecto iusto ducimus commodi ex!
+          Quasi officiis exercitationem reprehenderit, itaque sit nihil iste
+          expedita qui quas consequatur voluptatibus totam omnis minus
+          repudiandae eligendi quisquam natus quidem, neque officia saepe eaque
+          libero nisi ducimus animi! Distinctio suscipit necessitatibus fuga
+          vero saepe, error molestias nobis et labore impedit beatae
+          perspiciatis, veniam voluptatibus praesentium magnam incidunt!
+          Voluptatibus soluta sunt dolorem quam, omnis vel.
+        </p>
+
+        <h3>My Dog</h3>
+        <img
+          src="https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416_1280.jpg"
+          alt="mydog"
+        />
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt,
+          explicabo inventore nobis repudiandae suscipit nesciunt at hic animi
+          dicta. Quidem quas error nihil ab cum aperiam fugit officiis, totam
+          iste quibusdam in facilis dolorem dicta assumenda consequuntur ut
+          minima eligendi modi fugiat accusantium facere eaque aut. Fugiat sequi
+          dolores iusto vel modi beatae quisquam doloribus error culpa! Aut,
+          sapiente blanditiis. Vero maiores, earum rerum aut ducimus dolore quam
+          praesentium temporibus at dolor ex iusto ab.
+        </p>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><i class="fas fa-home"></i>Home</li>
+        <li><i class="fas fa-user-alt"></i>About</li>
+        <li><i class="fas fa-envelope"></i>Contact</li>
+      </ul>
+    </nav>
+
+    <script>
+      const open = document.getElementById("open");
+      const close = document.getElementById("close");
+      const container = document.querySelector(".container");
+
+      open.addEventListener("click", () => container.classList.add("show-nav"));
+      close.addEventListener("click", () =>
+        container.classList.remove("show-nav")
+      );
+    </script>
+  </body>
+</html>
