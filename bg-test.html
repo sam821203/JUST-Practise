@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bg-test</title>
+    <style>
+      /* 參考連結 https://blog.csdn.net/javaloveiphone/article/details/51098972 */
+      /* 當html標籤無背景樣式時，body的背景色其實不是body標籤的背景色，而是瀏覽器的。 */
+      /* 一旦html標籤含有背景色，則body的背景色變成了正常的body標籤自己的背景色，而此時的html標籤最頂級，背景色被瀏覽器獲取，成為瀏覽器的背景色。 */
+
+      body {
+        /* background-image: url("https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416_960_720.jpg");
+        background-repeat: no-repeat; */
+        /* color: white; */
+        background-color: #3b3b3b;
+        margin: 100px;
+        border: 30px solid #093;
+      }
+
+      /* div {
+        width: 200px;
+        height: 200px;
+        background-image: url("https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416_960_720.jpg");
+        background-size: contain;
+      } */
+
+      .bg-color {
+          background-color: tomato;
+      }
+    </style>
+  </head>
+  <body>
+    testtesttestvvtest
+    <div class="bg-color"></div>
+  </body>
+  <div></div>
+</html>
