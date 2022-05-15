@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>scroll top</title>
+    <title>anchor to top</title>
     <!-- ICON NEEDS FONT AWESOME FOR CHEVRON UP ICON -->
     <link
       href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
@@ -24,7 +24,7 @@
       }
 
       h3 i {
-          color: rgba(0, 0, 0, 0.3);
+        color: rgba(0, 0, 0, 0.3);
       }
 
       #top {
@@ -87,20 +87,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
-        $(window).scroll(function() {
-            // 當超過 50px，就顯示
-            if ($(this).scrollTop() >= 50) {
-                $('#top').fadeIn("fast");
-            } else {
-                $('#top').fadeOut("fast");
-            }
-        });
+      $(window).scroll(function () {
+        // 當超過 50px，就顯示
+        if ($(this).scrollTop() >= 50) {
+          $("#top").fadeIn("fast");
+        } else {
+          $("#top").fadeOut("fast");
+        }
+      });
 
-        $('#top').click(function() {
-            $('body, html').animate({
-                scrollTop: 0
-            }, 300);
-        });
+      $("#top").click(function () {
+        $("body, html").animate(
+          {
+            scrollTop: 0,
+          },
+          300
+        );
+      });
     </script>
   </body>
 </html>
