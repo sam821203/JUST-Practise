@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Styling The Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Muli", sans-serif;
+        overflow-x: hidden;
+        background-color: steelblue;
+        color: white;
+      }
+
+      .container {
+        padding: 20px 40px;
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      .container h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .container a {
+        text-decoration: none;
+        color: lightblue;
+      }
+
+      .form-control {
+        position: relative;
+        margin: 20px 0 40px;
+        width: 300px;
+      }
+
+      .form-control input {
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px solid #fff;
+        display: block;
+        width: 100%;
+        padding: 15px 0;
+        font-size: 18px;
+        color: white;
+      }
+
+      .form-control input:focus,
+      .form-control input:valid {
+        outline: 0;
+      }
+
+      .btn {
+        cursor: pointer;
+        display: inline-block;
+        width: 100%;
+        background: lightblue;
+        padding: 15px;
+        font-family: inherit;
+        font-size: 16px;
+        border: 0;
+        border-radius: 5px;
+      }
+
+      .btn:focus {
+        outline: 0;
+      }
+
+      .btn:active {
+        transform: scale(0.98);
+      }
+
+      .text {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Please Login</h1>
+      <form action="">
+        <div class="form-control">
+          <input type="text" required />
+          <label>Email</label>
+        </div>
+
+        <div class="form-control">
+          <input type="password" required />
+          <label>Password</label>
+        </div>
+
+        <button class="btn">Login</button>
+
+        <p class="text">Don't have an account?<a href="">Register</a></p>
+      </form>
+    </div>
+    <script></script>
+  </body>
+</html>
