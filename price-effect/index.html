@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Price effect</title>
+    <style>
+      body {
+        position: relative;
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .symbol {
+        font-size: 20px;
+        color: #f92665;
+      }
+
+      .price {
+        position: relative;
+        height: 100%;
+        font-size: 26px;
+        font-weight: 700;
+      }
+
+      .m-bottom {
+        margin-bottom: 80px;
+      }
+
+      .myflex {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* ===== shine ===== */
+      .shine {
+        transition: all 0.4s ease-in-out 0s;
+        /*   background: -webkit-linear-gradient(30deg, #f92665, #ce113f); */
+        background: -webkit-linear-gradient(30deg, #e32a0f, #cc1e05);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .shine::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -25px;
+        width: 30px;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.65);
+        transform: skewX(-15deg);
+        -webkit-filter: blur(2px);
+        animation: shine 3s linear infinite;
+      }
+
+      @keyframes shine {
+        0%,
+        65% {
+          opacity: 0;
+          left: -25px;
+        }
+        75% {
+          opacity: 1;
+          left: 50px;
+        }
+        76% {
+          opacity: 0;
+          left: 50px;
+        }
+        90% {
+          opacity: 0;
+          left: -25px;
+        }
+        100% {
+          opacity: 1;
+          left: 50px;
+        }
+      }
+
+      /* ===== shiftLeft ===== */
+      .shiftleft {
+        animation: opacity 0.2s;
+      }
+
+      .item__price.shiftleft {
+        position: relative;
+        width: 100%;
+        height: 26px;
+        overflow: hidden;
+      }
+
+      .item__price.shiftleft .price__info {
+        position: absolute;
+        left: 0%;
+        bottom: 0;
+        opacity: 0;
+        animation: shiftLeft 7s 1s ease-out infinite both;
+      }
+
+      @keyframes shiftLeft {
+        0% {
+          opacity: 0;
+          -webkit-transform: translateX(2000px) scale(0.5);
+          transform: translateX(2000px) scale(0.5);
+          opacity: 0.7;
+        }
+
+        10% {
+          opacity: 1;
+          -webkit-transform: translateX(0) scale(0.5);
+          transform: translateX(0) scale(0.5);
+          opacity: 0.7;
+        }
+
+        14% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+          opacity: 1;
+        }
+
+        90% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+        }
+
+        95% {
+          -webkit-transform: translateX(0) scale(0.5);
+          transform: translateX(0) scale(0.5);
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0;
+          -webkit-transform: translateX(-100px) scale(1);
+          transform: translateX(-100px) scale(1);
+        }
+      }
+
+      /* ===== swing-hinge ===== */
+      .swing-hinge {
+        -webkit-animation-duration: 4s;
+        animation-duration: 4s;
+        -webkit-animation-name: swingHinge;
+        animation-name: swingHinge;
+        -webkit-transform-origin: top left;
+        transform-origin: top left;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes swingHinge {
+        0% {
+          -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+        }
+        8% {
+          -webkit-transform: rotate(5deg);
+          transform: rotate(5deg);
+        }
+        10%,
+        28% {
+          -webkit-transform: rotate(-5deg);
+          transform: rotate(-5deg);
+        }
+        14%,
+        32% {
+          -webkit-transform: rotate(3deg);
+          transform: rotate(3deg);
+        }
+        16%,
+        34% {
+          -webkit-transform: rotate(-3deg);
+          transform: rotate(-3deg);
+        }
+        20%,
+        26%,
+        38% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        55% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        60%,
+        80% {
+          -webkit-transform: rotate(80deg);
+          transform: rotate(80deg);
+          -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+        }
+
+        70%,
+        90% {
+          -webkit-transform: rotate(60deg);
+          transform: rotate(60deg);
+          -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+          opacity: 1;
+        }
+        to {
+          -webkit-transform: translate3d(0, 700px, 0);
+          transform: translate3d(0, 700px, 0);
+          opacity: 0;
+        }
+      }
+
+      /* ===== popup in ===== */
+      .pop-outin {
+        transform-origin: center left;
+        animation: 2s anim-popoutin ease infinite;
+      }
+
+      @keyframes anim-popoutin {
+        0% {
+          filter: brightness(1);
+          transform: scale(0);
+          text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        }
+        25% {
+          filter: brightness(1.1);
+          transform: scale(2);
+          text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.32);
+        }
+        50% {
+          filter: brightness(1);
+          transform: scale(1);
+          text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+        }
+        100% {
+          transform: scale(1);
+          text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+        }
+      }
+
+      /* ===== flip X ===== */
+      .flipX {
+        animation: 2s anim-flipX ease infinite;
+      }
+      @keyframes anim-flipX {
+        0% {
+          opacity: 0;
+          transform: rotateX(90def);
+        }
+        50% {
+          opacity: 1;
+          transform: rotateX(720deg);
+        }
+        100% {
+          /* animate nothing to pause animation at the end */
+          opacity: 1;
+          transform: rotateX(720deg);
+        }
+      }
+
+      /* 組版宮格 */
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
+
+      a {
+        display: block;
+        text-decoration: none;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      img {
+        border: 0;
+      }
+
+      section {
+        display: block;
+      }
+
+      body {
+        font-size: 14px;
+        font-family: Helvetica, Arial, "LiHei Pro", "Microsoft JhengHei",
+          "微軟正黑體", sans-serif;
+      }
+
+      .build--960 {
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .margin-top-sm {
+        margin-top: 2%;
+      }
+
+      .margin-bottom-sm {
+        margin-bottom: 2%;
+      }
+
+      .margin-bottom-md {
+        margin-bottom: 4%;
+      }
+
+      /* .build__wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+} */
+
+      /* ===== animation setting start ===== */
+      .build__wrap.wow {
+        animation: 0.5s bounce-in-left both;
+      }
+
+      @keyframes bounce-in-left {
+        from {
+          transform: translateX(-30%);
+        }
+
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      /* ===== animation setting end ===== */
+      /* ===== card_pv--8pv8s03 setting start ===== */
+      .card_pv--8pv8s03 .build__item {
+        margin-bottom: 0.8%;
+        background-color: #fff;
+        border: 1px solid #ededed;
+        transition: transform 0.16s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+      }
+
+      .card_pv--8pv8s03 .build__item:active,
+      .card_pv--8pv8s03 .build__item:hover {
+        transform: scale(1.05);
+      }
+
+      @media screen and (min-width: 768px) {
+        .card_pv--8pv8s03 .build__item {
+          margin-bottom: 0.35%;
+        }
+      }
+
+      /* ===== .card_pv--8pv8s03 setting end ===== */
+      /* ===== .card_pv--8pv8s03 item *6 setting start ===== */
+
+      .card_pv--8pv8s03.item--8 .build__item {
+        width: 24%;
+        margin: 0.33%;
+      }
+
+      .card_pv--8pv8s03 .build__item,
+      .card_pv--8pv8s03 .item__img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .card_pv--8pv8s03 .item__info {
+        position: relative;
+      }
+
+      .card_pv--8pv8s03 .item__name {
+        height: 37px;
+        margin-top: 5px;
+      }
+
+      .card_pv--8pv8s03 .item__push span {
+        color: #cc1e05;
+        font-weight: 400;
+      }
+
+      /* ===== card_pv_8--white-four-space item *6 setting end ===== */
+      /* ===== item-push background-color setting start ===== */
+      .card_pv--8pv8s03 .item__push--outerFrame {
+        width: 100%;
+        height: 28px;
+        text-align: center;
+        display: flex;
+        align-items: baseline;
+      }
+
+      .card_pv--8pv8s03 .item__push {
+        position: relative;
+        z-index: 1;
+        line-height: 140%;
+        height: auto;
+      }
+
+      .card_pv--8pv8s03 .item__push span {
+        display: block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: relative;
+        z-index: 0;
+        margin: 0 3%;
+        max-height: 28px;
+        line-height: 200%;
+        color: #cc1e05;
+        font-weight: bold;
+        overflow: hidden;
+      }
+
+      .card_pv--8pv8s03 .item__push.first__pv span {
+        color: #9e9e9e;
+        text-decoration: line-through;
+      }
+
+      .card_pv--8pv8s03 .item__push-arrow {
+        color: #cc1e05;
+      }
+
+      .card_pv--8pv8s03 .build__item.black__bg {
+        background-color: #362e2b;
+        border-radius: 10px;
+        padding: 5px;
+      }
+
+      .card_pv--8pv8s03 .build__item.black__bg a,
+      .card_pv--8pv8s03 .black__bg .item__push span {
+        color: #ddd;
+      }
+
+      .card_pv--8pv8s03 .build__item.black__bg .item__price span:last-child {
+        background-color: rgba(#ededed, 0.5);
+        color: #fff;
+        font-weight: 700;
+      }
+
+      /* ===== item-push background-color setting end ===== */
+
+      @media screen and (max-width: 768px) {
+        .card_pv--8pv8s03.item--8 .build__item {
+          width: 49%;
+          margin: 1% 0.25%;
+        }
+
+        .card_pv--8pv8s03 .build__item {
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .card_pv--8pv8s03 .item__push--outerFrame {
+          height: 21px;
+          font-size: 13px;
+        }
+
+        .card_pv--8pv8s03 .item__push span {
+          max-height: 21px;
+          line-height: 170%;
+          letter-spacing: 0;
+        }
+
+        .card_pv--8pv8s03 .item__name {
+          height: 32px;
+          font-size: 14px;
+        }
+      }
+
+      .build__item a {
+        /*   color: #5d5d5d; */
+        color: #cc1e05;
+      }
+
+      .item__pic {
+        position: relative;
+        z-index: 0;
+        padding-top: 100%;
+        overflow: hidden;
+      }
+      .card_pv--8pv8s03 .item__pic:after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: 1vw;
+        background-image: url(pu_up.png);
+        width: 14vw;
+        height: 6vw;
+        background-size: 14vw 6vw;
+        z-index: 1;
+      }
+      @media screen and (min-width: 960px) {
+        .card_pv--8pv8s03 .item__pic:after {
+          bottom: 5px;
+          width: 67px;
+          height: 29px;
+          background-size: 67px 29px;
+        }
+      }
+      .item__img {
+        display: block;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      .item__info {
+        padding: 2%;
+      }
+
+      .item__push {
+        width: 100%;
+        height: 28px;
+        text-align: center;
+      }
+
+      .item__push span {
+        display: block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: relative;
+        z-index: 0;
+        margin: 0 3%;
+        max-height: 28px;
+        line-height: 200%;
+        color: #cc1e05;
+        font-weight: bold;
+        overflow: hidden;
+      }
+
+      .item__name {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        height: 36px;
+        line-height: 120%;
+        font-size: 15px;
+        overflow: hidden;
+      }
+
+      .item__price span:last-child {
+        color: #cc1e05;
+        font-size: 22px;
+      }
+
+      /* banner 表頭 */
+      section {
+        display: block;
+      }
+
+      .title__wrap {
+        max-width: 1260px;
+        margin: 0.5% auto;
+        padding: 0;
+      }
+
+      .title__wrap__img {
+        margin: 0;
+        height: 65px;
+        border: 0;
+        background: 50% 0% / auto auto no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="build__wrap build--960 card_pv--8pv8s03 item--8 wow">
+      <div class="myflex m-bottom">
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <div class="price__info">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <div class="price__info">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <div class="price__info">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <div class="price__info">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- <div class="item__price shiftleft marin-bottom-sm">
+      <div class="price__info shine">
+        <span>$</span>
+        <span>25000</span>
+      </div>
+    </div>
+
+    <div class="item__price pop-outin margin-bottom-sm">
+      <span>$</span>
+      <span>
+        45700
+      </span>
+    </div>
+
+    <div class="item__price flipX margin-bottom-sm">
+      <span>$</span>
+      <span>
+        650
+      </span>
+    </div> -->
+
+    <script>
+      function chooseRandomPromoItem() {
+        var promoItems = Array.apply(
+          null,
+          document.querySelectorAll(".build__item .price__info")
+        );
+        // console.log(promoItems);
+
+        var chooseItemIndex = siblingRandom(promoItems.length);
+        // console.log(chooseItemIndex);
+
+        promoItems.forEach(function (item) {
+          // arrayAnimationClass.forEach( function (className) {
+          item.classList.remove("swing-hinge");
+          // } );
+        });
+        promoItems[chooseItemIndex].classList.add("swing-hinge");
+      }
+
+      function siblingRandom(arrayLength, globalVariableName) {
+        var globalVariableName =
+          globalVariableName || "siblingRandomCheckNowIndex";
+        var selectedIndex = getRandom(arrayLength);
+
+        while (selectedIndex === window[globalVariableName]) {
+          selectedIndex = getRandom(arrayLength);
+        }
+        window[globalVariableName] = selectedIndex;
+        // console.log(selectedIndex);
+
+        return selectedIndex;
+      }
+
+      var initPromo = [
+        setInterval(function () {
+          chooseRandomPromoItem();
+        }, 4000),
+        // detectApp( window.addEventListener( 'load', promoEventReady ), promoEventReady ),
+        // promoEventReady(),
+      ];
+
+      function getRandom(length) {
+        return Math.floor(Math.random() * length);
+      }
+    </script>
+  </body>
+</html>
