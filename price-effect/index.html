@@ -29,12 +29,13 @@
       }
 
       .m-bottom {
-        margin-bottom: 80px;
+        margin-bottom: 160px;
       }
 
       .myflex {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
       }
 
       /* ===== shine ===== */
@@ -100,7 +101,7 @@
         left: 0%;
         bottom: 0;
         opacity: 0;
-        animation: shiftLeft 7s 1s ease-out infinite both;
+        animation: shiftLeft 7s 1s ease-out infinite forwards;
       }
 
       @keyframes shiftLeft {
@@ -144,96 +145,122 @@
 
       /* ===== swing-hinge ===== */
       .swing-hinge {
-        -webkit-animation-duration: 4s;
-        animation-duration: 4s;
+        -webkit-animation-duration: 5s;
+        animation-duration: 5s;
         -webkit-animation-name: swingHinge;
         animation-name: swingHinge;
         -webkit-transform-origin: top left;
         transform-origin: top left;
-        -webkit-animation-iteration-count: infinite;
-        animation-iteration-count: infinite;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1;
       }
 
       @keyframes swingHinge {
         0% {
           -webkit-animation-timing-function: ease-in-out;
           animation-timing-function: ease-in-out;
+          -webkit-transform-origin: top left;
+          transform-origin: top left;
         }
-        8% {
+        4% {
           -webkit-transform: rotate(5deg);
           transform: rotate(5deg);
         }
-        10%,
-        28% {
+        6%,
+        24% {
           -webkit-transform: rotate(-5deg);
           transform: rotate(-5deg);
         }
-        14%,
-        32% {
+        7%,
+        25% {
           -webkit-transform: rotate(3deg);
           transform: rotate(3deg);
         }
-        16%,
-        34% {
+        11%,
+        30% {
           -webkit-transform: rotate(-3deg);
           transform: rotate(-3deg);
         }
+        12%,
         20%,
-        26%,
-        38% {
+        31% {
           -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
         }
-        55% {
+        48% {
           -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
         }
-        60%,
-        80% {
+        53%,
+        73% {
           -webkit-transform: rotate(80deg);
           transform: rotate(80deg);
           -webkit-animation-timing-function: ease-in-out;
           animation-timing-function: ease-in-out;
         }
 
-        70%,
-        90% {
+        60%,
+        80% {
           -webkit-transform: rotate(60deg);
           transform: rotate(60deg);
           -webkit-animation-timing-function: ease-in-out;
           animation-timing-function: ease-in-out;
           opacity: 1;
         }
-        to {
+
+        84% {
+          opacity: 0;
+          -webkit-transform-origin: top left;
+          transform-origin: top left;
+        }
+
+        90% {
           -webkit-transform: translate3d(0, 700px, 0);
           transform: translate3d(0, 700px, 0);
+          -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
           opacity: 0;
+        }
+
+        98% {
+          -webkit-transform: scale3d(0.3, 0.3, 0.3);
+          transform: scale3d(0.3, 0.3, 0.3);
+        }
+
+        to {
+          opacity: 1;
         }
       }
 
       /* ===== popup in ===== */
       .pop-outin {
         transform-origin: center left;
-        animation: 2s anim-popoutin ease infinite;
+        animation: 3s anim-popoutin ease-in-out 1;
       }
 
       @keyframes anim-popoutin {
-        0% {
-          filter: brightness(1);
-          transform: scale(0);
+        0%,
+        16%,
+        32%,
+        42% {
+          transform: scale(1);
           text-shadow: 0 0 0 rgba(0, 0, 0, 0);
         }
-        25% {
+
+        8%,
+        24% {
+          transform: scale(1.2);
+          text-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        50% {
           filter: brightness(1.1);
           transform: scale(2);
           text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.32);
         }
-        50% {
-          filter: brightness(1);
-          transform: scale(1);
-          text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
-        }
+
         100% {
+          filter: brightness(1);
           transform: scale(1);
           text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
         }
@@ -256,6 +283,31 @@
           /* animate nothing to pause animation at the end */
           opacity: 1;
           transform: rotateX(720deg);
+        }
+      }
+
+      .fire-shadow {
+        -webkit-animation: fireShadow 1s ease-in-out infinite alternate;
+        animation: fireShadow 1s ease-in-out infinite alternate;
+      }
+
+      @keyframes fireShadow {
+        0% {
+          text-shadow: 0 0 0px rgba(254, 252, 201, 0.3),
+            0px 0px 0px rgba(254, 236, 133, 0.3),
+            0px 0px 2px rgba(255, 174, 52, 0.3),
+            0px 0px 4px rgba(236, 118, 12, 0.3),
+            0px 0px 6px rgba(205, 70, 6, 0.3), 0 -4px 8px rgba(151, 55, 22, 0.3),
+            1px -5px 10px rgba(69, 27, 14, 0.1);
+        }
+        100% {
+          text-shadow: 0 0 4px rgba(254, 252, 201, 0.3),
+            1px -1px 6px rgba(254, 252, 201, 0.3),
+            -2px -2px 8px rgba(254, 236, 133, 0.3),
+            2.2px -4.2px 10px rgba(255, 174, 52, 0.3),
+            -2.2px -5.8px 12px rgba(236, 118, 12, 0.3),
+            0 -8.2px 14px rgba(205, 70, 6, 0.3),
+            1px -9px 16px rgba(151, 55, 22, 0.3);
         }
       }
 
@@ -306,13 +358,14 @@
         margin-bottom: 4%;
       }
 
-      /* .build__wrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-} */
+      .build__wrap {
+        /* display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around; */
+        overflow: visible;
+        overflow-y: hidden;
+      }
 
-      /* ===== animation setting start ===== */
       .build__wrap.wow {
         animation: 0.5s bounce-in-left both;
       }
@@ -327,8 +380,6 @@
           opacity: 1;
         }
       }
-
-      /* ===== animation setting end ===== */
       /* ===== card_pv--8pv8s03 setting start ===== */
       .card_pv--8pv8s03 .build__item {
         margin-bottom: 0.8%;
@@ -356,6 +407,7 @@
       .card_pv--8pv8s03.item--8 .build__item {
         width: 24%;
         margin: 0.33%;
+        margin-bottom: 8px;
       }
 
       .card_pv--8pv8s03 .build__item,
@@ -475,7 +527,7 @@
         padding-top: 100%;
         overflow: hidden;
       }
-      .card_pv--8pv8s03 .item__pic:after {
+      /* .card_pv--8pv8s03 .item__pic:after {
         content: "";
         display: block;
         position: absolute;
@@ -486,7 +538,7 @@
         height: 6vw;
         background-size: 14vw 6vw;
         z-index: 1;
-      }
+      } */
       @media screen and (min-width: 960px) {
         .card_pv--8pv8s03 .item__pic:after {
           bottom: 5px;
@@ -565,6 +617,7 @@
   </head>
   <body>
     <section class="build__wrap build--960 card_pv--8pv8s03 item--8 wow">
+      <!-- need price__info -->
       <div class="myflex m-bottom">
         <div class="build__item">
           <a href="<!--[GOOD_LINK_1]-->">
@@ -742,6 +795,354 @@
             </div>
           </a>
         </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <div class="price__info">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <div class="price__info">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <div class="price__info">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <div class="price__info">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- without price__info -->
+      <div class="myflex m-bottom">
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price fire-shadow">
+                  <span>$</span>
+                  <span>9998</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <span>$</span>
+                  <span>9998</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <span>$</span>
+                  <span>9998</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG1_1]-->
+                    </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span
+                      >PV&nbsp;
+                      <!--[CUSTOM_TAG2_1]-->
+                    </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md">
+                  <!--[GOOD_NAME_1]-->
+                </p>
+                <div class="item__price">
+                  <span>$</span>
+                  <span>9998</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -767,49 +1168,70 @@
     </div> -->
 
     <script>
-      function chooseRandomPromoItem() {
-        var promoItems = Array.apply(
-          null,
-          document.querySelectorAll(".build__item .price__info")
-        );
-        // console.log(promoItems);
+      // function chooseRandomPromoItem() {
+      //   var promoItems = Array.apply(
+      //     null,
+      //     document.querySelectorAll(".build__item .price__info")
+      //   );
+      //   var chooseItemIndex = siblingRandom(promoItems.length);
+      //   promoItems.forEach(function (item) {
+      //     item.classList.remove("swing-hinge");
+      //   });
+      //   promoItems[chooseItemIndex].classList.add("swing-hinge");
+      // }
 
-        var chooseItemIndex = siblingRandom(promoItems.length);
-        // console.log(chooseItemIndex);
+      // ===== shine & shiftleft =====
+      // function chooseRandomPromoItem() {
+      //   var itemPrice = document.querySelectorAll(".build__item .item__price");
+      //   var priceInfo = document.querySelectorAll(".build__item .price__info");
 
-        promoItems.forEach(function (item) {
-          // arrayAnimationClass.forEach( function (className) {
-          item.classList.remove("swing-hinge");
-          // } );
-        });
-        promoItems[chooseItemIndex].classList.add("swing-hinge");
-      }
+      //   var chooseItemIndex = siblingRandom(itemPrice.length);
 
-      function siblingRandom(arrayLength, globalVariableName) {
-        var globalVariableName =
-          globalVariableName || "siblingRandomCheckNowIndex";
-        var selectedIndex = getRandom(arrayLength);
+      //   itemPrice.forEach(function (item) {
+      //     item.classList.remove("shiftleft");
+      //   });
+      //   priceInfo.forEach(function (item) {
+      //     item.classList.remove("shine");
+      //   });
+      //   itemPrice[chooseItemIndex].classList.add("shiftleft");
+      //   priceInfo[chooseItemIndex].classList.add("shine");
+      // }
 
-        while (selectedIndex === window[globalVariableName]) {
-          selectedIndex = getRandom(arrayLength);
-        }
-        window[globalVariableName] = selectedIndex;
-        // console.log(selectedIndex);
+      // ===== pop-outin =====
+      // function chooseRandomPromoItem() {
+      //   var promoItems = Array.apply(
+      //     null,
+      //     document.querySelectorAll(".build__item .item__price")
+      //   );
+      //   var chooseItemIndex = siblingRandom(promoItems.length);
+      //   promoItems.forEach(function (item) {
+      //     item.classList.remove("pop-outin");
+      //   });
+      //   promoItems[chooseItemIndex].classList.add("pop-outin");
+      // }
 
-        return selectedIndex;
-      }
+      // function siblingRandom(arrayLength, globalVariableName) {
+      //   var globalVariableName =
+      //     globalVariableName || "siblingRandomCheckNowIndex";
+      //   var selectedIndex = getRandom(arrayLength);
 
-      var initPromo = [
-        setInterval(function () {
-          chooseRandomPromoItem();
-        }, 4000),
-        // detectApp( window.addEventListener( 'load', promoEventReady ), promoEventReady ),
-        // promoEventReady(),
-      ];
+      //   while (selectedIndex === window[globalVariableName]) {
+      //     selectedIndex = getRandom(arrayLength);
+      //   }
+      //   window[globalVariableName] = selectedIndex;
 
-      function getRandom(length) {
-        return Math.floor(Math.random() * length);
-      }
+      //   return selectedIndex;
+      // }
+
+      // var initPromo = [
+      //   setInterval(function () {
+      //     chooseRandomPromoItem();
+      //   }, 6000),
+      // ];
+
+      // function getRandom(length) {
+      //   return Math.floor(Math.random() * length);
+      // }
     </script>
   </body>
 </html>
