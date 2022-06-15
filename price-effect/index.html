@@ -41,7 +41,6 @@
       /* ===== shine ===== */
       .shine {
         transition: all 0.4s ease-in-out 0s;
-        /*   background: -webkit-linear-gradient(30deg, #f92665, #ce113f); */
         background: -webkit-linear-gradient(30deg, #e32a0f, #cc1e05);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -151,8 +150,8 @@
         animation-name: swingHinge;
         -webkit-transform-origin: top left;
         transform-origin: top left;
-        -webkit-animation-iteration-count: 1;
-        animation-iteration-count: 1;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
       }
 
       @keyframes swingHinge {
@@ -235,28 +234,28 @@
       /* ===== popup in ===== */
       .pop-outin {
         transform-origin: center left;
-        animation: 3s anim-popoutin ease-in-out 1;
+        animation: 3s anim-popoutin ease-in-out infinite;
       }
 
       @keyframes anim-popoutin {
         0%,
-        16%,
-        32%,
-        42% {
+        12%,
+        24%,
+        36% {
           transform: scale(1);
           text-shadow: 0 0 0 rgba(0, 0, 0, 0);
         }
 
-        8%,
-        24% {
+        6%,
+        18% {
           transform: scale(1.2);
-          text-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2);
+          text-shadow: 2px 5px 5px rgba(0, 0, 0, 0.3);
         }
 
         50% {
           filter: brightness(1.1);
           transform: scale(2);
-          text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.32);
+          text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.4);
         }
 
         100% {
@@ -275,7 +274,7 @@
           opacity: 0;
           transform: rotateX(90def);
         }
-        50% {
+        70% {
           opacity: 1;
           transform: rotateX(720deg);
         }
@@ -293,6 +292,13 @@
 
       @keyframes fireShadow {
         0% {
+          /* text-shadow: 0 0 0px rgba(245, 207, 201, 0.3),
+            0px 0px 0px rgba(240, 185, 176, 0.3),
+            0px 0px 2px rgba(235, 163, 152, 0.3),
+            0px 0px 4px rgba(224, 118, 103, 0.3),
+            0px 0px 6px rgba(214, 74, 54, 0.3), 0 -4px 8px rgba(204, 30, 5, 0.3),
+            1px -5px 10px rgba(69, 27, 14, 0.1); */
+
           text-shadow: 0 0 0px rgba(254, 252, 201, 0.3),
             0px 0px 0px rgba(254, 236, 133, 0.3),
             0px 0px 2px rgba(255, 174, 52, 0.3),
@@ -301,6 +307,14 @@
             1px -5px 10px rgba(69, 27, 14, 0.1);
         }
         100% {
+          /* text-shadow: 0 0 4px rgba(250, 229, 225, 0.3),
+            1px -1px 6px rgba(245, 207, 201, 0.3),
+            -2px -2px 8px rgba(240, 185, 176, 0.3),
+            2.2px -4.2px 10px rgba(235, 163, 152, 0.3),
+            -2.2px -5.8px 12px rgba(224, 118, 103, 0.3),
+            0 -8.2px 14px rgba(214, 74, 54, 0.3),
+            1px -9px 16px rgba(204, 30, 5, 0.3); */
+
           text-shadow: 0 0 4px rgba(254, 252, 201, 0.3),
             1px -1px 6px rgba(254, 252, 201, 0.3),
             -2px -2px 8px rgba(254, 236, 133, 0.3),
@@ -308,6 +322,244 @@
             -2.2px -5.8px 12px rgba(236, 118, 12, 0.3),
             0 -8.2px 14px rgba(205, 70, 6, 0.3),
             1px -9px 16px rgba(151, 55, 22, 0.3);
+        }
+      }
+
+      /* after img */
+      .after-img {
+        position: relative;
+      }
+      .after-img::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: -50%;
+        left: calc(50% - 102px);
+        background: url(flame.svg) center 0 no-repeat;
+        background-size: 20%;
+        width: 12vw;
+        height: 4vw;
+        -webkit-animation: afterImg 1s ease-in-out 1.5s infinite;
+        animation: afterImg 1s ease-in-out 1.5s infinite;
+      }
+
+      @keyframes afterImg {
+        0% {
+          -webkit-transform: translateX(0);
+          transform: translateX(0);
+        }
+
+        6.5% {
+          -webkit-transform: translateX(-3.5px) rotateY(-6deg);
+          transform: translateX(-3.5px) rotateY(-6deg);
+          filter: brightness(1.1);
+        }
+
+        18.5% {
+          -webkit-transform: translateX(3px) rotateY(5deg);
+          transform: translateX(3px) rotateY(5deg);
+          filter: brightness(1.15);
+        }
+
+        31.5% {
+          -webkit-transform: translateX(-1px) rotateY(-3deg);
+          transform: translateX(-1px) rotateY(-3deg);
+          filter: brightness(1.2);
+        }
+
+        43.5% {
+          -webkit-transform: translateX(1px) rotateY(1deg);
+          transform: translateX(1px) rotateY(1deg);
+          filter: brightness(1.25);
+        }
+
+        50% {
+          -webkit-transform: translateX(0);
+          transform: translateX(0);
+          filter: brightness(1.15);
+        }
+
+        60% {
+          filter: brightness(1.05);
+        }
+
+        80% {
+          filter: brightness(1);
+        }
+      }
+
+      /* car moving */
+      .pull {
+        animation: pull 2s infinite linear;
+      }
+
+      @keyframes pull {
+        0% {
+          transform: translateX(5%);
+        }
+        25% {
+          transform: translateX(10%);
+        }
+        50% {
+          transform: translateX(5%);
+        }
+        75% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(5%);
+        }
+      }
+
+      .putt {
+        animation-name: putt;
+        animation-duration: 400ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      @keyframes putt {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(1px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .smoke::after {
+        content: "";
+        width: 12px;
+        height: 12px;
+        top: 9px;
+        background: #acacac;
+        position: absolute;
+        border-radius: 100%;
+        left: 1.75%;
+        transform: translate(-50%, 0px) scale(0);
+        opacity: 0.5;
+        animation-name: smoke;
+        animation-duration: 1000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      @keyframes smoke {
+        0% {
+          transform: translate(-50%, 0px) scale(0);
+        }
+        10% {
+          transform: translate(-50%, -6px) scale(0.2);
+        }
+        20% {
+          transform: translate(-50%, -8px) scale(0.4);
+        }
+        30% {
+          transform: translate(-50%, -10px) scale(0.6);
+        }
+        40% {
+          transform: translate(-50%, -12px) scale(0.8);
+        }
+        50% {
+          transform: translate(-50%, -14px) scale(1);
+        }
+        60% {
+          transform: translate(-50%, -16px) scale(0.8);
+        }
+        70% {
+          transform: translate(-50%, -18px) scale(0.6);
+        }
+        80% {
+          transform: translate(-50%, -20px) scale(0.4);
+        }
+        90% {
+          transform: translate(-50%, -22px) scale(0.2);
+        }
+        100% {
+          transform: translate(-50%, -24px) scale(0);
+        }
+      }
+
+      /* glitch style */
+      .skew {
+        font-size: 16px;
+        animation: skew 0.95s infinite alternate;
+      }
+
+      .glitch {
+        font-size: 24px;
+        animation: glitch 0.8s infinite alternate;
+      }
+
+      @keyframes skew {
+        0% {
+          transform: skew(0deg);
+        }
+        20% {
+          transform: skew(0deg);
+        }
+        24% {
+          transform: skew(-4deg);
+        }
+        28% {
+          transform: skew(0deg);
+        }
+        70% {
+          transform: skew(0deg);
+        }
+        74% {
+          transform: skew(7deg);
+        }
+        78% {
+          transform: skew(0deg);
+        }
+        100% {
+          transform: skew(0deg);
+        }
+      }
+
+      @keyframes glitch {
+        0% {
+          transform: translate3d(0, 0, 0);
+          opacity: 1;
+        }
+        20% {
+          transform: translate3d(0, 0, 0);
+          opacity: 0.3;
+        }
+        24% {
+          transform: translate3d(4px, 3px, 0);
+          opacity: 1;
+        }
+        28% {
+          transform: translate3d(0, 0, 0);
+        }
+        60% {
+          transform: translate3d(0, 0, 0);
+        }
+        64% {
+          transform: translate3d(-3px, -2px, 0);
+        }
+        68% {
+          transform: translate3d(0, 0, 0);
+        }
+        70% {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+        74% {
+          opacity: 0.3;
+          transform: translate3d(8px, -4px, 0);
+        }
+        78% {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+        100% {
+          transform: translate3d(0, 0, 0);
         }
       }
 
@@ -527,6 +779,7 @@
         padding-top: 100%;
         overflow: hidden;
       }
+
       /* .card_pv--8pv8s03 .item__pic:after {
         content: "";
         display: block;
@@ -617,6 +870,289 @@
   </head>
   <body>
     <section class="build__wrap build--960 card_pv--8pv8s03 item--8 wow">
+      <!-- display all -->
+      <div class="myflex m-bottom">
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md"></p>
+                <div class="item__price shiftleft">
+                  <div class="price__info shine">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md"></p>
+                <div class="item__price swing-hinge">
+                  <div class="price__info">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md"></p>
+                <div class="item__price pop-outin">
+                  <span>$</span>
+                  <span>9998</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md"></p>
+                <div class="item__price flipX">
+                  <span>$</span>
+                  <span>9998</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md"></p>
+                <div class="item__price fire-shadow">
+                  <span>$</span>
+                  <span>9998</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md"></p>
+                <div class="item__price after-img">
+                  <span>$</span>
+                  <span>9998</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md"></p>
+                <div class="item__price pull">
+                  <div class="smoke putt">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="build__item">
+          <a href="<!--[GOOD_LINK_1]-->">
+            <div class="item__box">
+              <div class="item__pic">
+                <img
+                  class="item__img lazyload"
+                  data-src="https://media.etmall.com.tw/nximg/002571/2571438/2571438-1_xxl.jpg?t=18350661069"
+                  src="https://media.etmall.com.tw/nximg/003494/3494986/3494986-1_xxl.jpg?t=18372010786"
+                  alt=""
+                />
+              </div>
+              <div class="item__info">
+                <div class="item__push--outerFrame">
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm first__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                  <p class="item__push-arrow">→</p>
+                  <p
+                    class="item__push margin-top-sm margin-bottom-sm second__pv"
+                  >
+                    <span>PV&nbsp; </span>
+                  </p>
+                </div>
+                <p class="item__name margin-bottom-md"></p>
+                <div class="item__pric skew">
+                  <div class="price__info glitch">
+                    <span>$</span>
+                    <span>9998</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
       <!-- need price__info -->
       <div class="myflex m-bottom">
         <div class="build__item">
@@ -635,24 +1171,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <div class="price__info">
                     <span>$</span>
@@ -679,24 +1207,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <div class="price__info">
                     <span>$</span>
@@ -723,24 +1243,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <div class="price__info">
                     <span>$</span>
@@ -767,24 +1279,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <div class="price__info">
                     <span>$</span>
@@ -811,24 +1315,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <div class="price__info">
                     <span>$</span>
@@ -855,24 +1351,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <div class="price__info">
                     <span>$</span>
@@ -899,24 +1387,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <div class="price__info">
                     <span>$</span>
@@ -943,24 +1423,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <div class="price__info">
                     <span>$</span>
@@ -991,24 +1463,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price fire-shadow">
                   <span>$</span>
                   <span>9998</span>
@@ -1033,24 +1497,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <span>$</span>
                   <span>9998</span>
@@ -1075,24 +1531,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <span>$</span>
                   <span>9998</span>
@@ -1117,24 +1565,16 @@
                   <p
                     class="item__push margin-top-sm margin-bottom-sm first__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG1_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                   <p class="item__push-arrow">→</p>
                   <p
                     class="item__push margin-top-sm margin-bottom-sm second__pv"
                   >
-                    <span
-                      >PV&nbsp;
-                      <!--[CUSTOM_TAG2_1]-->
-                    </span>
+                    <span>PV&nbsp; </span>
                   </p>
                 </div>
-                <p class="item__name margin-bottom-md">
-                  <!--[GOOD_NAME_1]-->
-                </p>
+                <p class="item__name margin-bottom-md"></p>
                 <div class="item__price">
                   <span>$</span>
                   <span>9998</span>
