@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array to Poker</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        box-sizing: border-box;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      li {
+        margin: 10px 4px;
+        padding: 10px 20px;
+        list-style: none;
+        border: 1px solid #000;
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <ul id="spadePoker"></ul>
+      <ul id="heartPoker"></ul>
+      <ul id="diamondPoker"></ul>
+      <ul id="clubPoker"></ul>
+    </div>
+    <script>
+      // 以 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]為資料
+      // 轉換成四個顏色，52張簡易撲克牌呈現在畫面上
+      var dataArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+      var typeArray = ["spade", "heart", "diamond", "club"];
+
+      // 產生 13張同花色撲克牌 (數字陣列, 花色)
+      // spade 黑桃 / heart 紅心 / diamond 方塊 / club 梅花
+      function generateCard(number, suit) {
+        return {
+          number: number,
+          suit: suit,
+        };
+      }
+
+      // 產生撲克牌 html (數字, 花色)
+      function buildPokerHtml(suit) {
+        for (var i = 0; i < dataArray.length; i++) {
+          var spadePoker = document.getElementById("spadePoker");
+          var heartPoker = document.getElementById("heartPoker");
+          var diamondPoker = document.getElementById("diamondPoker");
+          var clubPoker = document.getElementById("clubPoker");
+
+          var newList = document.createElement("li");
+          var card = generateCard(dataArray[i], suit);
+
+          if (suit === "spade") {
+            spadePoker.appendChild(newList);
+          } else if (suit === "heart") {
+            heartPoker.appendChild(newList);
+          } else if (suit === "diamond") {
+            diamondPoker.appendChild(newList);
+          } else {
+            clubPoker.appendChild(newList);
+          }
+
+          newList.insertAdjacentHTML(
+            "beforeend",
+            "<h1>" + checkNumber(card.number) + "</h1>"
+          );
+          newList.insertAdjacentHTML("beforeend", "<h1>" + card.suit + "</h1>");
+        }
+      }
+
+      // 呼叫四個花色產生 13張撲克牌
+      function buildAllPoker() {
+        for (var i = 0; i < typeArray.length; i++) {
+          buildPokerHtml(typeArray[i]);
+        }
+      }
+      buildAllPoker();
+
+      // 判斷是不是11 12 13
+      function checkNumber(currentNumber) {
+        for (var i = 0; i < dataArray.length; i++) {
+          if (currentNumber === 11) {
+            currentNumber = "J";
+          } else if (currentNumber === 12) {
+            currentNumber = "Q";
+          } else if (currentNumber === 13) {
+            currentNumber = "K";
+          } else if (currentNumber === 1) {
+            currentNumber = "A";
+          }
+          return currentNumber;
+        }
+      }
+      checkNumber();
+    </script>
+  </body>
+</html>
