@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ETmall-sort-practise</title>
+  </head>
+  <body>
+    <script>
+      // 從東森購物節錄商品資料
+      var products = [
+        {
+          type: "clothes",
+          name: "GIORDANO 男/女裝B-SPORTS輕量抗UV防風外套 (多色任選)-熱",
+          price: 2000,
+          discount: 0.2,
+          amounts: 1,
+        },
+        {
+          type: "food",
+          name: "亞培 小安素均衡完整營養配方(850gx10入)+(贈品)亞培粉嫩橘陶",
+          price: 8390,
+          discount: 1,
+          amounts: 10,
+        },
+        {
+          type: "medicine",
+          name: "【日南製藥】日本定序_苦瓜胜肽強效版_5盒",
+          price: 14900,
+          discount: 0.2,
+          amounts: 5,
+        },
+        {
+          type: "cosmetic",
+          name: "PENHALIGONS 潘海利根 Scent Library 香氛圖書館禮盒 2mlX10",
+          price: 2500,
+          discount: 0.39,
+          amounts: 10,
+        },
+        {
+          type: "cosmetic",
+          name: "BIO UP自然美日本黃金麴酒粕煥顏青春露200ml(2入)-贈彈力面膜",
+          price: 5760,
+          discount: 0.26,
+          amounts: 2,
+        },
+      ];
+
+      // 使用 sort 排序價格
+      var priceOrder = products.sort(function (a, b) {
+        return a.price - b.price;
+      });
+
+      priceOrder.forEach(function (product, index) {
+        index += 1;
+        console.log(
+          "第" +
+            index +
+            "的品：" +
+            product.name +
+            "的價格：" +
+            product.price +
+            "元"
+        );
+      });
+
+      // 並過濾出所有總價 5000 的商品
+      var priceFilter = products.filter(function (product) {
+        return product.price >= 5000;
+      });
+
+      console.log(priceFilter);
+    </script>
+  </body>
+</html>
