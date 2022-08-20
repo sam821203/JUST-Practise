@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>object 2</title>
+    <style>
+      .person {
+        padding: 10px;
+        border: 4px solid #000;
+      }
+
+      .person img {
+        width: 50px;
+      }
+
+      .person.worker {
+        border-color: tomato;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // 新增『人』物件
+      var Person = function (name, age) {
+        this.name = name;
+        this.age = age;
+      };
+      var Mary = new Person("Mary", 40);
+      var Henry = new Person("Henry", 36);
+
+      Person.prototype.getHtml = function () {
+        return `
+          <div class='person'> 
+            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-45gYPtG2C5jtj3zGW-T5-GsTlCl4m4jhVAlP2iA0SrFfRZg1S1hm-Iv6E2XRvNPAVuo&usqp=CAU'>
+            <h3>Person: ${this.name}<br>Age: ${this.age}</h3>
+          </div>
+          `;
+      };
+
+      // 新增『工作者』物件
+      var Worker = function (name, age, work) {
+        Person.call(this, name, age);
+        this.work = work;
+      };
+
+      // 讓 worker 可以用 person 裡的 sayHello
+      // 創造一個新物件，這個物件是連結 Person 的 prototype
+      Worker.prototype = Object.create(Person.prototype);
+
+      // 為了避免往上找到 Person 的 constructor, 也需要再指派一次
+      Worker.prototype.constructor = Worker.constructor;
+
+      Worker.prototype.sayWork = function () {
+        console.log(`Hello, my name is ${this.name}, I'm a ${this.work}`);
+      };
+      Worker.prototype.getHtml = function () {
+        return `
+        <div class='person worker'> 
+            <img src='https://media.istockphoto.com/vectors/construction-worker-icon-vector-person-profile-avatar-pictogram-vector-id803713506?k=20&m=803713506&s=170667a&w=0&h=Vbszh0hxQp7DkDpqNrD0UJgsHNTuAeVw3yFQ1k8Z5xc='>
+            <h3>Person: ${this.name}<br>Age: ${this.age}<br>Work: ${this.work}</h3>
+          </div>
+        `;
+      };
+
+      var John = new Worker("John", 22, "Engineer");
+      Worker.prototype.toString = function () {
+        return "[Worker] " + this.name;
+      };
+      console.log("This is " + John);
+
+      // 將資料置入 HTML 裡
+      const myBody = document.querySelector("body");
+
+      myBody.insertAdjacentHTML("beforeend", Mary.getHtml());
+      myBody.insertAdjacentHTML("beforeend", Henry.getHtml());
+      myBody.insertAdjacentHTML("beforeend", John.getHtml());
+
+      // ============ 課後練習 ============
+      // 建立一個『生物』物件
+      // 有血量 / 技能 / 位置
+      var Creature = function (blood, skill, location) {
+        this.blood = blood;
+        this.skill = skill;
+        this.location = location;
+      };
+
+      // var player = new Creature(2000, "一般直拳", "台中");
+
+      // 新增『玩家』物件，玩家 >> 裝備欄
+      // 新增『魔物』物件，魔物 >> 有掉宝的種類跟機率
+      var Player = function (blood, skill, location, equipment) {
+        Creature.call(this, blood, skill, location);
+        this.equipment = equipment;
+      };
+      var Monster = function (blood, skill, location, rewards, probability) {
+        Creature.call(this, blood, skill, location);
+        this.rewards = rewards;
+        this.probability = probability;
+      };
+
+      // 創造一個新物件，這個物件是連結 Creature 的 prototype
+      // 為了避免往上找到 Person 的 constructor, 也需要再指派一次
+      Player.prototype = Object.create(Creature.prototype);
+      Monster.prototype = Object.create(Creature.prototype);
+      Player.prototype.constructor = Player.constructor;
+      Monster.prototype.constructor = Monster.constructor;
+
+      // 建構 HTML
+      Player.prototype.getHtml = function () {
+        return `
+        <div class='player'> 
+            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP3B2Jl07Z51Vhlly1IabkWFnfz5vkG0cWDA&usqp=CAU'>
+            <h3>blood: ${this.blood}<br>Skill: ${this.skill}<br>Location: ${this.location}</h3>
+            <h4>目前持有裝備： ${this.equipment}</h4>
+          </div>
+        `;
+      };
+
+      Monster.prototype.getHtml = function () {
+        return `
+        <div class='player monster'> 
+            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSILoQqDMkisSh39IU7vRXvyPa8e4WqpwEx5w&usqp=CAU'>
+            <h3>blood: ${this.blood}<br>Skill: ${this.skill}<br>Location: ${this.location}</h3>
+            <h4>掉落物品： ${this.equipment}<br>掉落物品機率： ${this.probability}</h4>
+          </div>
+        `;
+      };
+
+      // 宣告新『生物』類別
+      var fishingHao = new Player("9999", "肘擊", "新北市新手村", "室內拖");
+      var porCheng = new Player("1234", "直拳", "新北市新手村", "日本製拖鞋");
+      var monster1 = new Monster(
+        "987",
+        "助跑",
+        "新北市新手村",
+        "2等魔石",
+        "0.5%"
+      );
+
+      myBody.insertAdjacentHTML("beforeend", fishingHao.getHtml());
+      myBody.insertAdjacentHTML("beforeend", porCheng.getHtml());
+      myBody.insertAdjacentHTML("beforeend", monster1.getHtml());
+    </script>
+  </body>
+</html>
