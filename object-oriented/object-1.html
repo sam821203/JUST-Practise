@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>object</title>
+  </head>
+  <body>
+    <script>
+      var Person = function (name, gender, obj, concert) {
+        this.name = name;
+        this.gender = gender;
+        this.object = obj;
+        this.concert = concert;
+
+        this.greeting = function () {
+          console.log("Hello I am " + this.name);
+        };
+        this.hello = function (person) {
+          console.log("Hello " + person.name + ", I am " + this.name);
+        };
+        this.give = function (person) {
+          console.log(this.name + "把" + this.object + "給了" + person.name);
+          person.object = this.object;
+          this.object = null;
+        };
+      };
+
+      // 就算定義的物件不需要初始參數，後面還是要加小括號
+      var person1 = new Person("John", "Male", "banana");
+      var person2 = new Person("Marry", "Female", null, null);
+      // person1.give(person2);
+
+      // console.log(person1);
+      // console.log(person2);
+      console.log("====================================");
+
+      // 建立一個『門票』物件
+      // 初始化設定演唱會的價格 名稱 實名持有者
+      // 並有『打折』『賣出』『轉讓』等功能
+      var Ticket = function (price, concert, name) {
+        this.price = price;
+        this.concert = concert;
+        this.name = name;
+        this.getDiscount = function () {
+          return this.price * 0.9;
+        };
+        this.sellIt = function () {
+          return (
+            "如果想賣黃牛票，我建議" + this.getDiscount() * 1.5 + "的價格賣出"
+          );
+        };
+        this.turnToSomeOne = function (person) {
+          return this.name + "把" + this.concert + "的票給了 >> " + person.name;
+          person.concert = this.concert;
+          this.concert = null;
+        };
+      };
+
+      var myTicket = new Ticket(2800, "盧廣仲", "黃先生");
+      console.log(person2);
+      console.log(myTicket.turnToSomeOne(person2));
+      console.log(person2);
+
+      console.log(myTicket.sellIt());
+    </script>
+  </body>
+</html>
