@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>object 3</title>
+    <style>
+      .game {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        border: 5px solid black;
+      }
+
+      .game .board,
+      .game .ball {
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game">
+      <div class="board b1"></div>
+      <div class="board b2"></div>
+      <div class="ball"></div>
+      <div class="info">
+        <h2 class="infoText">Start Game</h2>
+        <button class="start"></button>
+      </div>
+      <div class="grade"></div>
+    </div>
+
+    <script>
+      var GameObject = function (position, size, selector) {
+        this.selector = document.querySelector("selector");
+        this.position = position;
+        this.size = size;
+        this.selector.style.position = "relative";
+      };
+
+      GameObject.prototype.updateCss = function () {
+        this.selector.style.top = this.position.y;
+        this.selector.style.left = this.position.x;
+        this.selector.style.width = this.size.width;
+        this.selector.style.height = this.size.height;
+      };
+
+      // 新增遊戲物件
+      var board = new GameObject(
+        { x: 50, y: 50 },
+        { width: 50, height: 200 },
+        ".b1"
+      );
+
+      board.position.x = 100;
+      board.updateCss();
+    </script>
+  </body>
+</html>

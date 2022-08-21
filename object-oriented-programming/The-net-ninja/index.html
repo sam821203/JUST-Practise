@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 建立一個『User』類別
+      // class User {
+      //   constructor(name, email) {
+      //     this.name = name;
+      //     this.email = email;
+      //     this.score = 0;
+      //   }
+      //   login() {
+      //     console.log(this.email, " just logged in");
+      //     return this;
+      //   }
+      //   logout() {
+      //     console.log(this.email, " just logged out");
+      //     return this;
+      //   }
+      //   updateScore() {
+      //     this.score++;
+      //     console.log(this.email, " score is now", this.score);
+      //     return this;
+      //   }
+      // }
+
+      // class Admin extends User {
+      //   deleteUser(user) {
+      //     users = users.filter((u) => {
+      //       return u.email != user.email;
+      //     });
+      //   }
+      // }
+
+      // var admin = new Admin("Uranus", "uranus@danmachi.com");
+
+      function User(name, email) {
+        this.name = name;
+        this.email = email;
+        this.online = false;
+        // this.login = function () {
+        //   console.log(this.email, "has logged in");
+        // };
+      }
+
+      function Admin(...args) {
+        User.apply(this, args);
+        this.role = "God";
+      }
+
+      Admin.prototype = Object.create(User.prototype);
+      Admin.prototype.deleteUser = function (u) {
+        users = users.filter((user) => {
+          return user.email != u.email;
+        });
+      };
+
+      User.prototype.login = function () {
+        this.online = true;
+        console.log(this.email, "has logged in");
+      };
+
+      User.prototype.logout = function () {
+        this.online = false;
+        console.log(this.email, "has logged out");
+      };
+
+      var userOne = new User("Ryu", "ryu@danmachi.com");
+      var userTwo = new User("Ais", "ais@danmachi.com");
+      var admin = new Admin("Uranus", "uranus@danmachi.com");
+      var users = [userOne, userTwo, admin];
+      console.log(admin);
+    </script>
+  </body>
+</html>
