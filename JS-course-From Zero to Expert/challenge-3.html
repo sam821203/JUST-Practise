@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const dolphinsScore1 = 96;
+      const dolphinsScore2 = 108;
+      const dolphinsScore3 = 89;
+      const koalasScore1 = 88;
+      const koalasScore2 = 91;
+      const koalasScore3 = 110;
+      const minScore = 100;
+
+      const dolphinsAverageScore = Math.floor(
+        (dolphinsScore1 + dolphinsScore2 + dolphinsScore3) / 3
+      );
+      const koalasAverageScore = Math.floor(
+        (koalasScore1 + koalasScore2 + koalasScore3) / 3
+      );
+
+      if (dolphinsAverageScore > koalasAverageScore) {
+        console.log("dolphins is winner");
+      } else if (dolphinsAverageScore < koalasAverageScore) {
+        console.log("koalas is winner");
+      } else {
+        console.log("both of them are winners!!!");
+      }
+    </script>
+  </body>
+</html>
