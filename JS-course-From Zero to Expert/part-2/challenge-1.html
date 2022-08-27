@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 一定要放第一行，不然不會執行
+      "use strict";
+
+      // function logger() {
+      //   console.log("My name is Sam!");
+      // }
+
+      // // calling / running / invoking function
+      // logger();
+      // logger();
+      // logger();
+
+      // // function declaration
+      // // 跟函式表達式的差別在於，這可以在函式之前就呼叫 (因為 hoisting 的關係)
+      // console.log(calcAge1(1993));
+      // function calcAge1(birthYear) {
+      //   return 2022 - birthYear;
+      // }
+
+      // // function expression
+      // // 函式表達式只能在之後呼叫
+      // const calcAge2 = function (birthYear) {
+      //   return 2022 - birthYear;
+      // };
+      // const age2 = calcAge2(1991);
+
+      // // Arrow function
+      // const calcAge3 = (birthYear) => 2022 - birthYear;
+      // const age3 = calcAge3(1995);
+      // console.log(age3);
+
+      // const calcAge = function (birthYear) {
+      //   return 2022 - birthYear;
+      // };
+
+      // const yearsUntilRetirement = function (birthYear, firstName) {
+      //   const age = calcAge(birthYear);
+      //   const retirement = 65 - age;
+
+      //   if (retirement > 0) {
+      //     return `${firstName} retires in ${retirement} years`;
+      //   } else {
+      //     return -1;
+      //   }
+      // };
+      // console.log(yearsUntilRetirement(1993, "Sam"));
+      // console.log(yearsUntilRetirement(1950, "Mike"));
+
+      // fruit example
+      // function cutFruitPieces(fruit) {
+      //   return fruit * 4;
+      // }
+
+      // function fruitProcessor(apples, oranges) {
+      //   const applePieces = cutFruitPieces(apples);
+      //   const orangePieces = cutFruitPieces(oranges);
+
+      //   const juice = `juice with ${applePieces} piece of apples and ${orangePieces} piece of oranges.`;
+      //   return juice;
+      // }
+
+      // console.log(fruitProcessor(2, 3));
+
+      const calcAverage = (score1, score2, score3) =>
+        (score1 + score2 + score3) / 3;
+
+      const dolphinsAverage = calcAverage(44, 23, 71);
+      const koalasAverage = calcAverage(65, 54, 49);
+
+      function checkWinner(avgDolhins, avgKoalas) {
+        if (avgDolhins > avgKoalas && avgDolhins >= avgKoalas * 2) {
+          console.log(`Dolphins win ${avgDolhins} vs. ${avgKoalas}`);
+        } else if (avgKoalas > avgDolhins && avgKoalas >= avgDolhins * 2) {
+          console.log(`Koalas win ${avgKoalas} vs. ${avgDolhins}`);
+        } else {
+          console.log("No winner!");
+        }
+        return checkWinner;
+      }
+
+      checkWinner(dolphinsAverage, koalasAverage);
+    </script>
+  </body>
+</html>
