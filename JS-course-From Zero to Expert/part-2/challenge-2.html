@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // const friends = ["Michael", "Steven", "Peter"];
+      // console.log(friends);
+
+      // const newLength = friends.push("Tim");
+      // console.log(newLength);
+
+      // friends.unshift("Sam");
+      // console.log(friends);
+
+      // const removeEl = friends.pop();
+      // console.log(removeEl);
+      // console.log(friends);
+
+      // friends.shift();
+      // console.log(friends);
+
+      // console.log(friends.indexOf("Bob"));
+
+      // friends.push(23);
+      // console.log(friends);
+
+      // console.log(friends.includes("23"));
+
+      // if (friends.includes("Steven")) {
+      //   console.log("You have a friend call Steven!");
+      // }
+
+      // const billValue = 275;
+      // const tip =
+      //   billValue <= 300 && billValue >= 50
+      //     ? billValue * 0.15
+      //     : billValue * 0.2;
+
+      const bills = [125, 555, 44];
+      const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
+      const total = [];
+
+      // console計算加小費的功能
+      function calcTip(billValue) {
+        return billValue <= 300 && billValue >= 50
+          ? billValue * 0.15
+          : billValue * 0.2;
+      }
+
+      // 將 tips 裡的值一個個跑過，然後放進去 total 陣列
+      function calcTotal() {
+        for (let i = 0; i < bills.length; i++) {
+          total.push(bills[i] + tips[i]);
+        }
+        return;
+      }
+      calcTotal();
+
+      console.log(total);
+    </script>
+  </body>
+</html>
