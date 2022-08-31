@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const jonas = {
+        firstName: "Jonas",
+        lastName: "Schmedtmann",
+        birthYear: 1991,
+        job: "teacher",
+        friends: ["Sam", "Peter", "Steven"],
+        hasDriversLicense: true,
+
+        // calcAge: function (birthYear) {
+        //   return 2037 - birthYear;
+        // },
+
+        // calcAge: function () {
+        //   console.log(this);
+        //   return 2037 - this.birthYear;
+        // },
+
+        calcAge: function () {
+          this.age = 2037 - this.birthYear;
+          return this.age;
+        },
+        // "Jonas is a 46 years old teacher and he has a/no driver's license"
+        calSum: function () {
+          return `${this.firstName} is a ${this.calcAge()} years old ${
+            this.job
+          } and he has ${this.hasDriversLicense ? "a" : "no"} drivers license.`;
+        },
+      };
+
+      // console.log(jonas.calcAge());
+      // console.log(jonas.calcAge());
+      // console.log(jonas);
+
+      // console.log(jonas.calSum());
+
+      // const nameKey = "Name";
+      // console.log(jonas["first" + nameKey]);
+      // console.log(jonas["last" + nameKey]);
+
+      // const interested = prompt("What the hell?");
+
+      // if (jonas[interested]) {
+      //   console.log(jonas[interested]);
+      // } else {
+      //   console.log("nothing there");
+      // }
+
+      jonas.location = "Taichung";
+      jonas["instagram"] = "jonas_ig";
+      // console.log(jonas);
+
+      // 'Sam has 3 friends and his best friend is called Kane'
+      // const sam = {
+      //   name: "Sam",
+      //   friends: 3,
+      //   bestFriends: "Kane",
+      // };
+      // console.log(
+      //   `${sam.name} has ${sam.friends} friends and his best friend is called ${sam.bestFriends}`
+      // );
+
+      // ===== challenge 3 =====
+      // const markBMI = massForMark / heightForMark ** 2;
+      // const johnBMI = massForJohn / (heightForJohn * heightForJohn);
+
+      // const markHigherBMI = markBMI > johnBMI;
+      // const result = markHigherBMI.toString();
+
+      // console.log(
+      //   `Mark's BMI is ${parseInt(markBMI)}, John's BMI is ${parseInt(
+      //     johnBMI
+      //   )}!`
+      // );
+
+      // if (markBMI > johnBMI) {
+      //   console.log(`Mark's BMI is higher than John's`);
+      // } else {
+      //   console.log(`John's BMI is higher than Mark's`);
+      // }
+
+      const markBMI = {
+        fullName: "Mark Miller",
+        mass: 64,
+        height: 1.69,
+        calcBMI: function () {
+          this.valueBMI = parseInt(this.mass / (this.height * this.height));
+          return this.valueBMI;
+        },
+        calcSum: function () {
+          return `${markBMI.fullName}'s BMI (${markBMI.valueBMI}) is higher than ${johnBMI.fullName}'s (${johnBMI.valueBMI})`;
+        },
+      };
+
+      const johnBMI = {
+        fullName: "John Smith",
+        mass: 78,
+        height: 1.95,
+        calcBMI: function () {
+          this.valueBMI = parseInt(this.mass / (this.height * this.height));
+          return parseInt(this.valueBMI);
+        },
+        calcSum: function () {
+          return `${johnBMI.fullName}'s BMI (${johnBMI.valueBMI}) is higher than ${markBMI.fullName}'s (${markBMI.valueBMI})`;
+        },
+      };
+
+      markBMI.calcBMI();
+      johnBMI.calcBMI();
+      // markBMI.calSum();
+      // johnBMI.calSum();
+
+      // function resultSum() {
+      //   return `${markBMI.age > johnBMI.age} ? ${markBMI.fullName}'s BMI (${
+      //     markBMI.valueBMI
+      //   }) is higher than ${johnBMI.fullName}'s (${johnBMI.valueBMI}) : ${
+      //     johnBMI.fullName
+      //   }'s BMI (${johnBMI.valueBMI}) is higher than ${markBMI.fullName}'s (${
+      //     markBMI.valueBMI
+      //   })`;
+      // }
+
+      console.log(
+        markBMI.age > johnBMI.age ? johnBMI.calcSum() : markBMI.calcSum()
+      );
+    </script>
+  </body>
+</html>
