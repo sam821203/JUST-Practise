@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const jonasArray = [
+        "Jonas",
+        "Schmedtmann",
+        1991,
+        "teacher",
+        ["Sam", "Peter", "Steven"],
+        true,
+      ];
+
+      // print reversely
+      // for (let i = jonasArray.length - 1; i >= 0; i--) {
+      //   console.log(i, jonasArray[i]);
+      // }
+
+      // loop in loop
+      // for (let exercise = 1; exercise < 4; exercise++) {
+      //   console.log(`------- starting exercise ${exercise} -------`);
+      //   for (let rep = 1; rep < 6; rep++) {
+      //     console.log(`Exercise ${exercise}: Lifting weight repetition ${rep}`);
+      //   }
+      // }
+
+      // while loop
+      // let rep = 1;
+      // while (rep <= 10) {
+      //   console.log(`Lifting weight repetition ${rep}`);
+      //   rep++;
+      // }
+
+      // random dice
+      // const rollingHistory = [];
+      // let dice = Math.trunc(Math.random() * 6) + 1;
+      // while (dice !== 6) {
+      //   console.log(`You rolled a ${dice}, so keep rolling`);
+      //   rollingHistory.push(dice);
+      //   dice = Math.trunc(Math.random() * 6) + 1;
+      //   if (dice === 6) console.log(`You finally get ${dice}!!!`);
+      // }
+
+      // const types = [];
+      // for (let i = 0; i < jonasArray.length; i++) {
+      //   if (typeof jonasArray[i] === "string") continue;
+      //   console.log(jonasArray[i], typeof jonasArray[i]);
+      // }
+
+      // for (let i = 0; i < jonasArray.length; i++) {
+      //   if (typeof jonasArray[i] !== "string") break;
+      //   console.log(jonasArray[i], typeof jonasArray[i]);
+      // }
+
+      // const years = [1991, 2007, 1969, 2020];
+      // const ages = [];
+
+      // for (let i = 0; i < years.length; i++) {
+      //   ages.push(2022 - years[i]);
+      // }
+
+      const bills = [22, 295, 176, 400, 37, 105, 10, 1100, 86, 52];
+      const tips = [];
+      const totals = [];
+
+      const calcTip = function (bill) {
+        return bill <= 300 && bill >= 50 ? bill * 0.15 : bill * 0.2;
+      };
+
+      // console計算加小費的功能
+      for (let i = 0; i < bills.length; i++) {
+        const eachBill = bills[i];
+        const tip = calcTip(bills[i]);
+        tips.push(tip);
+        totals.push(eachBill + tip);
+      }
+      console.log(bills, tips, totals);
+    </script>
+  </body>
+</html>

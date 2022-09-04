@@ -107,7 +107,7 @@
         height: 1.95,
         calcBMI: function () {
           this.valueBMI = parseInt(this.mass / (this.height * this.height));
-          return parseInt(this.valueBMI);
+          return this.valueBMI;
         },
         calcSum: function () {
           return `${johnBMI.fullName}'s BMI (${johnBMI.valueBMI}) is higher than ${markBMI.fullName}'s (${markBMI.valueBMI})`;
@@ -116,18 +116,6 @@
 
       markBMI.calcBMI();
       johnBMI.calcBMI();
-      // markBMI.calSum();
-      // johnBMI.calSum();
-
-      // function resultSum() {
-      //   return `${markBMI.age > johnBMI.age} ? ${markBMI.fullName}'s BMI (${
-      //     markBMI.valueBMI
-      //   }) is higher than ${johnBMI.fullName}'s (${johnBMI.valueBMI}) : ${
-      //     johnBMI.fullName
-      //   }'s BMI (${johnBMI.valueBMI}) is higher than ${markBMI.fullName}'s (${
-      //     markBMI.valueBMI
-      //   })`;
-      // }
 
       console.log(
         markBMI.age > johnBMI.age ? johnBMI.calcSum() : markBMI.calcSum()
