@@ -54,7 +54,6 @@
       // 做一個猜數字遊戲。玩家要在 10 回合內猜中一個1到100之間的隨機數字 , 每回合結束時都要告訴玩家他們猜對還是猜錯 , 然後要是他們猜錯 , 要告訴他們數字猜的太小還是太大 , 這個遊戲會在玩家猜對 , 或是猜超過 10 次時結束 , 且遊戲結束時 , 要提供一個選項讓玩家可以再玩一次 。
 
       // 1) understanding the problem
-      // - with 2 arrays, should we implement functionality twice? Answer: No! Just merge two arrays at the beginning
       // - 只能猜最多 10 回合 >> 回合數不能大於 10
       // - 只能猜 1-100 間的數字 >> 猜的數字須介於 1 和 100 間
       // - 遊戲結束的兩種可能：玩家猜對 / 猜超過 10 次 >> 會有猜錯 / 猜對 / 猜超過 10 次 三種路可以走
@@ -66,7 +65,7 @@
       // - 如何控制 1-100？ 答：隨機變數 * 100，並設一個變數存放這個隨機數字 / 和一個猜的數字
       // - 如何控制只有三種路？ 答：if / else if / else
       // - 如何先印出對錯，再判斷跟隨機數字比的大小？ 答：如果猜錯的話，才會做比較 (只會有 較大 較小)
-      // - 如何果遊戲結束時，有哪些部分需要重新賦予值？ 答：回合數 / 隨機數
+      // - 如何果遊戲結束時，有哪些部分需要重新賦予值？ 答：回合數 / 隨機數等等...
 
       let count = 1;
       let randomNumber = Math.trunc(Math.random() * 100) + 1;
@@ -80,9 +79,7 @@
       // 重置遊戲
       function resetGame() {
         count = 1;
-        // 重新設置隨機數字
         randomNumber = Math.trunc(Math.random() * 100) + 1;
-
         const resetParas = document.querySelectorAll("#resultParas p");
 
         for (let i = 0; i < resetParas.length; i++) {
@@ -108,9 +105,6 @@
 
       function checkGuess() {
         let guessValue = document.getElementById("guessField").value;
-        console.log(randomNumber);
-        console.log(guessValue);
-        console.log(count);
 
         // 如果大於 10 回合
         if (count > 9) {
@@ -137,9 +131,7 @@
       guessButton.addEventListener("click", checkGuess);
 
       // 觸發重置遊戲
-      resetButton.addEventListener("click", function () {
-        resetGame();
-      });
+      resetButton.addEventListener("click", resetGame);
     </script>
   </body>
 </html>
