@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    html {
+      font-family: sans-serif;
+    }
+
+    body {
+      width: 50%;
+      max-width: 800px;
+      min-width: 480px;
+      margin: 0 auto;
+    }
+
+    .last__result {
+      color: white;
+      padding: 3px;
+    }
+
+    .btn--reset {
+      display: none;
+    }
+
+    .btn--reset.active {
+      display: block;
+    }
+  </style>
+  <body>
+    <h1>猜數字遊戲</h1>
+
+    <p>
+      程式在1到100間挑了一個雖機的數字，請在10次機會中猜出來！猜錯的話會提示要大一點還是小一點。
+    </p>
+
+    <div class="form">
+      <label for="guessField">輸入數字: </label>
+      <input type="number" id="guessField" />
+      <input type="submit" value="就猜是你！" id="guessSubmit" />
+    </div>
+
+    <div id="resultParas">
+      <p id="guesses"></p>
+      <p id="lastResult" class="last__result"></p>
+      <p id="lowOrHi"></p>
+    </div>
+    <button id="resetButton" class="btn--reset">再來一場</button>
+    <script>
+      // 做一個猜數字遊戲。玩家要在 10 回合內猜中一個1到100之間的隨機數字 , 每回合結束時都要告訴玩家他們猜對還是猜錯 , 然後要是他們猜錯 , 要告訴他們數字猜的太小還是太大 , 這個遊戲會在玩家猜對 , 或是猜超過 10 次時結束 , 且遊戲結束時 , 要提供一個選項讓玩家可以再玩一次 。
+
+      // 1) understanding the problem
+      // - with 2 arrays, should we implement functionality twice? Answer: No! Just merge two arrays at the beginning
+      // - 只能猜最多 10 回合 >> 回合數不能大於 10
+      // - 只能猜 1-100 間的數字 >> 猜的數字須介於 1 和 100 間
+      // - 遊戲結束的兩種可能：玩家猜對 / 猜超過 10 次 >> 會有猜錯 / 猜對 / 猜超過 10 次 三種路可以走
+      // - 每猜一次，就要印出猜的 "對錯" / "太大或太小" >> 印出相對印的結果和比較
+      // - 遊戲結束時，要有個按鈕，讓玩家可以選擇再玩一次 >> 需要有 again 按鈕
+
+      // 2) break into sub-problems
+      // - 如何控制回合數？ 答：先設一個從 1 開始的變數存放回合數，每回合 ++
+      // - 如何控制 1-100？ 答：隨機變數 * 100，並設一個變數存放這個隨機數字 / 和一個猜的數字
+      // - 如何控制只有三種路？ 答：if / else if / else
+      // - 如何先印出對錯，再判斷跟隨機數字比的大小？ 答：如果猜錯的話，才會做比較 (只會有 較大 較小)
+      // - 如何果遊戲結束時，有哪些部分需要重新賦予值？ 答：回合數 / 隨機數
+
+      let count = 1;
+      let randomNumber = Math.trunc(Math.random() * 100) + 1;
+      const guessButton = document.getElementById("guessSubmit");
+      const guessWhat = document.getElementById("guessField");
+      const guesses = document.getElementById("guesses");
+      const lastGuess = document.getElementById("lastResult");
+      const lowOrHigh = document.getElementById("lowOrHi");
+      const resetButton = document.querySelector(".btn--reset");
+
+      // 重置遊戲
+      function resetGame() {
+        count = 1;
+        // 重新設置隨機數字
+        randomNumber = Math.trunc(Math.random() * 100) + 1;
+
+        const resetParas = document.querySelectorAll("#resultParas p");
+
+        for (let i = 0; i < resetParas.length; i++) {
+          resetParas[i].textContent = "";
+        }
+        guessValue = undefined;
+        lastGuess.style.backgroundColor = "transparent";
+        guessButton.disabled = false;
+        resetButton.style.display = "none";
+      }
+
+      // 顯示出結果
+      function showResult(result, background, comparison) {
+        lastGuess.textContent = result;
+        lastGuess.style.backgroundColor = background;
+        lowOrHigh.textContent = comparison;
+      }
+
+      function renewGuessValue(guessValue) {
+        guessWhat.value = guessValue;
+        guessWhat.textContent = guessValue;
+      }
+
+      function checkGuess() {
+        let guessValue = document.getElementById("guessField").value;
+        console.log(randomNumber);
+        console.log(guessValue);
+        console.log(count);
+
+        // 如果大於 10 回合
+        if (count > 9) {
+          lastGuess.textContent += ` 你最後猜了 ${guessValue} ，已經超過 10 回合了，所以遊戲結束！`;
+          guessButton.disabled = true;
+          resetButton.style.display = "block";
+        } else if (randomNumber !== guessValue && randomNumber > guessValue) {
+          renewGuessValue(guessValue);
+          showResult("你猜錯了", "red", "再猜大點");
+        } else if (randomNumber !== guessValue && randomNumber < guessValue) {
+          renewGuessValue(guessValue);
+          showResult("你猜錯了", "red", "再猜小點");
+        } else {
+          renewGuessValue(guessValue);
+          showResult("你猜對了", "green", "");
+          guessButton.disabled = true;
+          resetButton.style.display = "block";
+        }
+        count++;
+        guessWhat.focus();
+      }
+
+      // 觸發點擊事件
+      guessButton.addEventListener("click", checkGuess);
+
+      // 觸發重置遊戲
+      resetButton.addEventListener("click", function () {
+        resetGame();
+      });
+    </script>
+  </body>
+</html>
