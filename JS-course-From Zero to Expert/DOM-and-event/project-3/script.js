@@ -15,15 +15,10 @@ const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
-// Starting conditions
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
-
-let scores = [0, 0];
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true;
+let scores;
+let currentScore;
+let activePlayer;
+let playing;
 
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
@@ -33,27 +28,29 @@ const switchPlayer = function () {
   player1El.classList.toggle('player--active');
 };
 
-const resetGame = function () {
-  // active the button of roll and hold
-  playing = true;
-
+const init = function () {
+  // Starting conditions
+  scores = [0, 0];
   currentScore = 0;
   activePlayer = 0;
-  scores = [0, 0];
-
-  player0El.classList.remove('player--winner');
-  player1El.classList.remove('player--winner');
-  player0El.classList.remove('player--active');
-  player1El.classList.remove('player--active');
-
-  player0El.classList.add('player--active');
+  playing = true;
 
   // reset current and score content
   for (let i = 0; i < currentEls.length; i++) {
     currentEls[i].textContent = 0;
     scoreEls[i].textContent = 0;
   }
+
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  // 如果 player 1 原本已經有 .player--active，JS 就不會再添加一樣的 class
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+
+  diceEl.classList.add('hidden');
 };
+
+init();
 
 // Rolling dice functionality
 btnRoll.addEventListener('click', function () {
@@ -83,7 +80,6 @@ btnHold.addEventListener('click', function () {
   if (playing) {
     // 1. Add current score tp active player's score
     scores[activePlayer] += currentScore;
-    console.log(scores[activePlayer]);
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
 
@@ -105,4 +101,4 @@ btnHold.addEventListener('click', function () {
   }
 });
 
-btnNew.addEventListener('click', resetGame);
+btnNew.addEventListener('click', init);
