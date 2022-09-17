@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+      var firstName = 'Jonas';
+
+      const sam = {
+        firstName: 'Sam',
+        year: 1993,
+        calcAge: function () {
+          // console.log(this);
+          // console.log(2022 - this.year);
+
+          // ============= Solution 1 =============
+          // regular function 只會呼叫自己的 this
+          // const self = this;
+          // const isMillennial = function () {
+          //   console.log(self);
+          //   console.log(self.year);
+          //   console.log(self.year >= 1981 && self.year <= 1996);
+          // };
+          // isMillennial();
+
+          // ============= Solution 2 =============
+          // arrow function 則會往父層 (parent scope) 找，在這裡就會找到 calcAge 的 this
+          const isMillennial = () => {
+            console.log(this);
+            console.log(this.year);
+            console.log(this.year >= 1981 && this.year <= 1996);
+          };
+          isMillennial();
+        },
+        greet: () => {
+          console.log(this);
+          console.log(`Hey ${this.firstName}`);
+        },
+      };
+      // sam.greet();
+      sam.calcAge();
+
+      // 引數的 keyword 只有在 regular function 有效
+      const addExpr = function (a, b) {
+        console.log(arguments);
+        return a + b;
+      };
+      addExpr(2, 5);
+
+      var addArrow = (a, b) => {
+        console.log(arguments);
+        return a + b;
+      };
+      addArrow(3, 10);
+    </script>
+  </body>
+</html>

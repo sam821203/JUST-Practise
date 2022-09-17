@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Primitive types
+      let lastName = 'Yu Hao';
+      let oldLastName = lastName;
+      lastName = 'Davis';
+      console.log(lastName, oldLastName);
+
+      // Reference types
+      const jessica = {
+        firstName: 'Jessica',
+        lastName: 'Huang',
+        age: 27,
+      };
+
+      const marriedJessica = jessica;
+
+      // Copying objects
+      const jessica2 = {
+        firstName: 'Jessica',
+        lastName: 'Huang',
+        age: 27,
+        family: ['Alice', 'Smith'],
+      };
+
+      // Object.assign 被稱為 shallow cope，因為只會複製第一層，裡面的 object 還是會是一樣的
+      const jessicaCopy = Object.assign({}, jessica2);
+      jessicaCopy.lastName = 'Tina';
+      jessicaCopy.family.push('Mary');
+      jessicaCopy.family.push('John');
+      console.log(jessica2);
+      console.log(jessicaCopy);
+    </script>
+  </body>
+</html>
