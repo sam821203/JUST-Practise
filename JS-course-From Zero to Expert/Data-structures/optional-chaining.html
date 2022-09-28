@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+
+      const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+      const openingHours = {
+        [weekdays[3]]: {
+          open: 12,
+          close: 22,
+        },
+        [weekdays[4]]: {
+          open: 11,
+          open: 11,
+          close: 23,
+        },
+        [weekdays[5]]: {
+          open: 0, // Open 24 hours
+          close: 24,
+        },
+      };
+
+      const restaurant = {
+        name: 'Classico Italiano',
+        location: 'Via Angelo Tavanti 23, Firenze, Italy',
+        categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+        starterMenu: [
+          'Focaccia',
+          'Bruschetta',
+          'Garlic Bread',
+          'Caprese Salad',
+        ],
+        mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+        //ES6 enhanced object literals 可以把這個變數名稱的值帶進來，同時創建一個一樣名字的變數
+        openingHours,
+
+        //ES6 可以直接寫成 method
+        order(starterIndex, mainIndex) {
+          return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+        },
+
+        orderDelivery({
+          starterIndex = 1,
+          mainIndex = 0,
+          time = '20:00',
+          address,
+        }) {
+          console.log(
+            `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+          );
+        },
+
+        orderPasta: function (ing1, ing2, ing3) {
+          console.log(
+            `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+          );
+        },
+
+        orderPizza: function (mainIngredient, ...otherIngredients) {
+          console.log(mainIngredient);
+          console.log(otherIngredients);
+        },
+      };
+
+      if (restaurant.openingHours && restaurant.openingHours.mon)
+        console.log(restaurant.openingHours.mon.open);
+
+      // WITH optional chaining
+      // 當問號前的事 true 的話，才會執行問號後面的
+      console.log(restaurant.openingHours.mon?.open);
+      console.log(restaurant.openingHours?.fri?.open);
+
+      // Example
+      for (const day of weekdays) {
+        const open = restaurant.openingHours[day]?.open ?? 'closed';
+        console.log(`On ${day}, we open at ${open}`);
+      }
+
+      // Methods
+      console.log(restaurant.order?.(0, 2) ?? 'Method does not exist');
+      console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+      // Arrays
+      const users = [
+        {
+          name: 'Sam',
+          email: 'sam@example.com',
+        },
+      ];
+
+      console.log(users[0]?.name ?? 'User does not exist!');
+
+      // if else 的寫法
+      if (users.length > 0) console.log(users[0].name);
+      else console.log('User array empty');
+    </script>
+  </body>
+</html>

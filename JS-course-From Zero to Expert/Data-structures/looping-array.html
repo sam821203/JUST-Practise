@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+
+      const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      const openingHours = {
+        [weekdays[3]]: {
+          open: 12,
+          close: 22,
+        },
+        [weekdays[4]]: {
+          open: 11,
+          open: 11,
+          close: 23,
+        },
+        [`day-${2 + 4}`]: {
+          open: 0, // Open 24 hours
+          close: 24,
+        },
+      };
+
+      const restaurant = {
+        name: 'Classico Italiano',
+        location: 'Via Angelo Tavanti 23, Firenze, Italy',
+        categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+        starterMenu: [
+          'Focaccia',
+          'Bruschetta',
+          'Garlic Bread',
+          'Caprese Salad',
+        ],
+        mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+        // 原本的寫法
+        // openingHours: openingHours,
+
+        //ES6 enhanced object literals 可以把這個變數名稱的值帶進來，同時創建一個一樣名字的變數
+        openingHours,
+
+        // 原本的寫法
+        // order: function (starterIndex, mainIndex) {
+        //   return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+        // },
+
+        //ES6 可以直接寫成 method
+        order(starterIndex, mainIndex) {
+          return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+        },
+
+        orderDelivery({
+          starterIndex = 1,
+          mainIndex = 0,
+          time = '20:00',
+          address,
+        }) {
+          console.log(
+            `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+          );
+        },
+
+        orderPasta: function (ing1, ing2, ing3) {
+          console.log(
+            `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+          );
+        },
+
+        orderPizza: function (mainIngredient, ...otherIngredients) {
+          console.log(mainIngredient);
+          console.log(otherIngredients);
+        },
+      };
+
+      const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+      console.log(menu);
+
+      for (const item of menu) console.log(item);
+
+      // for (const item of menu.entries()) {
+      //   console.log(`${item[0] + 1}: ${item[1]}`);
+      // }
+
+      for (const [i, el] of menu.entries()) {
+        console.log(`${i + 1}: ${el}`);
+      }
+    </script>
+  </body>
+</html>
