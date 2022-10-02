@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners about their dog's age, and stored the data into an array (one array for each). For now, they are just interested in knowing whether a dog is an adult or a puppy. A dog is an adult if it is at least 3 years old, and it's a puppy if it's less than 3 years old.
+
+      // Julia and Kate 各一個陣列
+      // adult: age >= 3
+      // puppy: age < 3
+
+      // Create a function 'checkDogs', which accepts 2 arrays of dog's ages ('dogsJulia' and 'dogsKate'), and does the following things:
+
+      const dogsJulia = [3, 5, 2, 12, 7];
+      const dogsKate = [4, 1, 15, 8, 3];
+
+      const checkDogs = function (dogsJulia, dogsKate) {
+        // 1. create a shallow copy of Julia's array
+        const juliaAfterRemoveCat = dogsJulia.slice();
+        juliaAfterRemoveCat.splice(0, 1);
+        juliaAfterRemoveCat.splice(-2);
+
+        // 2. Create an array with both Julia's (corrected) and Kate's data
+        const allDogs = juliaAfterRemoveCat.concat(dogsKate);
+
+        allDogs.forEach(function (age, i) {
+          if (age >= 3) {
+            console.log(
+              `Dog number ${i + 1} is an adult, and is ${age} years old`
+            );
+          } else {
+            console.log(`Dog number ${i + 1} is till a puppy 🐶`);
+          }
+        });
+      };
+
+      // Coding Challenge #3
+      // use chaining
+      const calcAverageHumanAge = function (ages) {
+        const averageResult = ages
+          .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+          .filter(age => age >= 18)
+          .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+        return averageResult;
+      };
+
+      const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+      const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+      console.log(avg1, avg2);
+      // TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+      // TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+    </script>
+  </body>
+</html>
