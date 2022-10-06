@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+
+      const bookingArr = [];
+
+      // 這種寫預設方式，除了寫數字外，還能寫運算式或運用"前面的"參數等等
+      const createBooking = function (
+        flightNum,
+        numPassengers = 1,
+        price = 1000 * numPassengers
+      ) {
+        // use short-circuiting (這是 ES5 的做法，ES6 如上方，可以直接將預設值寫在參數後面)
+        // numPassengers = numPassengers || 1;
+        // price = price || 1000;
+        const booking = {
+          flightNum,
+          numPassengers,
+          price,
+        };
+        bookingArr.push(booking);
+      };
+
+      createBooking('LH123');
+      createBooking('H123', 3, 1200);
+      createBooking('H45678', 5);
+
+      // 如果想要跳過某個參數，可以設 undefined
+      createBooking('H999', undefined, 1400);
+
+      console.log(bookingArr);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+
+      let flight = 'LH345';
+      const sam = {
+        name: 'Sam Huang',
+        passport: 24678938,
+      };
+
+      const checkIn = function (flightNum, passenger) {
+        flightNum = 'LH999';
+        passenger.name = 'Mr. ' + passenger.name;
+        if (passenger.passport === 24678938) {
+          alert('Check in');
+        } else {
+          alert('Wrong passport!!');
+        }
+      };
+
+      // flight基礎型別之所以沒有被修改，是因為當參數傳進去時，它會是原本 flight 的 copy版本 flightNum，並不會修改到原本 flight的值
+      // checkIn(flight, sam);
+
+      // flightNum = flight一樣，不會修改到原本 flight的值
+      // console.log(flight);
+
+      // passenger = sam，這只會 copy到原本的參考值，但他們兩個都會指向相同的記憶體，所以 object裡面的值會直接被修改
+      // console.log(sam);
+
+      // 解決方式
+      const newPassport = function (person) {
+        person.passport = Math.trunc(Math.random() * 100000000) + 1;
+      };
+
+      newPassport(sam);
+      checkIn(flight, sam);
+
+      // 在 javascript 裡，沒有 passing by reference，只有 passing by value
+    </script>
+  </body>
+</html>

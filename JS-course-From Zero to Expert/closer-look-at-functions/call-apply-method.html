@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+
+      const lufthansa = {
+        airline: 'Lufthansa',
+        iataCode: 'LH',
+        bookings: [],
+        // old way
+        // book: function() {}
+
+        // new way
+        book(flightNum, name) {
+          console.log(
+            `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+          );
+          this.bookings.push({
+            flight: `${this.iataCode}${flightNum}`,
+            name: name,
+          });
+        },
+      };
+
+      lufthansa.book(239, 'Sam');
+      lufthansa.book(540, 'Jonas');
+      // console.log(lufthansa);
+
+      const eurowings = {
+        airline: 'Eurowings',
+        iataCode: 'EW',
+        bookings: [],
+      };
+
+      // 將 book函式儲存在 book變數裡
+      const book = lufthansa.book;
+
+      // 這樣寫會報錯，因為 this 關鍵字在一般的函式呼叫不管用
+      // 他是函式，不是方法了，所以不能用 this
+      // book(23, 'Sarah');
+
+      // ========== call method ==========
+      // 這裡的 book函式是物件，然後物件會有方法
+      // 這次不像上面一樣直接呼叫 book函式自己，而是呼叫了 book函式的 call()方法
+      // 這裡的 call方法會呼叫 book函式的 this，並指向括號裡的引數
+      book.call(eurowings, 23, 'Sarah');
+      // console.log(eurowings);
+
+      book.call(lufthansa, 239, 'Marry');
+      // console.log(lufthansa);
+
+      const swiss = {
+        airline: 'Swiss Air Lines',
+        iataCode: 'LX',
+        bookings: [],
+      };
+
+      // book.call(swiss, 987, 'Tom');
+      // console.log(swiss);
+
+      // ========== apply method ==========
+      // 跟 call方法的功能幾乎一樣，差在它不會接收到u 一堆引數
+      // 一樣第一個引數會是 this key word，第二個是 data陣列
+      // 現在 apply比較少用，因為後面的 data陣列可以用 spread operator來取代
+      const flightData = [583, 'George'];
+      book.apply(swiss, flightData);
+      console.log(swiss);
+
+      book.call(swiss, ...flightData);
+    </script>
+  </body>
+</html>

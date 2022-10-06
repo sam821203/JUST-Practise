@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const oneWord = function (str) {
+        return str.replace(/ /g, '').toLowerCase();
+      };
+
+      const upperFirstWord = function (str) {
+        const [first, ...others] = str.split(' ');
+        return [first.toUpperCase(), ...others].join(' ');
+      };
+
+      // higher-order function
+      const transformer = function (str, fn) {
+        console.log(str);
+        console.log(`Original string ${str}`);
+        console.log(`Transformed string: ${fn(str)}`);
+
+        console.log(`Transformed by ${fn.name}`);
+      };
+
+      transformer('JS is the best!!', upperFirstWord);
+
+      transformer('JS is the best!!', oneWord);
+
+      // JS uses callbacks all the time
+      const high5 = function () {
+        console.log('🥰');
+      };
+      document.body.addEventListener('click', high5);
+
+      ['Sam', 'Tina', 'Adam'].forEach(high5);
+    </script>
+  </body>
+</html>
