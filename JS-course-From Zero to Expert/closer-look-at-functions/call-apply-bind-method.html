@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(to top left, #28b487, #7dd56f);
+      }
+      h1 {
+        font-family: sans-serif;
+        font-size: 50px;
+        line-height: 1.3;
+        width: 100%;
+        padding: 30px;
+        text-align: center;
+        color: white;
+      }
+      .buy,
+      .poll {
+        font-size: 1.6rem;
+        padding: 1rem 2rem;
+        position: absolute;
+        top: 2rem;
+      }
+      .buy {
+        left: 2rem;
+      }
+      .poll {
+        right: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>A Closer Look at Functions</h1>
+    <button class="buy">Buy new plane 🛩</button>
+    <button class="poll">Answer poll ⁉️</button>
+    <script>
+      'use strict';
+
+      const lufthansa = {
+        airline: 'Lufthansa',
+        iataCode: 'LH',
+        bookings: [],
+        // old way
+        // book: function() {}
+
+        // new way
+        book(flightNum, name) {
+          console.log(
+            `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+          );
+          this.bookings.push({
+            flight: `${this.iataCode}${flightNum}`,
+            name: name,
+          });
+        },
+      };
+
+      lufthansa.book(239, 'Sam');
+      lufthansa.book(540, 'Jonas');
+      // console.log(lufthansa);
+
+      const eurowings = {
+        airline: 'Eurowings',
+        iataCode: 'EW',
+        bookings: [],
+      };
+
+      // 將 book函式儲存在 book變數裡
+      const book = lufthansa.book;
+
+      // 這樣寫會報錯，因為 this 關鍵字在一般的函式呼叫不管用
+      // 他是函式，不是方法了，所以不能用 this
+      // book(23, 'Sarah');
+
+      // ========== call method ==========
+      // 這裡的 book函式是物件，然後物件會有方法
+      // 這次不像上面一樣直接呼叫 book函式自己，而是呼叫了 book函式的 call()方法
+      // 這裡的 call方法會呼叫 book函式的 this，並指向括號裡的引數
+      book.call(eurowings, 23, 'Sarah');
+      // console.log(eurowings);
+
+      book.call(lufthansa, 239, 'Marry');
+      // console.log(lufthansa);
+
+      const swiss = {
+        airline: 'Swiss Air Lines',
+        iataCode: 'LX',
+        bookings: [],
+      };
+
+      // book.call(swiss, 987, 'Tom');
+      // console.log(swiss);
+
+      // ========== apply method ==========
+      // 跟 call方法的功能幾乎一樣，差在它不會接收到一堆引數
+      // 一樣第一個引數會是 this key word，第二個是 data陣列
+      // 現在 apply比較少用，因為後面的 data陣列可以用 spread operator來取代
+      const flightData = [583, 'George'];
+      book.apply(swiss, flightData);
+      // console.log(swiss);
+
+      book.call(swiss, ...flightData);
+
+      // ========== bind method ==========
+      // Bind 不會馬上呼叫函式，而是會回傳一個新的函式，此函式是 this的地方
+
+      // book.call(eurowings, 23, 'Sarah');
+
+      // 回傳新函式，這函式的 this會一直指向 eurowings
+      const bookEW = book.bind(eurowings);
+      const bookLH = book.bind(lufthansa);
+      const bookLx = book.bind(swiss);
+
+      // 這裡至所以可以直接以呼叫函式的方式下去寫，是因為上行已經將 this指向 eurowings了
+      bookEW(23, 'Tina');
+
+      // bind 也可以有多個引數
+      const bookEW23 = book.bind(eurowings, 23);
+      bookEW23('Sam Huang');
+      bookEW23('Cooper');
+
+      // With event Listeners
+      lufthansa.planes = 300;
+      lufthansa.buyPlane = function () {
+        console.log(this);
+
+        this.planes++;
+        console.log(this.planes);
+      };
+
+      // 如果單純呼叫 lufthansa.planes，就會直接選到原本的 lufthansa
+      // lufthansa.buyPlane();
+
+      // 這裡的 this會選到 .buy的HTML架構，因為 this會選到 handler附著在的元素上
+      document
+        .querySelector('.buy')
+        .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+      // Partial application 可以預設引數
+      const addTax = (rate, value) => value + value * rate;
+      console.log(addTax(0.1, 200));
+
+      // 這裡我們不需要第一個引數值(this)，可以寫 null來代替
+      const addVAT = addTax.bind(null, 0.23);
+      console.log(addVAT(100));
+
+      // challenge: one function return another function
+      const addTax2 = function (rate) {
+        return function (value) {
+          return value + value * rate;
+        };
+      };
+
+      const addVAT2 = addTax2(0.23);
+      console.log(addVAT2(100));
+      console.log(addVAT2(20));
+    </script>
+  </body>
+</html>

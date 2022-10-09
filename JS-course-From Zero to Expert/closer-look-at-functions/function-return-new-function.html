@@ -10,23 +10,18 @@
     <script>
       const greet = function (greeting) {
         return function (name) {
-          console.log(`${greeting} ${name}`);
+          console.log(`${name} ${greeting}`);
         };
       };
-
-      const greeterHey = greet('Hey');
-      greeterHey('Sam');
-      greeterHey('Linn');
-
-      greet('Hey')('Jonas');
-
-      // Challenge
-      const greet2 = greeting => name => console.log(`${greeting} ${name}`);
-      const greeterHello = greet2('Hello');
+      const greeterHello = greet('Hello');
       greeterHello('Sam');
-      greeterHello('Linn');
+      // Challenge
+      // const greet2 = greeting => name => console.log(`${greeting} ${name}`);
+      // const greeterHello = greet2('Hello');
+      // greeterHello('Sam');
+      // greeterHello('Linn');
 
-      greet2('Hello')('Jonas');
+      // greet2('Hello')('Jonas');
     </script>
   </body>
 </html>
