@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+
+      const secureBooking = function () {
+        let passengerCount = 0;
+
+        return function () {
+          // 這個變數在父層有先被定義過
+          passengerCount++;
+          console.log(`${passengerCount} passengers`);
+        };
+      };
+
+      // 當指派完後，這時的 secureBooking 函式就會完成執行，並且消失在 call stack 裡
+      // 之所以還能拿掉 passengerCount 的值，是因為封包 (closure)
+      // 封包 (closure) 永遠可以萃取創造它(函式)的函式裡的所有變數，不管那個函式在或不在 call stack裡了。這些變數會被封包給保存起來
+      // 而且 JS如果找不到變數時，會先找封包，才會找 scope chain
+      const booker = secureBooking();
+
+      // booker();
+      // booker();
+      // booker();
+
+      // console.dir(booker);
+
+      // =========== Closure example 1 ===========
+      let f;
+
+      const g = function () {
+        const a = 23;
+        f = function () {
+          console.log(a * 2);
+        };
+      };
+
+      const h = function () {
+        const b = 777;
+        f = function () {
+          console.log(b * 2);
+        };
+      };
+
+      g();
+      // f();
+      // 這裡會在 scopes 的 closure 裡找到 a = 23
+      // console.dir(f);
+
+      // reassigned by h function
+      h();
+      // f();
+
+      // 這裡不會在 scopes 的 closure 裡找到 a = 23，而是 b = 777
+      // console.dir(f);
+
+      // =========== Closure example 2 ===========
+      // Timer example
+      const boardPassengers = function (number, wait) {
+        const perGroup = number / 3;
+
+        // setTimeout 函式需要兩個參數。第一個是要執行的事情，第二個是多久後執行
+        setTimeout(function () {
+          console.log(`We are now boarding all ${number} passengers`);
+          console.log(`We are 3 groups, each with ${perGroup} passengers`);
+        }, wait * 1000);
+
+        console.log(`Will start boarding in ${wait} seconds`);
+      };
+
+      const perGroup = 1000;
+      boardPassengers(180, 3);
+    </script>
+  </body>
+</html>

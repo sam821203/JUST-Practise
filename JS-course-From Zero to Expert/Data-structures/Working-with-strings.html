@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const airline = 'TAP Air Portugal';
+      const plane = 'A320';
+
+      console.log(plane[0]);
+      console.log(plane[1]);
+      console.log(plane[2]);
+
+      // 可以直接把字串寫出來，用來取值
+      console.log('BJ4'[1]);
+
+      console.log(airline.length);
+      console.log('TAW Air Taiwan'.length);
+
+      // 找到該字串的位置，會找出第一個相符的
+      console.log(airline.indexOf('r'));
+      // 找到該字串的位置，會找出最後一個相符的
+      console.log(airline.lastIndexOf('r'));
+
+      // 也可以直接找一個長字串
+      console.log(airline.indexOf('Portugal'));
+
+      // ===== slice =====
+      // 出來的結果叫 substring() 用來擷取兩個索引位置之間的字串，索引位置從0 開始。
+      // substring() 還有一個特別的地方在於，如果indexStart 比indexEnd 還大時，效果就像這兩個參數位置互換一樣。
+      // 但因為 string 是原始型別，所以不會修改到原本的 airline 值
+      // 所以如果想要存取結果，就需要存到新的變數裡
+      console.log('========== slice ==========');
+      console.log(airline.slice(4));
+      console.log(airline.slice(-2));
+      console.log(airline.slice(4, 7));
+
+      // 剪掉最後一個字
+      console.log(airline.slice(1, -1));
+      console.log(airline);
+
+      console.log(airline.slice(0, airline.indexOf('P') + 1));
+
+      const checkMiddleSeat = function (seat) {
+        // B and E are middle seats
+        // 判斷字串的最後一個值是否是 B 或 E
+        const s = seat.slice(-1);
+        if (s === 'B' || s === 'E') console.log('You got the middle one!');
+        else console.log('Not middle');
+      };
+
+      // 數字是行數，英文是column
+      // 每當我們讓字串呼叫 Method 時，該字串就會自動被轉成物件
+      // 比如呼叫 .slice( )
+      checkMiddleSeat('11B');
+      checkMiddleSeat('23C');
+      checkMiddleSeat('3E');
+
+      console.log('========== part2 ==========');
+      console.log(airline.toLowerCase());
+      console.log('Sam'.toUpperCase());
+
+      // Fix capitalization in name
+      const passenger = 'jOnAS';
+      const passengerLower = passenger.toLowerCase();
+      const passengerCorrect =
+        passengerLower[0].toUpperCase() + passengerLower.slice(1);
+      console.log(passengerCorrect);
+
+      // Comparing email
+      const email = 'hello@jonas.io';
+      const loginEmail = ' Hello@Jonas.Io \n';
+
+      // 1.先全部轉成小寫
+      const lowerEmail = loginEmail.toLowerCase();
+
+      // 2.刪除掉空格
+      const trimmedEmail = lowerEmail.trim();
+      console.log(trimmedEmail);
+
+      // 整合成一個步驟
+      const normalizedEmail = loginEmail.toLowerCase().trim();
+      console.log(normalizedEmail);
+
+      const checkCorrectEmail = function () {
+        return email === normalizedEmail ? true : false;
+      };
+      console.log(checkCorrectEmail());
+
+      // replacing
+      // replace 方法也會產出一個新的字串，而不是修改原本的
+      // 只會修改第一個
+      const priceTW = '120,000NT';
+      const priceUS = priceTW.replace('NT', '$').replace(',', '.');
+      console.log(priceUS);
+
+      const announcement =
+        'All passengers come to boarding door 23. Boarding door 23.';
+
+      console.log(announcement.replace('door', 'gate'));
+      console.log(announcement.replaceAll('door', 'gate'));
+
+      // 也可以用 正則表示式的方式來做
+      console.log(announcement.replace(/door/g, 'gate'));
+
+      // return Booleans
+      // 用來看是否有包含該字串
+      const planeName = 'Airbus A320neo';
+      console.log(planeName.includes('A320'));
+      console.log(planeName.includes('Boeing'));
+      console.log(planeName.startsWith('A320'));
+      console.log(planeName.startsWith('Air'));
+
+      // check whether the current plane is part of the new airbus family
+      if (planeName.startsWith('Airbus') && planeName.endsWith('neo')) {
+        console.log('part of the new airbus family');
+      }
+
+      // Practice exercise
+      // 當再處理 input 時，要在一開始就先把所有的 input 內容轉成小寫，這樣才不用大小寫都檢查
+      const checkBaggage = function (items) {
+        const baggage = items.toLowerCase();
+        if (baggage.includes('knife') || baggage.includes('gun')) {
+          console.log('You are not allowed on board');
+        } else {
+          console.log('Welcome!!');
+        }
+      };
+
+      checkBaggage('I have a laptop, some Food, and a pocket Knife');
+      checkBaggage('Socks and camera');
+      checkBaggage('Got some snacks and a gun for protection');
+
+      // split 用來分割字串，也會產生出新的陣列
+      // console.log('a+very+nice+string'.split('+'));
+
+      const [firstName, lastName] = 'Sam Huang'.split(' ');
+
+      // join 相反的 split
+      const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+      // console.log(newName);
+
+      const passengerName = 'jessica ann smith davis';
+      const nameCap = function (name) {
+        const names = name.split(' ');
+        const namesUpper = [];
+
+        // return names;
+        for (const n of names) {
+          // 方法一
+          // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+
+          // 方法二
+          namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+        }
+
+        console.log(namesUpper.join(' '));
+      };
+
+      nameCap(passengerName);
+      nameCap('sam huang');
+    </script>
+  </body>
+</html>

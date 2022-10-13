@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+
+      // ㄧ般陳述式，只要呼叫一次就會執行一次
+      const runOnce = function () {
+        console.log('This will never run again!');
+      };
+      // runOnce();
+
+      // IIFE 只會執行一次，再來就不會用到了，這樣也就不會特別存放在哪了
+      // 不需要命名，但需要在外面再包一個小刮號。但這樣還沒有呼叫，所以需要在最後面加上個小刮號來呼叫
+      (function () {
+        console.log('This will never run again!');
+      })();
+      // ES6 立即呼叫的函式表示式 寫法
+      // (() => console.log('This will never run again!'))();
+
+      {
+        const test = 19;
+        var test2 = 30;
+      }
+      console.log(test2);
+      console.log(test);
+    </script>
+  </body>
+</html>
