@@ -197,12 +197,12 @@
       };
 
       // ========== fetch 寫法 ==========
-      // const getJSON = function (url, errorMsg = 'Something went wrong') {
-      //   return fetch(url).then(response => {
-      //     if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
-      //     return response.json();
-      //   });
-      // };
+      const getJSON = function (url, errorMsg = 'Something went wrong') {
+        return fetch(url).then(response => {
+          if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+          return response.json();
+        });
+      };
 
       // const getCountryData = function (country) {
       //   // 當使用 fetch 時，同時就是在像伺服器端 request 資料，會馬上回傳 promise
@@ -254,6 +254,7 @@
       // };
 
       const getCountryData = function (country) {
+        // ===== Country 1 =====
         getJSON(
           `https://restcountries.com/v3.1/name/${country}`,
           'Country not found'
