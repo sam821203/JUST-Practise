@@ -81,19 +81,27 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
-
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort
+    ? acc.movements.slice().sort((a, b) => a - b)
+    : acc.movements;
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const date = new Date(acc.movementsDates[i]);
+    const day = `${date.getDate()}`.padStart(2, 0);
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+    const displayDate = `${day}/${month}/${year}`;
 
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
+        <div class="movements__date">${displayDate}</div>
         <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
@@ -142,7 +150,7 @@ createUsernames(accounts);
 
 const updateUI = function (acc) {
   // Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
 
   // Display balance
   calcDisplayBalance(acc);
@@ -154,6 +162,11 @@ const updateUI = function (acc) {
 ///////////////////////////////////////
 // Event handlers
 let currentAccount;
+
+// FAKE ALWAYS LOGGED IN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -170,6 +183,14 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 100;
+
+    const todayNow = new Date();
+    const day = `${todayNow.getDate()}`.padStart(2, 0);
+    const month = todayNow.getMonth() + 1;
+    const year = todayNow.getFullYear();
+    const hour = `${todayNow.getHours()}`.padStart(2, 0);
+    const min = `${todayNow.getMinutes()}`.padStart(2, 0);
+    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -198,6 +219,10 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
+    // Add transfer date
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -210,6 +235,9 @@ btnLoan.addEventListener('click', function (e) {
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
     currentAccount.movements.push(amount);
+
+    // Add loan date
+    currentAccount.movementsDates.push(new Date().toISOString());
 
     // Update UI
     updateUI(currentAccount);
@@ -439,3 +467,60 @@ console.log(huge + 'what the hell');
 // BigInt 在除法時，會直接拿掉小數點後的值
 console.log(10 / 3);
 console.log(10n / 3n);
+
+// Create a date
+// 方法一：
+const now = new Date();
+console.log(now);
+
+// 也可以直接給時間戳
+console.log(new Date('Oct 22 2022 22:27:12'));
+console.log(new Date('December 24, 2015'));
+console.log(new Date(account1.movementsDates[0]));
+
+// 這裡的 10 會對應到十一月份，是因為 javascript 的月份是從零開始算
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+
+// javascript 也會幫忙自動修正，比如這裡的 31號會自動修正成 11/1
+console.log(new Date(2037, 10, 31));
+
+// 如果填寫 0，會從起始時間開始
+// UNIX時間是UNIX或類UNIX系統使用的時間表示方式：從UTC1970年1月1日0時0分0秒起至現在的總秒數，不考慮閏秒。
+console.log(new Date(0));
+
+// 三天算法：天 / 小時 / 分 / 秒 / 毫秒
+// 3 * 24 * 60 * 60 * 1000 乘出來的結果 (259200000) 叫 timestamp
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+const future = new Date(2037, 10, 19, 15, 23);
+console.log('======== future ========');
+console.log(future);
+console.log(future.getFullYear());
+
+// 月份是 0 base 開始
+console.log(future.getMonth());
+
+// getDate() 是當月份的哪天
+console.log(future.getDate());
+
+// getDay() 是當禮拜的哪天
+console.log(future.getDay());
+
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+
+// 顯示時間的方式不一樣
+console.log(future.toISOString());
+
+// 這裡會算出 2142228180000，這是指從 1970年一開始到 future 變數的時間
+console.log(future.getTime());
+console.log(new Date(2142228180000));
+
+// 可以拿到現在時間的 timestamp
+console.log(Date.now());
+
+// 可以直接更改年份，這時星期幾也會跟著換
+console.log(future);
+future.setFullYear(2040);
+console.log(future);
