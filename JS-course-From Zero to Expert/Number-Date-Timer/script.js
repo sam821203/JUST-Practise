@@ -81,7 +81,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
@@ -93,10 +93,13 @@ const formatMovementDate = function (date) {
   if (daysPassed <= 7) return `${daysPassed} days ago`;
 
   // 如果上面的程式碼沒有執行，才會執行到這裡
-  const day = `${date.getDate()}`.padStart(2, 0);
-  const month = `${date.getMonth() + 1}`.padStart(2, 0);
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+  // const day = `${date.getDate()}`.padStart(2, 0);
+  // const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  // const year = date.getFullYear();
+  // return `${day}/${month}/${year}`;
+
+  // 可以用底下的方式做取代
+  return new Intl.DateTimeFormat(locale).format(date);
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -108,7 +111,7 @@ const displayMovements = function (acc, sort = false) {
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const date = new Date(acc.movementsDates[i]);
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
 
     const html = `
       <div class="movements__row">
@@ -198,13 +201,32 @@ btnLogin.addEventListener('click', function (e) {
     }`;
     containerApp.style.opacity = 100;
 
+    // Experimenting API
     const todayNow = new Date();
-    const day = `${todayNow.getDate()}`.padStart(2, 0);
-    const month = todayNow.getMonth() + 1;
-    const year = todayNow.getFullYear();
-    const hour = `${todayNow.getHours()}`.padStart(2, 0);
-    const min = `${todayNow.getMinutes()}`.padStart(2, 0);
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+      // weekday: 'short',
+    };
+
+    // 抓取本地端的電腦使用語言
+    // const locale = navigator.language;
+    // console.log(`當地使用語言 ${locale}`);
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(todayNow);
+
+    // const day = `${todayNow.getDate()}`.padStart(2, 0);
+    // const month = todayNow.getMonth() + 1;
+    // const year = todayNow.getFullYear();
+    // const hour = `${todayNow.getHours()}`.padStart(2, 0);
+    // const min = `${todayNow.getMinutes()}`.padStart(2, 0);
+    // labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
