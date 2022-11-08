@@ -160,3 +160,48 @@ btnScrollTo.addEventListener('click', function (e) {
   // 較新的方法
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+// 各種 handlers
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the heading :D!');
+};
+
+// 第一種監聽事件的方式，較新的方式
+// 較熱門是因為它可以同時有多種監聽方式
+h1.addEventListener('mouseenter', alertH1);
+
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 2000);
+
+// 第二種監聽事件的方式，較舊的方式
+// h1.onmouseenter = function (e) {
+//   alert('addEventListener: Great! You are reading the heading :D!');
+// };
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+
+  // 會停止 Bubbling，但不建議用
+  // e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('Container LINK', this === e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('Nav', e.target, e.currentTarget);
+  },
+  true
+);
