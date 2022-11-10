@@ -1,13 +1,14 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
+///////////////////////////////////////
+// Modal window
 const openModal = function () {
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
@@ -19,7 +20,7 @@ const closeModal = function (e) {
   overlay.classList.add('hidden');
 };
 
-btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
+// btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 
 // for (let i = 0; i < btnsOpenModal.length; i++)
 //   btnsOpenModal[i].addEventListener('click', openModal);
@@ -125,41 +126,37 @@ logo.classList.contains('c');
 // 不用要這個，因為它會覆蓋掉該元素上所有的 class
 // logo.className = 'Jonas';
 
-// Smooth Scroll
-// 較舊的方法
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
+// Button scrolling
+// btnScrollTo.addEventListener('click', function (e) {
+//   const s1coords = section1.getBoundingClientRect();
+//   console.log(s1coords);
 
-btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = section1.getBoundingClientRect();
-  console.log(s1coords);
+//   // 這裡的 target 是指 btnScrollTo
+//   console.log(e.target.getBoundingClientRect());
 
-  // 這裡的 target 是指 btnScrollTo
-  console.log(e.target.getBoundingClientRect());
+//   console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
 
-  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+//   // console.log(
+//   //   'height/width viewport',
+//   //   document.documentElement.clientHeight,
+//   //   document.documentElement.clientWidth
+//   // );
 
-  console.log(
-    'height/width viewport',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
+//   // Scrolling
+//   // window.scrollTo(
+//   //   s1coords.left + window.pageXOffset,
+//   //   s1coords.top + window.pageYOffset
+//   // );
 
-  // Scrolling
-  // window.scrollTo(
-  //   s1coords.left + window.pageXOffset,
-  //   s1coords.top + window.pageYOffset
-  // );
+//   // window.scrollTo({
+//   //   left: s1coords.left + window.pageXOffset,
+//   //   top: s1coords.top + window.pageYOffset,
+//   //   behavior: 'smooth',
+//   // });
 
-  // window.scrollTo({
-  //   left: s1coords.left + window.pageXOffset,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior: 'smooth',
-  // });
-
-  // 較新的方法
-  section1.scrollIntoView({ behavior: 'smooth' });
-});
+//   // 較新的方法
+//   section1.scrollIntoView({ behavior: 'smooth' });
+// });
 
 // 各種 handlers
 const h1 = document.querySelector('h1');
@@ -179,29 +176,44 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 2000);
 //   alert('addEventListener: Great! You are reading the heading :D!');
 // };
 
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
-const randomColor = () =>
-  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min + 1) + min);
+// const randomColor = () =>
+//   `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
 
-document.querySelector('.nav__link').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('LINK', e.target, e.currentTarget);
+// document.querySelector('.nav__link').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('LINK', e.target, e.currentTarget);
 
-  // 會停止 Bubbling，但不建議用
-  // e.stopPropagation();
-});
+//   // 會停止 Bubbling，但不建議用
+//   // e.stopPropagation();
+// });
 
+// document.querySelector('.nav__links').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('Container LINK', this === e.currentTarget);
+// });
+
+// document.querySelector('.nav').addEventListener(
+//   'click',
+//   function (e) {
+//     this.style.backgroundColor = randomColor();
+//     console.log('Nav', e.target, e.currentTarget);
+//   },
+//   true
+// );
+
+///////////////////////////////////////
+// Page navigation
+// 1. Add event listener to common parent element
+// 2. Determine what element originated the event
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('Container LINK', this === e.currentTarget);
-});
+  e.preventDefault();
 
-document.querySelector('.nav').addEventListener(
-  'click',
-  function (e) {
-    this.style.backgroundColor = randomColor();
-    console.log('Nav', e.target, e.currentTarget);
-  },
-  true
-);
+  // Matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    // console.log(this.href);
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
