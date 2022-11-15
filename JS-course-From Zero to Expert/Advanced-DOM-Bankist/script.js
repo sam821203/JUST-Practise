@@ -6,6 +6,12 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const nav = document.querySelector('.nav');
+
+// Tabbed component
+const tabs = document.querySelectorAll('.tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
 
 ///////////////////////////////////////
 // Modal window
@@ -81,8 +87,8 @@ message.style.backgroundColor = '#37383d';
 message.style.width = '120%';
 
 // 但這種做法只能拿到 inline style 裡的屬性值
-console.log(message.style.height);
-console.log(message.style.backgroundColor);
+// console.log(message.style.height);
+// console.log(message.style.backgroundColor);
 
 // 也可以用這種方式來娶某個元素上的屬性值
 console.log(getComputedStyle(message).height);
@@ -232,10 +238,10 @@ h1.lastElementChild.style.color = 'orangered';
 console.log(h1.parentNode);
 console.log(h1.parentElement);
 
-h1.closest('.header').style.background = 'var(--gradient-secondary)';
+// h1.closest('.header').style.background = 'var(--gradient-secondary)';
 
 // 如果呼叫跟自己一樣的 query string (元素或類別)，則會呼叫到自己
-h1.closest('h1').style.background = 'var(--gradient-primary)';
+// h1.closest('h1').style.background = 'var(--gradient-primary)';
 
 // Going sideways: siblings
 console.log(h1.previousElementSibling);
@@ -248,11 +254,6 @@ const allChildrenArray = [...h1.parentElement.children];
 allChildrenArray.forEach(function (el) {
   if (el !== h1) el.style.transform = 'scale(0.5)';
 });
-
-// Tabbed component
-const tabs = document.querySelectorAll('.tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
 
 // 但這種跑迴圈監聽方式不是好方法
 // tabs.forEach(tab => tab.addEventListener('click', () => console.log('TAB')));
@@ -276,3 +277,56 @@ tabsContainer.addEventListener('click', function (e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+// Menu fade animation
+const handleHover = function (e, opacity) {
+  console.log(this);
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = opacity;
+    });
+
+    // 也可以寫 this
+    logo.style.opacity = this;
+  }
+};
+
+// 這樣寫是錯的，因為監聽事件後面需要輸入呼叫函式，而不是放入值
+// nav.addEventListener('mouseover', handleHover(e, 0.5));
+
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
+
+// Sticky navigation
+window.addEventListener('scroll', function () {
+  console.log(window);
+});
+
+// lazy loading img
+const imgTargets = document.querySelectorAll('img[data-src]');
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) return;
+
+  // Replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observer.unobserve(entry.target);
+};
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '-200px',
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
