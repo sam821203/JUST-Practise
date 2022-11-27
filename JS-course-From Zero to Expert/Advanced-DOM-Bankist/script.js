@@ -330,3 +330,22 @@ const imgObserver = new IntersectionObserver(loadImg, {
 });
 
 imgTargets.forEach(img => imgObserver.observe(img));
+
+// DOMContentLoaded
+// 不會等圖片 load 完，只會等 HTML 和 javascript 跑完就執行
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built!', e);
+});
+
+// Load Event 會等所有檔案分析完才執行，包含圖片和外部連結檔案
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded!', e);
+});
+
+// beforeunload
+// 可以讓使用者在關閉視窗時，跳出警告訊息
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = '';
+// });
