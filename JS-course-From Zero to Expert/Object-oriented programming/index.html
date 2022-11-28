@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+
+      const Person = function (firstName, birthYear) {
+        // instance properties
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+
+        // 這是錯的範例，絕對不要在 constructor function 裡寫方法
+        // 因為會繼承，每個新建的物件都會帶著同個方法，會很耗效能
+        // this.calcAge = function() {
+        //   console.log(2037 - this.birthYear);
+        // }
+      };
+
+      const jonas = new Person('Jonas', 1991);
+      console.log(jonas);
+      // 會同時發生四個階段
+      // 1. New {} is created
+      // 2. function is called, this = {}
+      // 3. {} linked to prototype
+      // 4. function automatically return {}
+
+      const matilda = new Person('Matilda', 2017);
+      const jack = new Person('Jack', 1991);
+      console.log(matilda, jack);
+
+      console.log(jonas instanceof Person);
+
+      // Prototypes
+      console.log(Person.prototype);
+      Person.prototype.calcAge = function () {
+        console.log(2037 - this.birthYear);
+      };
+
+      jonas.calcAge();
+
+      // jonas 的 properties
+      // __proto__ 這個屬性在第三步驟時生成的
+      console.log(jonas.__proto__);
+      console.log(jonas.__proto__ === Person.prototype);
+
+      console.log(Person.prototype.isPrototypeOf(jonas));
+      console.log(Person.prototype.isPrototypeOf(matilda));
+      console.log(Person.prototype.isPrototypeOf(Person));
+
+      Person.prototype.species = 'Homo Sapiens';
+      console.log(jonas.species, matilda.species);
+
+      console.log(jonas.hasOwnProperty('firstName'));
+      console.log(jonas.hasOwnProperty('species'));
+    </script>
+  </body>
+</html>
