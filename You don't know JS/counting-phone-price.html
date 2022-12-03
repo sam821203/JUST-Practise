@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let pocketMoney = 240000;
+      let phonePrice = 23400;
+      let phoneCount = 0;
+      let spentMoney = 0;
+
+      // 持續購買手機，直到花光錢。計算購買手機的總金額
+      while (pocketMoney > phonePrice) {
+        pocketMoney = pocketMoney - phonePrice;
+        spentMoney = spentMoney + phonePrice;
+      }
+      console.log(pocketMoney);
+      console.log(spentMoney);
+      // 只要購買金額低於心中的消費預算，我就會為每支手機購買配件
+
+      // 計算購買金額後，加要繳的稅額
+    </script>
+  </body>
+</html>
