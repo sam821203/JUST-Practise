@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let first = "one";
+      let second = "two";
+
+      setTimeout(() => {
+        console.log("Delayed for 1 second." + first);
+      }, 1000);
+      first = "three";
+
+      console.log("syn");
+      console.log(first);
+      console.log(second);
+    </script>
+  </body>
+</html>

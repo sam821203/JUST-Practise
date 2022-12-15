@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Heading</h1>
+    <div>
+      <b>Type of animals: <span id="type"></span></b><br />
+      <b>Sound it makes: <span id="sound"></span></b><br />
+    </div>
+    <script>
+      let animalXMLData = `
+      <animal>
+        <type>Dog</type>
+        <sound>Woof</sound>
+      </animal>
+    `;
+
+      let XMLparser = new DOMParser();
+
+      // convert our XML string into a document tree
+      let xmlDocumentTree = XMLparser.parseFromString(
+        animalXMLData,
+        "text/xml"
+      );
+
+      // insert the animal data into our HTML page
+      // display the type of animal
+      document.getElementById('type').innerHTML = xmlDocumentTree.getElementsByTagName('animal')[0].childNodes[1].textContent;
+
+      // display the sound of animal
+      document.getElementById('sound').innerHTML = xmlDocumentTree.getElementsByTagName('animal')[0].childNodes[3].textContent;
+    </script>
+  </body>
+</html>
