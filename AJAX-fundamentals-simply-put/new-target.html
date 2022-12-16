@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <h1>AJAX is going to change this text</h1>
+      <button class="btn" id="btn">change content</button>
+    </div>
+
+    <script>
+      function Member(username) {
+        if (!new.target)
+          throw new Error(
+            "You cannot call this function without using the new keyword"
+          );
+        this.name = username;
+        this.admin = false;
+      }
+
+      let user1 = new Member("Sam");
+    </script>
+  </body>
+</html>
