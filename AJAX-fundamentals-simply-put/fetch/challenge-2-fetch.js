@@ -1,10 +1,4 @@
 let url = "https://icanhazdadjoke.com/";
-
-let myHeaders = {
-  Accept: "application/json",
-};
-
-// 1.選取所有需要的 HTML 元素
 let buttonTwo = document.getElementById("two");
 let divTwo = document.querySelector(".output");
 
