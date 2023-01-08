@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // create user birthday
+      let birthday = new Date(1993, 0, 8);
+
+      // extract birthday / month & date
+      let myMonth = birthday.getMonth();
+      let myDate = birthday.getDate();
+
+      // console.log(myMonth, myDate);
+
+      let now = new Date();
+      let currentMonth = now.getMonth();
+      let currentDate = now.getDate();
+
+      // console.log(now, currentMonth, currentDate);
+
+      if (currentMonth === myMonth && currentDate === myDate) {
+        console.log("Happy birthday");
+      } else {
+        console.log("get the fuck up");
+      }
+
+      // UTC time zone
+      let now2 = new Date();
+      console.log(now2.getHours());
+      console.log(now2.getUTCHours());
+    </script>
+  </body>
+</html>
