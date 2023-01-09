@@ -6,5 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <script>
+      let bike = {
+        sound: function () {
+          console.log("vroooooooo");
+        },
+      };
+
+      bike.type = "Petrol";
+      bike["year"] = 1999;
+
+      bike.color = "orange";
+      console.log(bike);
+
+      let empty = function () {
+        console.log("test");
+      };
+      empty.a = "hi";
+      console.log(empty);
+    </script>
+  </body>
 </html>
