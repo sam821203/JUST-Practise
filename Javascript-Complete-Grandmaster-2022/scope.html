@@ -19,7 +19,18 @@
         console.log(`A ${age} year warthog is ${humanAge} years old in human`);
       }
 
-      console.log(humanAge);
+      // console.log(humanAge);
+
+      function variableScope() {
+        let x = 10;
+        if (true) {
+          let x = "Wally";
+          console.log(x); // Wally
+        }
+        console.log(x); // 10
+      }
+      variableScope();
+      console.log(x);
     </script>
   </body>
 </html>
