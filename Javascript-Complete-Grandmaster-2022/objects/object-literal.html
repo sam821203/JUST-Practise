@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let empty = {};
+
+      let dog = {
+        name: "Woofy",
+      };
+
+      // an object with one method
+      let welcomeMessage = {
+        sayHi: function (text) {
+          console.log(text);
+        },
+      };
+
+      welcomeMessage.sayHi("Hello");
+
+      let person = {
+        firstName: "Yu Hao",
+        lastName: "Huang",
+        age: "29",
+        message: function () {
+          console.log(`${this.firstName} is ${this.age} years old`);
+        },
+      };
+
+      person.message();
+    </script>
+  </body>
+</html>
