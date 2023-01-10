@@ -12,62 +12,49 @@
       *:before {
         box-sizing: border-box;
       }
-      :root {
-        --bg: #04050d;
-        --glow: rgba(245, 224, 163, 0.08);
-        --sparkler-top: #4f4139;
-        --sparkler-bottom: #333;
-        --spark: #fff;
-      }
+
       body {
         min-height: 100vh;
-        background: var(--bg);
-        cursor: none;
+        /* cursor: url("https://orig00.deviantart.net/df6e/f/2012/287/f/8/i_want_to_be_a_hero__apng_animated__by_tamalesyatole-d5ht8eu.png"), default; */
+        cursor: url("money.png"), default;
         display: flex;
         align-items: center;
         justify-content: center;
         touch-action: none;
+        background-color: #04050d;
         overflow: hidden;
       }
-      span {
+
+      /* span {
         position: absolute;
-        border: 2px solid #008000;
         opacity: 0.1;
         width: calc((100 / 3) * 1vw);
         height: 50vh;
         z-index: 3;
-      }
+      } */
+
       .sparkler {
         position: absolute;
-        left: calc(var(--x) * 1px);
-        top: calc(var(--y) * 1px);
-        box-shadow: 0 0 40px 40px var(--glow);
+        box-shadow: 0 0 8px 8px rgba(245, 224, 163, 0.08);
       }
+
       .sparkler__spark {
-        --shadow: hsl(
+        --shadow: hsl( 
           var(--h),
-          calc(var(--s, 100) * 1%),
-          calc(var(--l, 50) * 1%)
+          calc(var(--s, 50) * 1%),
+          calc(var(--l, 25) * 1%)
         );
-        height: 15px;
         position: absolute;
-        width: 2px;
-        box-shadow: 0 0 20px 4px var(--shadow);
-        background: var(--spark);
+        height: 8px;
+        width: 1.6px;
+        box-shadow: 0 0 10px 2px var(--shadow);
+        background-color: #fff;
         transform: rotate(calc(var(--rotation) * 1deg)) translate(0, 0);
-        -webkit-animation: spark calc(var(--speed) * 1s)
-          calc(var(--delay) * -1s) infinite ease;
         animation: spark calc(var(--speed) * 1s) calc(var(--delay) * -1s)
           infinite ease;
         z-index: 2;
       }
-      @-webkit-keyframes spark {
-        to {
-          opacity: 0;
-          transform: rotate(calc(var(--rotation) * 1deg))
-            translate(0, calc(var(--travel) * 1px));
-        }
-      }
+
       @keyframes spark {
         to {
           opacity: 0;
@@ -91,7 +78,7 @@
         }
         100% {
           opacity: 0;
-          transform: translate(20px, 20px) scale(0);
+          transform: translate(2%, 2%) scale(0);
         }
       }
     </style>
@@ -100,13 +87,23 @@
     <div class="touch__wrap" id="touchWrap"></div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", initTouchAnimate);
-
       const animationDuration = 1.4;
+      const touchWrap = document.querySelector(".touch__wrap");
+      
+      document.addEventListener("DOMContentLoaded", buildTouchAnimate);
 
-      function initTouchAnimate() {
-        document.addEventListener("touchmove", animateFirecrackerMove);
-        document.addEventListener("touchend", animateFirecrackerEnd);
+      function randomInRange (min, max) {
+        return Math.floor(Math.random() * (max - min) + 1) + min;
+      }
+
+      function buildTouchAnimate() {
+        // mobile
+        document.addEventListener("touchmove", firecrackerTouchMove);
+        document.addEventListener("touchend", firecrackerTouchEnd);
+
+        // web
+        document.addEventListener("mousemove", firecrackerMouseMove);
+
       }
 
       function removeAllChildNodes(parent) {
@@ -115,46 +112,77 @@
         };
       };
 
+      // 生成火花動畫
+      function firecrackerAnimate(e) {
+
+        // 生成隨機
+        for (let count = 0; count < 10; count++) {
+          e.insertAdjacentHTML('beforeend', `
+          <div class="sparkler__spark" style="
+            --rotation: ${randomInRange(0, 360)}; 
+            --delay: ${Math.random()}; 
+            --speed: ${randomInRange(1, 10) / 10}; 
+            --travel: ${randomInRange(100, 150)}; 
+            --h: ${randomInRange(20, 60)}; 
+            --s: ${randomInRange(50, 100)}; 
+            --l: ${randomInRange(50, 100)};">
+          </div>
+        `);
+        }
+
+        // 加上淡入淡出動畫
+        e.style.animation = `fade-out ${animationDuration}s ease-out forwards`;
+
+        // 新增至頁面上
+        touchWrap.appendChild(e);
+      }
+
       // touch move
-      function animateFirecrackerMove(touches) {
-        const touchWrap = document.querySelector(".touch__wrap");
-        const randomInRange = (min, max) => Math.floor(Math.random() * (max - min) + 1) + min;
+      function firecrackerTouchMove(touches) {
         
         // 偵測不同手指
         [...touches.changedTouches].forEach((touch) => {
-
+          
           const firecracker = document.createElement("div");
 
           firecracker.classList.add('sparkler');
-          
-          firecracker.insertAdjacentHTML('beforeend', `
-            <div class="sparkler__spark" style="--rotation: ${randomInRange(0, 360)}; --delay: ${Math.random()}; --speed: ${randomInRange(1, 10) / 10}; --travel: ${randomInRange(200, 360)}; --h: ${randomInRange(20, 60)}; --s: ${randomInRange(50, 100)}; --l: ${randomInRange(50, 100)};"></div>
-            <div class="sparkler__spark" style="--rotation: ${randomInRange(0, 360)}; --delay: ${Math.random()}; --speed: ${randomInRange(1, 10) / 10}; --travel: ${randomInRange(200, 360)}; --h: ${randomInRange(20, 60)}; --s: ${randomInRange(50, 100)}; --l: ${randomInRange(50, 100)};"></div>
-            <div class="sparkler__spark" style="--rotation: ${randomInRange(0, 360)}; --delay: ${Math.random()}; --speed: ${randomInRange(1, 10) / 10}; --travel: ${randomInRange(200, 360)}; --h: ${randomInRange(20, 60)}; --s: ${randomInRange(50, 100)}; --l: ${randomInRange(50, 100)};"></div>
-            <div class="sparkler__spark" style="--rotation: ${randomInRange(0, 360)}; --delay: ${Math.random()}; --speed: ${randomInRange(1, 10) / 10}; --travel: ${randomInRange(200, 360)}; --h: ${randomInRange(20, 60)}; --s: ${randomInRange(50, 100)}; --l: ${randomInRange(50, 100)};"></div>
-            <div class="sparkler__spark" style="--rotation: ${randomInRange(0, 360)}; --delay: ${Math.random()}; --speed: ${randomInRange(1, 10) / 10}; --travel: ${randomInRange(200, 360)}; --h: ${randomInRange(20, 60)}; --s: ${randomInRange(50, 100)}; --l: ${randomInRange(50, 100)};"></div>
-          `);
+
+          // 生成火花
+          firecrackerAnimate(firecracker);
           
           // 偵測 X 與 Y 軸
           firecracker.style.top = `${touch.clientY}px`;
           firecracker.style.left = `${touch.clientX}px`;
-
-          firecracker.style.animation = `fade-out ${animationDuration}s ease-out forwards`;
-
-          // 新增至頁面上
-          touchWrap.append(firecracker);
         });
       }
 
       // touch end
-      function animateFirecrackerEnd() {
-        const touchWrap = document.querySelector(".touch__wrap");
-        const delayTime =  animationDuration * 2 * 1000;
+      function firecrackerTouchEnd() {
+        const delayTime =  animationDuration * 3 * 1000;
         
+        // 如果 opacity = 0，則刪除該節點
         setTimeout( function() {
           removeAllChildNodes(touchWrap);
         }, delayTime);
       };
+
+      function firecrackerMouseMove (e) {
+        const firecracker = document.createElement("div");
+
+        firecracker.classList.add('sparkler');
+
+        // 生成火花
+        firecrackerAnimate(firecracker);
+
+        // 偵測滑鼠移動位置
+        firecracker.style.left = `${e.clientX}px`;
+        firecracker.style.top = `${e.clientY}px`;
+
+        firecracker.style.transition = "all 0.5s linear 0s";
+        firecracker.style.left = `${firecracker.offsetLeft - 20}px`;
+        firecracker.style.top = `${firecracker.offsetTop - 20}px`;
+        firecracker.style.opacity = 0;
+      }
     </script>
   </body>
 </html>
