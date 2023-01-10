@@ -31,6 +31,46 @@
 
       let person2 = new Person("Linn", "27");
       console.log(person2);
+
+      // constructor v.s literal
+      function SinglePerson() {
+        this.membership = false;
+        this.name = "Wally";
+        this.talk = function () {
+          return `Ths membership status of ${this.name} is ${this.membership}`;
+        };
+      }
+
+      // instantiate
+      let person3 = new SinglePerson();
+      console.log(person3.talk());
+
+      let person4 = new SinglePerson();
+      person4.name = "John";
+      console.log(person4.talk());
+
+      // constructor our object with parameters we pass into it
+      function WebsiteUrl(url) {
+        this.url = url;
+        this.showUrl = function () {
+          console.log(this.url);
+        };
+      }
+
+      let myWebUrl = new WebsiteUrl("http://etmall");
+      myWebUrl.showUrl();
+
+      let website = {
+        init: function (url) {
+          this.url = url;
+        },
+        showUrl: function () {
+          console.log(this.url);
+        },
+      };
+
+      website.init("http://etmall2");
+      website.showUrl();
     </script>
   </body>
 </html>
