@@ -15,7 +15,6 @@
 
       body {
         min-height: 100vh;
-        /* cursor: url("https://orig00.deviantart.net/df6e/f/2012/287/f/8/i_want_to_be_a_hero__apng_animated__by_tamalesyatole-d5ht8eu.png"), default; */
         cursor: url("money.png"), default;
         display: flex;
         align-items: center;
@@ -24,14 +23,6 @@
         background-color: #04050d;
         overflow: hidden;
       }
-
-      /* span {
-        position: absolute;
-        opacity: 0.1;
-        width: calc((100 / 3) * 1vw);
-        height: 50vh;
-        z-index: 3;
-      } */
 
       .sparkler {
         position: absolute;
@@ -87,7 +78,7 @@
     <div class="touch__wrap" id="touchWrap"></div>
 
     <script>
-      const animationDuration = 1.4;
+      const animationDuration = .8;
       const touchWrap = document.querySelector(".touch__wrap");
       
       document.addEventListener("DOMContentLoaded", buildTouchAnimate);
@@ -99,18 +90,27 @@
       function buildTouchAnimate() {
         // mobile
         document.addEventListener("touchmove", firecrackerTouchMove);
-        document.addEventListener("touchend", firecrackerTouchEnd);
 
         // web
         document.addEventListener("mousemove", firecrackerMouseMove);
-
       }
 
-      function removeAllChildNodes(parent) {
-        while (parent.firstChild) {
-          parent.removeChild(parent.firstChild);
-        };
+      function removeSparkle(length, remove) {
+
+        let maxLength = 60;
+        const childArray = Array.from(touchWrap.childNodes)
+
+        if (childArray.length > maxLength) {
+          let newChildArray = childArray.splice(0, maxLength / 2);
+          newChildArray.forEach(function (el) { 
+            el.remove();
+          })
+        }
       };
+
+      // 每 5 秒檢查一次
+      // 假如 touchWrap 裡的 child nodes 超過 100，就刪除前面 50 個元素
+      setInterval(removeSparkle, 1000);
 
       // 生成火花動畫
       function firecrackerAnimate(e) {
@@ -158,12 +158,11 @@
 
       // touch end
       function firecrackerTouchEnd() {
-        const delayTime =  animationDuration * 3 * 1000;
+        const delayTime =  animationDuration * 1 * 1000;
         
-        // 如果 opacity = 0，則刪除該節點
-        setTimeout( function() {
-          removeAllChildNodes(touchWrap);
-        }, delayTime);
+        // setTimeout( function() {
+        //   removeSparkle(touchWrap);
+        // }, delayTime);
       };
 
       function firecrackerMouseMove (e) {
