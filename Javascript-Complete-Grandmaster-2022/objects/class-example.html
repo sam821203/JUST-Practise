@@ -21,11 +21,23 @@
       user1.greeting();
 
       // 2. class syntax
-      class Person {
+      class Member {
         constructor(name) {
           this.name = name;
         }
+        greeting() {
+          console.log(`Hi ${this.name}`);
+        }
       }
+
+      let member1 = new Member("Sam");
+      console.log(member1, typeof Member);
+      member1.greeting();
+
+      console.log(Member.prototype);
+      console.log(Member === Member.prototype.constructor);
+
+      console.log(Object.getOwnPropertyNames(Member.prototype));
     </script>
   </body>
 </html>
