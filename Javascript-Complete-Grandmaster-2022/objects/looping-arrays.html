@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // let fruitKeys = ["banana", "mango"];
+
+      // for (const key of fruitKeys) {
+      //   console.log(key);
+      // }
+
+      let hi = function (name) {
+        return `Welcome ${name}`;
+      };
+
+      let memberList = ["Tom", "Jerry"];
+
+      // get new user
+      memberList.push("Sam");
+      memberList.push("John");
+
+      // greet all members
+      // 傳統方式
+      for (let i = 0; i < memberList.length; i++) {
+        let greeting = hi(memberList[i]);
+        console.log(greeting);
+      }
+
+      // 傳統方式2
+      for (const name in memberList) {
+        if (memberList.hasOwnProperty(name)) {
+          let greeting = hi(memberList[name]);
+          console.log(greeting);
+        }
+      }
+
+      // for of loop
+      for (const name of memberList) {
+        let greeting = hi(name);
+        console.log(greeting);
+      }
+    </script>
+  </body>
+</html>

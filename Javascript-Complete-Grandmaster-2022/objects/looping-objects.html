@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let fruit = {
+        bananas: 12,
+        carrots: 2,
+        mangos: 7,
+      };
+
+      // method 1
+      let fruitKeys = Object.keys(fruit);
+      console.log(fruitKeys);
+
+      // method 2
+      let fruitValues = Object.values(fruit);
+      console.log(fruitValues);
+
+      // method 3
+      let fruitEntries = Object.entries(fruit);
+      console.log(fruitEntries);
+
+      for (const [fruitKey, fruitValue] of fruitEntries) {
+        console.log(`You need to buy ${fruitValue} of ${fruitKey}`);
+      }
+    </script>
+  </body>
+</html>
