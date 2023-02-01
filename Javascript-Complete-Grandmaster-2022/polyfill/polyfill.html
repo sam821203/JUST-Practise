@@ -9,9 +9,12 @@
   <body>
     <script>
       Array.prototype.forEach = function (callback, argThis) {
+        // check whether the callback is a function
         if (typeof callback !== "function") {
           throw new TypeError(callback + " is not a function");
         }
+
+        // 如果沒有 type error，就可以在這邊繼續
         // console.log(this);
         let len = this.length;
         // console.log(len);

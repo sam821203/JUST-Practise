@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: #000;
+        /* height: 250vh; */
+      }
+
+      .container {
+        display: flex;
+        /* height: 100vh; */
+        justify-content: center;
+        align-items: center;
+      }
+
+      .cursor {
+        width: 40px;
+        height: 40px;
+        border: 1px solid white;
+        border-radius: 50%;
+        position: absolute;
+        transition-duration: 200ms;
+        transition-timing-function: ease-out;
+        pointer-events: none;
+      }
+
+      .cursor-effect {
+        content: "";
+        width: 40px;
+        height: 40px;
+        border: 1px solid #4deeea;
+        box-shadow: 0 0 20px #4deeea, 0 0 40px #4deeea, 0 0 80px #4deeea;
+        border-radius: 50%;
+        position: absolute;
+        animation: cursorPulse 1s;
+      }
+
+      .dot {
+        width: 20px;
+        height: 20px;
+        background-color: #fff;
+        border-radius: 50%;
+      }
+
+      @keyframes cursorPulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(3);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="cursor"></div>
+    </div>
+    <script>
+      const container = document.querySelector(".container");
+
+      // 選取 cursor 的節點
+      const cursor = document.querySelector(".cursor");
+
+      // 手指放到螢幕上時會觸發
+      document.addEventListener("touchstart", (e) => {
+        
+        // 偵測有多少手指在上面
+        [...e.changedTouches].forEach((touch) => {
+          const dot = document.createElement("div");
+          dot.classList.add("dot");
+          // console.log(touch);
+          // dot.style.top = `${touch.pageY}px`;
+        });
+      });
+
+      // 讓滑鼠跟著客制的滑鼠樣式
+      document.addEventListener("touchmove", (e) => {
+        cursor.setAttribute(
+          "style",
+          "top: " + e.pageY + "px; left: " + e.pageX + "px;"
+        );
+      });
+    </script>
+  </body>
+</html>
