@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div class="ticket">
+      <div class="date">{{ ticket.date }}</div>
+      <div class="info">{{ company }}</div>
+      <div class="info">{{ ticket.direction === 'south' ? '南下' : '北上'}}</div>
+      <div class="station">{{ ticket.from }}站</div>
+      <div class="station">{{ ticket.to }}站</div>
+      <div class="arrow">⬇</div>
+      <div class="info" v-html="ticket.other"></div>
+      <div class="info">售價 {{ ticket.price * ticket.discount }}</div>
+    </div>
+  </div>
+  <!-- <script src="https://unpkg.com/vue@next" defer></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        company: '台灣鐵路局',
+        ticket: {
+          date: '2023.02.04-02.05',
+          from: '板橋',
+          to: '台中',
+          direction: 'south',
+          other: '<b>限當日當次車有效</b>',
+          price: 250,
+          discount: 0.5,
+          link: 'http://www.google.com.tw'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

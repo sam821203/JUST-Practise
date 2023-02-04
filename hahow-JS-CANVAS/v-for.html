@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="item in items">
+        <h3>{{ label }} {{ item.name }}</h3>
+        <p v-for="tag in item.tags">{{ item.name }} {{ tag }}</p>
+      </li>
+    </ul>
+
+    <div v-if="loading">Loading...</div>
+    <div v-else>載入完畢</div>
+    <input type="checkbox" v-model="loading">
+    <input type="text" v-model="label">
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        items: [
+          {name: 'AAA', tags: ['11', '22']},
+          {name: 'BBB', tags: ['11', '22']},
+          {name: 'CCC', tags: ['11', '22']},
+        ],
+        label: '[商品]',
+        loading: true,
+      }
+    });
+  </script>
+</body>
+</html>
