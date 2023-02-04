@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html, body {
+        font-family: serif;
+        background-color: #dbcdb8;
+      }
+
+      .menu {
+        border: 1px solid rgba(black, 0.3);
+        padding: 20px;
+      }
+
+      .card {
+        display: inline-block;
+        vertical-align: top;
+        background-color: #fff;
+        margin: 10px;
+        box-shadow: 0px 0px 20px rgba(black, 0.3);
+      }
+
+      .cover {
+        width: 220px;
+      }
+
+      .info {
+        padding: 10px;
+      }
+
+      .soldOut {
+        float: right;
+        color: red;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="control">
+        <label for="">最小價格</label>
+        <input type="text" v-model="minPrice">
+        <label for="">最大價格</label>
+        <input type="text" v-model="maxPrice">
+        <label for="">關鍵字</label>
+        <input type="text" v-model="keyword">
+
+        <br>
+
+        <span v-for="(card, cid) in cards">
+          <span>{{ cid }}</span>
+          <input type="text" v-model.number="card.price">
+          <input type="checkbox" v-model="card.soldOut">
+        </span>
+      </div>
+      <div class="menu">
+        <h4 v-if="keyword">以下是搜尋 {{ keyword }} 的項目</h4>
+        <div class="cards">
+          <div class="card" v-for="card in cards" v-if="(basePrice + card.price > minPrice) && (basePrice + card.price < maxPrice) && (card.title.indexOf(keyword) != -1)">
+            <img class="cover" :src="card.cover" alt="">
+            <div class="info">
+              <h3>{{ card.title }}</h3>
+              <div class="soldOut" v-show="card.soldOut">已售完</div>
+              <div class="price">{{ basePrice + card.price }}$</div>
+              <div class="other">(+{{ serviceFee }}% 服務費)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          basePrice: 100,
+          serviceFee: 10,
+          minPrice: 50,
+          maxPrice: 1000,
+          keyword: "",
+          cards: [
+            {
+              title: "醬油拉麵",
+              cover:
+                "http://www.tabirai.net/tabirai-uploader/img/0005408/s1_0005408.jpg",
+              price: 150,
+              soldOut: true,
+            },
+            {
+              title: "豚股拉麵",
+              cover:
+                "http://3.bp.blogspot.com/-aj0ideQcly0/VfZ5RvLGyDI/AAAAAAAAWzE/Vy6U0R6vs90/s1600/IMG_2848.jpg",
+              price: 250,
+            },
+            {
+              title: "南洋咖哩拉麵",
+              cover: "http://img.anikolife.com/uploads/20180325191054_65.jpg",
+              price: 300,
+            },
+            {
+              title: "味噌叉燒拉麵",
+              cover:
+                "https://imageproxy.icook.network/resize?background=255%2C255%2C255&nocrop=true&stripmeta=true&type=auto&url=http%3A%2F%2Ftokyo-kitchen.icook.tw.s3.amazonaws.com%2Fuploads%2Frecipe%2Fcover%2F426373%2F09c610417ea20897.jpg&width=427",
+              price: 150,
+            },
+            {
+              title: "蝦醬豚骨拉麵",
+              cover:
+                "http://d10pyp7ylo9bub.cloudfront.net/2017/06/tokyofruitramen_papapapapain1.jpg",
+              price: 250,
+            },
+            {
+              title: "豚骨叉燒拉麵",
+              cover:
+                "https://farm1.static.flickr.com/380/32022985490_3e2bfbe774_b.jpg",
+              price: 300,
+            },
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>
