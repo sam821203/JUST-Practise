@@ -19,7 +19,25 @@
       Carrot.prototype = food;
 
       let carrot = new Carrot("orange");
-      console.log(carrot);
+      // console.log(carrot);
+
+      let user = {
+        member: false,
+      };
+
+      let guestUser = {
+        name: "Sam",
+      };
+
+      Object.setPrototypeOf(guestUser, user);
+
+      // console.log(guestUser);
+
+      function Car() {}
+
+      Car.prototype.sound = "hey hey";
+
+      let myCar = new Car();
     </script>
   </body>
 </html>
