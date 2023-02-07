@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Function example</h1>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga inventore
+      sunt voluptatem dolorem veritatis veniam iure dignissimos eaque ducimus,
+      quis maiores soluta maxime saepe tempora reiciendis, illum repudiandae,
+      mollitia magni!
+    </p>
+    <button id="myBtn">button</button>
+    <script>
+      const btn = document.getElementById("myBtn");
+
+      function showText() {
+        document.write("Hi");
+      }
+
+      function showQuote() {
+        let quotes = [];
+        const myPara = document.getElementsByTagName("p")[0];
+
+        quotes[0] = "first quote";
+        quotes[1] = "second quote";
+        quotes[2] = "third quote";
+
+        let randomIndex = Math.floor(Math.random() * quotes.length);
+        console.log(randomIndex);
+
+        myPara.innerHTML = quotes[randomIndex];
+      }
+
+      btn.addEventListener("click", showQuote);
+
+      function add(a, b) {
+        return a + b;
+      }
+
+      console.log(add(2, 5));
+
+      function test(name) {
+        return `Hello ${name}`;
+      }
+
+      document.write(test("Sam"));
+    </script>
+  </body>
+</html>
