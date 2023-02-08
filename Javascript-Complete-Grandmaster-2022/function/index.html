@@ -48,7 +48,43 @@
         return `Hello ${name}`;
       }
 
+      function test(name) {
+        return `Hello ${name}`;
+      }
+
       document.write(test("Sam"));
+
+      // declaration
+      function dog() {
+        let sound = "woof";
+        console.log(sound);
+      }
+
+      let sausageDog = dog;
+
+      sausageDog();
+      dog();
+
+      let sayHi = (_) => console.log("Hi");
+      sayHi();
+
+      let sayHiTwo = (name) => console.log(`Hi ${name}`);
+      sayHiTwo("Wally");
+
+      let sayHiThree = (num1, num2) => num1 + num2;
+      console.log(sayHiThree(3, 8));
+
+      function Person() {
+        this.firstName = "John";
+        let scope = this;
+        this.display = setInterval(function show() {
+          // console.log(`Show my first name ${this.firstName}`);
+          console.log(scope);
+        }, 1000);
+      }
+
+      // let user1 = new Person();
+      // console.log(user1);
     </script>
   </body>
 </html>
