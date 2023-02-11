@@ -6,29 +6,210 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .test {
-        font-size: 64px;
-        opacity: 0.5;
-      }
-
-      .success {
-        background-color: lightgreen;
+      html,
+      body {
+        display: flex;
+        justify-content: center;
+        background-color: #282f38;
+        font-family: sans-serif;
         color: white;
       }
 
-      .danger {
-        background-color: tomato;
+      @import url("https://fonts.googleapis.com/css?family=Tajawal");
+
+      html,
+      body {
+        background-color: #282f38;
+        display: flex;
+        justify-content: center;
         color: white;
+        font-family: "Tajawal", serif;
+      }
+
+      .coffee-type {
+        display: flex;
+        align-items: center;
+        max-width: 400px;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+        transition: 0.5s;
+        position: relative;
+      }
+
+      .coffee-type:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .coffee-type .num {
+        font-size: 60px;
+        flex: 1;
+        color: white;
+        font-weight: bold;
+        margin-right: 30px;
+      }
+
+      .coffee-type .cup-container {
+        flex: 1;
+      }
+
+      .coffee-type .control {
+        flex: 2;
+      }
+
+      .coffee-type .cup {
+        border: 4px solid #fff;
+        border-top: none;
+        border-radius: 0px 0px 50px 50px;
+        margin: 10px;
+        padding-top: 5px;
+        margin-right: 50px;
+        width: 70px;
+        height: 50px;
+        position: relative;
+      }
+
+      .coffee-type .cup .ingredients {
+        display: flex;
+        flex-direction: column-reverse;
+        overflow: hidden;
+        border-radius: 0px 0px 50px 50px;
+        width: 100%;
+        height: 100%;
+      }
+
+      .coffee-type .cup:before {
+        content: "";
+        display: block;
+        border: 4px solid #fff;
+        position: absolute;
+        border-radius: 0px 50px 50px 0px;
+        border-left: none;
+        width: 15px;
+        height: 20px;
+        left: 100%;
+        top: 40%;
+        transform: translateY(-50%);
+      }
+
+      .coffee-type .cup.mock {
+        width: 60px;
+        height: 90px;
+        border-radius: 0;
+      }
+
+      .coffee-type .cup.mock .ingredients {
+        border-radius: 0;
+      }
+
+      .coffee-type .cup.small {
+        width: 50px;
+        height: 40px;
+      }
+
+      .coffee-type .cup.big {
+        width: 80px;
+        height: 50px;
+      }
+
+      .coffee-type .coffee,
+      .coffee-type .milk,
+      .coffee-type .water,
+      .coffee-type .bubble {
+        background-color: #66491a;
+        height: 15px;
+      }
+
+      .coffee-type .bubble {
+        background-color: #eee;
+      }
+
+      .coffee-type .milk {
+        background-color: #f7d8bb;
+      }
+
+      .coffee-type .water {
+        background-color: #589bce;
+      }
+
+      .coffee-type.showMode input,
+      .coffee-type.showMode label,
+      .coffee-type.showMode select,
+      .coffee-type.showMode br {
+        display: none;
+      }
+
+      .coffee-type.favorite:before {
+        content: "BEST";
+        border: 5px solid;
+        padding: 5px 3px;
+        line-height: 0.9;
+        display: block;
+        color: #ff5e5e;
+        position: absolute;
+        font-size: 30px;
+        transform: translateX(-70px) rotate(-20deg);
+      }
+
+      .hidden-control {
+        position: fixed;
+        top: 10px;
+        left: 10px;
       }
     </style>
   </head>
   <body>
     <div id="app">
+      <label for="">
+        <div class="hidden-control">
+          Editing:
+          <input type="checkbox" v-model="editing" />
+          <select v-model="favoriteType">
+            <option v-for="coffee in coffees" :value="coffee.name">
+              {{ coffee.name }}
+            </option>
+          </select>
+        </div>
+      </label>
       <h3>Coffee Editor</h3>
-      <div class="coffee-type">
-        <div class="num"></div>
-        <div class="cup-container"></div>
-        <div class="control"></div>
+      <div
+        class="coffee-type"
+        :class="{favorite: coffee.name == favoriteType, showMode: !editing}"
+        v-for="(coffee, cid) in coffees"
+      >
+        <div class="num">0{{ cid }}</div>
+
+        <div class="cup-container">
+          <div class="cup" :class="[coffee.type]">
+            <div class="ingredients">
+              <div
+                class="coffee"
+                :style="{ height: coffee.coffee + '%' }"
+              ></div>
+              <div class="milk" :style="{ height: coffee.milk + '%' }"></div>
+              <div class="water" :style="{ height: coffee.water + '%' }"></div>
+              <div
+                class="bubble"
+                :style="{ height: coffee.bubble + '%' }"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="control">
+          <h2>{{ coffee.name }}</h2>
+          <select v-model="coffee.type">
+            <option v-for="cupType in cupTypes" :value="cupType">
+              {{ cupType }}
+            </option>
+          </select>
+          <div v-for="type in ['coffee', 'milk', 'bubble', 'water']">
+            <label for="">{{ type }}</label>
+            <br />
+            <input type="range" min="0" max="100" v-model="coffee[type]" />
+          </div>
+        </div>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
@@ -36,8 +217,8 @@
       const vm = new Vue({
         el: "#app",
         data: {
-          editing: true,
-          cupType: ["small", "medium", "big", "mock"],
+          editing: false,
+          cupTypes: ["small", "medium", "big", "mock"],
           coffees: [
             {
               name: "Expresso",
@@ -68,6 +249,7 @@
               bubble: 30,
               water: 0,
               milk: 30,
+              type: "mock",
             },
           ],
           favoriteType: "Latte",
