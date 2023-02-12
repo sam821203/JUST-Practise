@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .card {
+        display: inline-block;
+        width: 80px;
+        height: 100px;
+        border: 1px solid #000;
+        margin: 5px;
+      }
+
+      .card.open {
+        background-color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <h1 @click="setBase100">Base: {{ base }}</h1> -->
+      <!-- <h2 v-for="i in 5" @click="setBaseNumber(i)">{{ getNumberTitle(i) }}</h2> -->
+      <div
+        class="card"
+        v-for="card in filterCards(cards, keyword)"
+        :class="{open: card.open}"
+        @click="card.open = !card.open"
+      >
+        {{ card.label }}
+      </div>
+
+      <button @click="turnAll(true)">打開全部</button>
+      <button @click="turnAll(false)">關閉全部</button>
+
+      <h3>{{ inputting ? '輸入中...' : '' }}</h3>
+      <input
+        type="text"
+        v-model="keyword"
+        @keyup="inputToggle"
+        @keydown.enter="showInput"
+      />
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          base: 100,
+          cards: [
+            {
+              id: 1,
+              label: "spades",
+              open: false,
+            },
+            {
+              id: 2,
+              label: "hearts",
+              open: false,
+            },
+            {
+              id: 3,
+              label: "clubs",
+              open: false,
+            },
+            {
+              id: 4,
+              label: "diamonds",
+              open: false,
+            },
+          ],
+          keyword: "",
+          inputting: false,
+        },
+        methods: {
+          getSquare(num) {
+            return num * num;
+          },
+          getNumberTitle(num) {
+            return "My number is: " + this.getSquare(num);
+          },
+          setBaseNumber(num) {
+            this.base = num;
+          },
+          setBase100() {
+            this.setBaseNumber(100);
+          },
+          turnAll(state) {
+            this.cards.forEach((card) => {
+              card.open = state;
+            });
+          },
+          filterCards(cards, keyword) {
+            return cards.filter((card) => card.label.indexOf(keyword) != -1);
+          },
+          inputToggle() {
+            this.inputting = true;
+            let _this = this;
+            setTimeout(function () {
+              _this.inputting = false;
+            }, 1000);
+          },
+          showInput() {
+            console.log("使用者送出了：" + this.keyword);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
