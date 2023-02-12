@@ -6,42 +6,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .card {
-        display: inline-block;
-        width: 80px;
-        height: 100px;
-        border: 1px solid #000;
-        margin: 5px;
+      html,
+      body {
+        background-color: #102438;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
-      .card.open {
-        background-color: #aaa;
+      .cards {
+        width: 100%;
+        height: 40vh;
+        cursor: pointer;
+      }
+
+      .cards .card {
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+        width: 15vw;
+        height: 21vw;
+        position: absolute;
+        transform: rotate(0deg);
+        transition: left 0.5s, top 0.5s, transform 1s;
+        transform-style: preserve-3d;
+        top: 35%;
+      }
+
+      .cards .card .face {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        position: absolute;
+        background-color: white;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .cards .card .face.front {
+        transform: rotateY(180deg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 60px;
+        color: black;
+      }
+
+      .cards .card .face.back {
+        box-sizing: border-box;
+        padding: 10px;
+      }
+
+      .cards .card .face.back:before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: solid 3px #ed4747;
+        box-sizing: border-box;
+        background-color: white;
+        background-image: linear-gradient(
+            -60deg,
+            transparent 40%,
+            #ed4747 40%,
+            #ed4747 60%,
+            transparent 60%
+          ),
+          linear-gradient(
+            60deg,
+            transparent 40%,
+            #ed4747 40%,
+            #ed4747 60%,
+            transparent 60%
+          );
+        background-size: 8px 8px;
+      }
+
+      .cards .card.open {
+        transform: rotate(0deg) rotateY(180deg);
+      }
+
+      .cards .card[data-order="1"] {
+        left: calc(20% - 7.5vw);
+      }
+
+      .cards .card[data-order="2"] {
+        left: calc(40% - 7.5vw);
+      }
+
+      .cards .card[data-order="3"] {
+        left: calc(60% - 7.5vw);
+      }
+
+      .cards .card[data-order="4"] {
+        left: calc(80% - 7.5vw);
+      }
+
+      .cards .card:hover {
+        top: 30%;
+      }
+
+      .cards.gather .card {
+        top: 20%;
+        left: calc(50% - 7.5vw);
+        transform: rotate(360deg);
+      }
+
+      .cards.gather:hover .card[data-order="1"] {
+        transform: rotate(357deg);
+      }
+
+      .cards.gather:hover .card[data-order="2"] {
+        transform: rotate(364deg);
+      }
+
+      .cards.gather:hover .card[data-order="3"] {
+        transform: rotate(371deg);
+      }
+
+      .cards.gather:hover .card[data-order="4"] {
+        transform: rotate(378deg);
       }
     </style>
   </head>
   <body>
     <div id="app">
-      <!-- <h1 @click="setBase100">Base: {{ base }}</h1> -->
-      <!-- <h2 v-for="i in 5" @click="setBaseNumber(i)">{{ getNumberTitle(i) }}</h2> -->
-      <div
-        class="card"
-        v-for="card in filterCards(cards, keyword)"
-        :class="{open: card.open}"
-        @click="card.open = !card.open"
-      >
-        {{ card.label }}
+      <div class="control">
+        <input type="checkbox" v-model="gather" />
+        <input type="checkbox" v-for="card in cards" v-model="card.open" />
+
+        <button @click="shuffle">Shuffle</button>
+        <h2>{{ state }}</h2>
       </div>
-
-      <button @click="turnAll(true)">打開全部</button>
-      <button @click="turnAll(false)">關閉全部</button>
-
-      <h3>{{ inputting ? '輸入中...' : '' }}</h3>
-      <input
-        type="text"
-        v-model="keyword"
-        @keyup="inputToggle"
-        @keydown.enter="showInput"
-      />
+      <div class="cards" :class="{gather: gather}">
+        <div
+          class="card"
+          v-for="card in cards"
+          :class="{open: card.open}"
+          :data-order="card.id"
+          @click="openCard(card)"
+        >
+          <div class="face back"></div>
+          <div class="face front">{{ getSymbol(card.label) }}</div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
@@ -49,7 +159,14 @@
       const vm = new Vue({
         el: "#app",
         data: {
-          base: 100,
+          gather: true,
+          state: "Press the cards to start a game",
+          symbols: [
+            { label: "spades", symbol: "♠" },
+            { label: "hearts", symbol: "♥" },
+            { label: "diamonds", symbol: "♦" },
+            { label: "clubs", symbol: "♣" },
+          ],
           cards: [
             {
               id: 1,
@@ -72,40 +189,109 @@
               open: false,
             },
           ],
-          keyword: "",
-          inputting: false,
+
+          question: null,
+          mode: "",
+          count: 0,
         },
         methods: {
-          getSquare(num) {
-            return num * num;
-          },
-          getNumberTitle(num) {
-            return "My number is: " + this.getSquare(num);
-          },
-          setBaseNumber(num) {
-            this.base = num;
-          },
-          setBase100() {
-            this.setBaseNumber(100);
+          // 隨機打算陣列裡的順序
+          shuffle() {
+            let newOrder = [1, 2, 3, 4].sort((a, b) =>
+              Math.random() > 0.5 ? 1 : -1
+            );
+            this.cards.forEach((card, cid) => (card.id = newOrder[cid]));
           },
           turnAll(state) {
-            this.cards.forEach((card) => {
-              card.open = state;
-            });
+            this.cards.forEach((card) => (card.open = state));
           },
-          filterCards(cards, keyword) {
-            return cards.filter((card) => card.label.indexOf(keyword) != -1);
-          },
-          inputToggle() {
-            this.inputting = true;
-            let _this = this;
-            setTimeout(function () {
-              _this.inputting = false;
+          startGame() {
+            this.mode = "";
+            this.question = this.symbols[parseInt(Math.random() * 4)];
+            this.turnAll(false);
+            this.gather = true;
+            this.state = "Ready...";
+            setTimeout(() => {
+              this.gather = false;
+              this.state = "Your mission is...";
             }, 1000);
+
+            setTimeout(() => {
+              this.turnAll(true);
+              this.state =
+                "Find " +
+                this.question.label +
+                " " +
+                this.question.symbol +
+                "!";
+            }, 2000);
+
+            setTimeout(() => {
+              this.turnAll(false);
+              this.state = "Get ready...";
+            }, 4000);
+
+            // 洗牌前先把上局的歸零
+            this.count = 0;
+            setTimeout(() => {
+              let startShuffle = () => {
+                this.shuffle();
+                console.log("Shuffle !" + this.count);
+
+                // 判斷如果沒有執行 6 次以上的話，要再執行一次 startShuffle
+                if (this.count++ < 6) {
+                  setTimeout(startShuffle, 300);
+                } else {
+                  this.state =
+                    "Please pick out " +
+                    this.question.label +
+                    " " +
+                    this.question.symbol;
+
+                  this.mode = "answer";
+                }
+              };
+
+              // 執行
+              startShuffle();
+            }, 6000);
           },
-          showInput() {
-            console.log("使用者送出了：" + this.keyword);
+          getSymbol(label) {
+            let result = this.symbols.find((symbol) => symbol.label === label);
+            return result ? result.symbol : label;
           },
+
+          // 當答錯時，可以快速知道正確答案是什麼
+          getCard(label) {
+            return this.cards.find((card) => card.label == label);
+          },
+          openCard(card) {
+            if (this.mode == "answer") {
+              card.open = !card.open;
+
+              // 檢查卡牌上的符號是否跟題目要的吻合
+              if (card.label == this.question.label) {
+                this.state = `You get the ${this.question.label} ${this.question.symbol} !!!`;
+              } else {
+                this.state = "You lose !!!";
+                setTimeout(() => {
+                  let card = this.getCard(this.question.label);
+                  card.open = true;
+                }, 1000);
+              }
+
+              // 翻開正確答案後，三秒後重新開始遊戲
+              setTimeout(() => {
+                this.startGame();
+              }, 3000);
+            } else {
+              this.startGame();
+            }
+          },
+        },
+        // 可以直接觸發
+        mounted() {
+          // this.startGame();
         },
       });
     </script>
