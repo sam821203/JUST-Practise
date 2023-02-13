@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>水果清單</h2>
+      <ul>
+        <li v-for="item in list">
+          {{ item.name }} {{ item.price }}$ * {{ item.count }}
+        </li>
+        <p>+ 10% Fee</p>
+      </ul>
+      <h3>總價：{{ totalListPrice }}</h3>
+
+      <h2>雙向價錢轉換</h2>
+      <h4 :style="priceCss">
+        原價 {{ fullPrice }} x {{ discount }} = {{ price }}
+      </h4>
+
+      <input type="text" v-model="price" />
+      <input type="text" v-model="discount" />
+
+      <h2>雙向姓名轉換</h2>
+      <h4>firstName: {{ firstName }}</h4>
+      <h4>lastName: {{ lastName }}</h4>
+      <h4>fullName: {{ fullName }}</h4>
+
+      <input type="text" v-model="fullName" />
+
+      <h2>監看 watch</h2>
+      <ul>
+        <li v-for="item in latestHistory">{{ item }}</li>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          list: [
+            { name: "Apple", price: 30, count: 5 },
+            { name: "Banana", price: 50, count: 2 },
+            { name: "Orange", price: 40, count: 3 },
+          ],
+          fullPrice: 500,
+          discount: 0.8,
+          firstName: "Yu Hao",
+          lastName: "Huang",
+          count: 0,
+          history: [],
+        },
+        computed: {
+          totalListPrice() {
+            let sum = this.list
+              .map((item) => item.price * item.count)
+              .reduce((total, item) => total + item, 0);
+            return Math.floor(sum * 1.1);
+          },
+          price: {
+            get() {
+              return this.fullPrice * this.discount;
+            },
+            set(value) {
+              this.fullPrice = value / this.discount;
+              if (isNaN(this.fullPrice)) {
+                this.fullPrice = 0;
+              }
+            },
+          },
+          priceCss() {
+            return {
+              color: this.price >= 500 ? "red" : "blue",
+            };
+          },
+          fullName: {
+            get() {
+              if (this.lastName) {
+                return this.firstName + ", " + this.lastName;
+              } else {
+                return this.firstName || this.lastName || "";
+              }
+            },
+            set(name) {
+              this.firstName = name.split(", ")[0];
+              this.lastName = name.split(", ")[1];
+            },
+          },
+          latestHistory() {
+            return this.history.slice().reverse().slice(0, 10);
+          },
+        },
+        watch: {
+          price() {
+            this.count++;
+            console.log("price 被改變了" + this.count);
+          },
+          firstName(newValue, oldValue) {
+            this.history.push(oldValue + " -> " + newValue);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
