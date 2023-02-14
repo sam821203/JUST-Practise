@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="text">
+      <p>
+        Lorem ipsum dolor sit amet, adipiscing elit. Sed ac odio
+        massa. Donec eu odio eget nisl iaculis convallis. Aenean malesuada velit
+        et elit congue, nec faucibus enim volutpat. Mauris mollis nisi eu ipsum
+        faucibus, a auctor sapien pulvinar. Sed vel arcu urna. Integer imperdiet
+        consequat purus sed bibendum. Donec eget velit at velit varius volutpat.
+        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+        cubilia curae; Proin non sodales nisl, sed fringilla mi.
+      </p>
+    </div>
+
+    <script>
+      const text = document.querySelector(".text p");
+      const maxLength = 100;
+      const ellipsis = "...";
+
+      if (text.textContent.length > maxLength) {
+        
+        const toggleBtn = document.createElement("button");
+        const shortText = text.textContent.slice(0, maxLength) + ellipsis;
+        const longText = text.textContent;
+
+        text.textContent = shortText;
+        toggleBtn.textContent = "展開";
+
+        toggleBtn.addEventListener("click", function () {
+          
+          const isCollapsed = text.textContent.endsWith(ellipsis);
+
+          text.textContent = isCollapsed ? longText : shortText;
+          toggleBtn.textContent = isCollapsed ? "收起" : "展開";
+        });
+
+        text.after(toggleBtn);
+      }
+    </script>
+  </body>
+</html>
