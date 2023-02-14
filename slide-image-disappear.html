@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      height: 300vh;
+    }
+
+    .img__wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 30%; /* Initial height of the header image */
+      transition: height 0.3s ease-in-out; /* Animate height changes */
+    }
+
+    .img__wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="img__wrap">
+    <img src="https://static.vecteezy.com/system/resources/previews/007/762/665/original/graphics-drawing-landscape-view-nature-mountain-and-light-of-sunset-for-wallpaper-background-illustration-free-vector.jpg" alt="your-image-alt">
+  </div>
+  
+  <script>
+    const imgWrap = document.querySelector(".img__wrap");
+    let lastScrollTop = 0;
+
+    window.addEventListener("scroll", function() {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
+        // Scrolling down
+        imgWrap.style.height = "0";
+      } else {
+        // Scrolling up
+        imgWrap.style.height = "30%"; 
+      }
+      lastScrollTop = scrollTop;
+    });
+  </script>
+</body>
+</html>
