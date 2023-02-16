@@ -65,6 +65,10 @@
         position: relative;
       }
 
+      .cards.isCartOpen {
+        transform: scale(0.8);
+      }
+
       .card {
         margin: 60px;
         display: inline-flex;
@@ -150,6 +154,92 @@
         transform: translateY(-10px);
       }
 
+      .control {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: linear-gradient(
+          10deg,
+          #111 0%,
+          #111 50%,
+          transparent 100%
+        );
+        color: #eee;
+        padding: 5vmin;
+        box-sizing: border-box;
+        transition: 0.5s;
+        opacity: 0;
+        pointer-events: none;
+        box-shadow: 0px 5px 25px 5px rgba(0, 0, 0, 0.25);
+      }
+
+      .control.isCartOpen {
+        opacity: 1;
+        pointer-events: initial;
+      }
+
+      .control .panel {
+        width: 70%;
+      }
+      .control ul {
+        padding: 0;
+        list-style: none;
+      }
+      .control ul li {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        transition: 0.5s;
+        cursor: pointer;
+      }
+      .control ul li:hover {
+        transform: translateY(-10px);
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      .control ul li h3 {
+        font-size: 17px;
+        font-weight: normal;
+        display: inline-block;
+        opacity: 0.8;
+        width: calc(100% - 100px);
+      }
+      .control ul li .thumbnail {
+        width: 50px;
+        height: 70px;
+        display: inline-block;
+        margin-right: 20px;
+      }
+      .control.show {
+        opacity: 1;
+        pointer-events: initial;
+      }
+      .control .price {
+        float: right;
+      }
+      .control .remove {
+        display: inline-block;
+        padding: 4px 15px;
+        border-radius: 50px;
+        background-color: rgba(255, 255, 255, 0.3);
+        opacity: 0.5;
+        font-size: 17px;
+        margin-left: 10px;
+        transition: 0.5s;
+      }
+      .control .remove:hover {
+        background-color: #ef5353;
+        color: black;
+        opacity: 1;
+      }
+
+      /* fixed-control */
       .fixed-control {
         position: fixed;
         right: 30px;
@@ -185,7 +275,7 @@
     <div id="app">
       <div class="app-title">Vue JS theater</div>
       <div class="movie" @wheel.prevent="wheel">
-        <div class="cards">
+        <div class="cards" :class="{isCartOpen: isCartOpen}">
           <div class="card" v-for="movie in movies">
             <div class="left">
               <div class="cover" :style="bgCss(movie.cover)"></div>
@@ -195,9 +285,9 @@
               <h2>{{ movie.name }}</h2>
               <h4>{{ movie.type }}</h4>
               <p v-html="movie.description"></p>
-              <div class="price">{{ movie.price }}</div>
+              <div class="price">{{ movie.price }} $</div>
 
-              <button class="add" @click="addCart(movie)">
+              <button class="add" @click="addCart(movie, $event)">
                 + Add to My Cart
               </button>
             </div>
@@ -205,9 +295,36 @@
         </div>
       </div>
 
-      <div class="fixed-control">
+      <div
+        class="buybox"
+        :style="bgCss(currentMovie.cover)"
+        v-if="currentMovie"
+      ></div>
+
+      <div class="fixed-control" @click="isCartOpen = !isCartOpen">
         <i class="fa fa-shopping-cart"></i>
         <span>{{ cart.length }}</span>
+      </div>
+
+      <div class="control" :class="{isCartOpen: isCartOpen}">
+        <div class="panel">
+          <h2>My Movie Cart</h2>
+          <ul>
+            <li v-for="(movie, mid) in cart">
+              <div class="thumbnail" :style="bgCss(movie.cover)"></div>
+              <h3>{{ movie.name }}</h3>
+              <div class="price">{{ movie.price }} $</div>
+              <div class="remove" @click="cart.splice(mid, 1)">-</div>
+            </li>
+
+            <li v-if="!cart.length">
+              <h3>Your cart is empty!</h3>
+            </li>
+          </ul>
+
+          <hr />
+          <h2>{{ totalPrice }} $</h2>
+        </div>
       </div>
     </div>
 
@@ -219,13 +336,15 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
       const vm = new Vue({
         el: "#app",
         data: {
           movies: [],
           cart: [],
+          currentMovie: null,
+          isCartOpen: false,
         },
         created() {
           let apiUrl =
@@ -247,8 +366,29 @@
               left: "+=" + evt.deltaY * 2 + "px",
             });
           },
-          addCart(movie) {
-            this.cart.push(movie);
+          addCart(movie, event) {
+            let target = event.target;
+            this.currentMovie = movie;
+
+            // 在元件更新後，才會去執行動畫
+            this.$nextTick(() => {
+              TweenMax.from(".buybox", 0.8, {
+                left: $(event.target).offset().left,
+                top: $(event.target).offset().top,
+                opacity: 1,
+                ease: "power1.out",
+              });
+              setTimeout(() => {
+                this.cart.push(movie);
+              }, 800);
+            });
+          },
+        },
+        computed: {
+          totalPrice() {
+            return this.cart
+              .map((movie) => movie.price)
+              .reduce((total, current) => total + current, 0);
           },
         },
         watch: {
