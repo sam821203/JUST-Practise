@@ -1,6 +1,11 @@
 <template lang="pug">
   #app
     img(src="./assets/logo.png")
+    br
+    
+    button(@click="setTodos(['amy', 'tom', 'peter'])") Update todos
+    button(@click="loadTodos") Load todos
+
     router-link(to="/PageTest") To PageTest
     hr
     router-link(to="/user/Sam") User Sam
@@ -15,8 +20,19 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
-  name: "App"
+  name: "App",
+  computed: {
+    ...mapState(["todos"])
+  },
+  mounted() {
+    this.loadTodos();
+  },
+  methods: {
+    ...mapMutations(["setTodos"]),
+    ...mapActions(["loadTodos"])
+  }
 };
 </script>
 
