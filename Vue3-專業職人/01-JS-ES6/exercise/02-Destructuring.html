@@ -6,6 +6,25 @@
     <title>解構賦值 (Destructuring assignment)</title>
   </head>
   <body>
-    <script></script>
+    <script>
+      const user = {
+        name: "mike",
+        age: 12,
+        address: "Taiwan",
+      };
+
+      const userData = {
+        user,
+        test: {
+          age: user.age,
+        },
+        sex: "boy",
+      };
+
+      const { name, age, address } = user;
+
+      console.log(name, age, address);
+      console.log(userData);
+    </script>
   </body>
 </html>
