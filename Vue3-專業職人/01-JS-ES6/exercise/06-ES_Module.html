@@ -6,6 +6,12 @@
     <title>ES Module</title>
   </head>
   <body>
-    <script></script>
+    <script type="module">
+      import add, { Name, Age, Remove } from "./js/Tools.js";
+
+      console.log(add(3, 8));
+      console.log(Name, Age);
+      console.log(Remove(5, 2));
+    </script>
   </body>
 </html>
