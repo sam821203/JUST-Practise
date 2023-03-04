@@ -7,13 +7,27 @@
   </head>
   <body>
     <div id="app">
-      <h1></h1>
+      <h1>{{ text }}</h1>
     </div>
     <script src="./js/vue.js"></script>
     <script>
+      const { ref } = Vue;
+      console.log(Vue);
       const App = {
         setup() {
-          return {};
+          const text = ref("Hello Vue");
+          const text2 = ref("Hello Vue2");
+          const text3 = ref("Hello Vue3");
+
+          console.log(text);
+          setTimeout(() => {
+            console.log(text);
+
+            text.value = "Hello Sam";
+
+            console.log(text);
+          }, 1000);
+          return { text };
         },
       };
       Vue.createApp(App).mount("#app");

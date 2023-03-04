@@ -12,23 +12,29 @@
   </head>
   <body>
     <div id="app">
-      <h1>{{Num.idx}}</h1>
-      <button @click="AddFn">Add</button>
+      <h1>{{ num }}</h1>
+      <button @click="addFn">Add</button>
       <button @click="Test">Add copy</button>
     </div>
     <script src="./js/vue.js"></script>
     <script>
-      const { reactive } = Vue;
+      const { ref, readonly } = Vue;
       const App = {
         setup() {
-          const Num = reactive({ idx: 0 });
-          const AddFn = () => {
-            Num.idx++;
+          const num = ref(0);
+          const copyNum = readonly(num);
+
+          const addFn = () => {
+            num.value++;
+
+            console.log(num, copyNum);
           };
 
-          const Test = () => {};
+          const Test = () => {
+            copyNum.value++;
+          };
 
-          return { Num, AddFn, Test };
+          return { num, addFn, Test };
         },
       };
       Vue.createApp(App).mount("#app");

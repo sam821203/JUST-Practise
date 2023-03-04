@@ -7,8 +7,8 @@
   </head>
   <body>
     <div id="app">
-      <h1 id="vue-if">{{Text}}</h1>
-      <h1 id="vue-show">{{Text}}</h1>
+      <h1 id="vue-if" v-if="isShow">{{Text}}</h1>
+      <h1 id="vue-show" v-show="isShow">{{Text}}</h1>
       <button @click="handDomShow">Hand Dom Show</button>
     </div>
     <script src="./js/vue.js"></script>

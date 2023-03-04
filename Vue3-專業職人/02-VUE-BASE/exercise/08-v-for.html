@@ -8,7 +8,9 @@
   <body>
     <div id="app">
       <ul>
-        <li></li>
+        <li v-for="(item, idx) in listArr" v-show="item.show">
+          {{ idx + 1 }}. {{ item.name }}
+        </li>
       </ul>
     </div>
     <script src="./js/vue.js"></script>

@@ -6,12 +6,19 @@
     <title>howToSelect</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div>{{ text }}</div>
+      <div>{{ message[0] }}</div>
+    </div>
     <script src="./js/vue.js"></script>
     <script>
+      const { ref, reactive } = Vue;
       const App = {
         setup() {
-          return {};
+          const text = ref("Hello Vue");
+          const message = reactive([1, 2, 3]);
+
+          return { text, message };
         },
       };
       Vue.createApp(App).mount("#app");

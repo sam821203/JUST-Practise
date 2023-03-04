@@ -16,7 +16,12 @@
   <body>
     <div id="app">
       <ul>
-        <li v-for="(list, idx) in listArr" v-bind:key="list.name">
+        <li
+          v-for="(list, idx) in listArr"
+          :key="list.name"
+          :class="list.status"
+          :alt="list.altText"
+        >
           {{idx + 1}}. {{list.name}}
         </li>
       </ul>
@@ -27,11 +32,31 @@
       const App = {
         setup() {
           const listArr = reactive([
-            { name: "2020 Vue3 專業職人 | 入門篇", status: "red" },
-            { name: "2020 Vue3 專業職人 | 加值篇", status: "blue" },
-            { name: "2020 Vue3 專業職人 | 進階篇", status: "red" },
-            { name: "現代 JavaScript 職人之路｜入門篇", status: "red" },
-            { name: "現代 JavaScript 職人之路｜中階實戰篇", status: "blue" },
+            {
+              name: "2020 Vue3 專業職人 | 入門篇",
+              status: "red",
+              altText: "第一堂",
+            },
+            {
+              name: "2020 Vue3 專業職人 | 加值篇",
+              status: "blue",
+              altText: "第二堂",
+            },
+            {
+              name: "2020 Vue3 專業職人 | 進階篇",
+              status: "red",
+              altText: "第三堂",
+            },
+            {
+              name: "現代 JavaScript 職人之路｜入門篇",
+              status: "red",
+              altText: "第四堂",
+            },
+            {
+              name: "現代 JavaScript 職人之路｜中階實戰篇",
+              status: "blue",
+              altText: "第五堂",
+            },
           ]);
           return {
             listArr,
