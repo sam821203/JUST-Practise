@@ -10,13 +10,21 @@
 
     <script src="./js/vue.js"></script>
     <script>
-      const { ref, reactive } = Vue;
+      const { ref, reactive, watchEffect } = Vue;
       const App = {
         setup() {
           const num = ref(0);
           const numData = reactive({ idx: 0 });
+          let timer = null;
 
-          setTimeout(() => {
+          const stop = watchEffect(() => {
+            if (num.value >= 4) {
+              stop();
+              clearInterval(timer);
+            }
+          });
+
+          timer = setInterval(() => {
             num.value++;
             numData.idx++;
           }, 1000);

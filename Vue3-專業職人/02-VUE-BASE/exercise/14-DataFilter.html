@@ -61,7 +61,7 @@
     <div id="app">
       <a @click="HandListShow" class="title">課程列表</a>
       <ul class="box" :style="{height: BoxHeight}">
-        <li v-for="(list, idx) in listArr" :key="list">
+        <li v-for="(list, idx) in filterData" :key="list.money">
           {{idx + 1}}. {{list.name}} => ${{list.money}}
         </li>
       </ul>
@@ -83,8 +83,13 @@
             { name: "現代 JavaScript 職人之路｜面試篇", money: 1800 },
           ]);
 
+          const filterData = computed(() => {
+            const filter = listArr.filter((item) => item.money > 500);
+            return filter;
+          });
+
           const BoxHeight = computed(() => {
-            return isOpen.value ? `${listArr.length * 40}px` : "0px";
+            return isOpen.value ? `${filterData.value.length * 40}px` : "0px";
           });
 
           const HandListShow = () => {
@@ -93,7 +98,7 @@
 
           return {
             isOpen,
-            listArr,
+            filterData,
             HandListShow,
             BoxHeight,
           };

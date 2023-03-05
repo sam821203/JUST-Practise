@@ -19,6 +19,22 @@
           const refObj = ref({ idx: 0 });
           const reactiveObj = reactive({ idx: 0 });
 
+          watch(
+            () => refObj.value.idx,
+            (newValue, oldValue) => {
+              console.log(newValue);
+            }
+          );
+
+          watch(reactiveObj, (newValue, oldValue) => {
+            console.log(newValue);
+          });
+
+          setTimeout(() => {
+            refObj.value.idx = 1;
+            reactiveObj.idx = 1;
+          }, 1000);
+
           return { refObj, reactiveObj };
         },
       };
