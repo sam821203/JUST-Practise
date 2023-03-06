@@ -15,6 +15,8 @@
       const { ref, onBeforeMount, onMounted, onUpdated } = Vue;
       const App = {
         setup() {
+
+          console.log('當 Vue 掛載到 app 上後才會去執行');
           const idx = ref(0);
           setTimeout(() => {
             idx.value = 1;
@@ -30,6 +32,7 @@
           });
           onUpdated(() => {
             // 在資料更改導致virtual DOM重新渲染後調用
+            // 這裡指 DOM 上的資料，而不是 JS 裡的資料更改後
             console.log("資料更改後");
           });
 

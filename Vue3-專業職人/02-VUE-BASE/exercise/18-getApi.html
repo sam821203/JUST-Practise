@@ -43,23 +43,62 @@
   </head>
   <body>
     <div id="app">
-      <div class="box">
+      <div class="box" v-if="isLoad">
         <div>
-          <img class="img" src="" alt="" />
+          <img v-for="(item, i) in imgArr.arr" v-show="imgIdx === i" :key="item.url" class="img" :src="item.url" alt="" />
         </div>
-        <div class="btnbox">
-          <a href="javascript:;">上一張</a>
-          <a href="javascript:;">下一張</a>
+        <div class="btnbox" v-if="isLoad">
+          <a @click="imgReduce" href="javascript:;">上一張</a>
+          <a @click="imgAdd" href="javascript:;">下一張</a>
         </div>
       </div>
-      <img class="load" src="./images/load.gif" alt="" />
+      <img v-if="!isLoad" class="load" src="./images/load.gif" alt="" />
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src="./js/vue.js"></script>
     <script>
+      const { onMounted, reactive, ref } = Vue;
+
       const app = {
         setup() {
-          return {};
+
+          const imgArr = reactive({ arr: [] })
+          const imgIdx = ref(0);
+          let isLoad = ref(false);
+
+          const imgAdd = () => {
+            imgIdx.value++;
+            if (imgIdx.value > imgArr.arr.length - 1) imgIdx.value = 0;
+          }
+
+          const imgReduce = () => {
+            imgIdx.value--;
+            if (imgIdx.value < 0) imgIdx.value = imgArr.arr.length - 1;
+          }
+
+          const handleImgLoad = (imageArr) => {
+            let i = 0;
+            imageArr.forEach(image => {
+              const newImg = new Image();
+              newImg.src = image.url;
+              newImg.onload = () => {
+                i++;
+                if (imageArr.length === i) {
+                  console.log('loading OK');
+                  imgArr.arr = imageArr;
+                  isLoad.value = true;
+                }
+              }
+            })
+          }
+
+          onMounted(() => {
+            axios.get('https://vue-lessons-api.vercel.app/photo/list')
+              .then((res) => {
+                handleImgLoad(res.data);
+            })
+          })
+          return { imgArr, imgIdx, imgAdd, imgReduce, isLoad };
         },
       };
       Vue.createApp(app).mount("#app");
