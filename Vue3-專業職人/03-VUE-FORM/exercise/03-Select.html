@@ -10,21 +10,55 @@
   <body>
     <div id="app">
       <div class="select-box">
-        <select>
+        <select v-model="cityActive">
           <option disabled value="">請選擇縣市</option>
+          <option v-for="item in twZip.city" :key="item.name" :value="item.name">{{ item.name }}</option>
         </select>
-        <select>
+        <select v-model="areaActive">
           <option disabled value="">請選擇區域</option>
+          <option v-for="item in twZip.area" :key="item.name" :value="item.name">{{ item.name }}</option>
         </select>
       </div>
-      <a class="btn">送出</a>
+      <a class="btn" @click="handleSubmit">送出</a>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src="./js/vue.js"></script>
     <script>
+      const { onMounted, reactive, ref, watch } = Vue;
+
       const App = {
         setup() {
-          return {};
+
+          const twZip = reactive({ 
+            city: [], 
+            area: [],
+          })
+          const cityActive = ref('');
+          const areaActive = ref('');
+
+          watch(cityActive, (newCity) => {
+            const newArr = twZip.city.filter((city) => city.name === newCity);
+            areaActive.value = '';
+            twZip.area = newArr[0].area;
+          })
+
+          const handleSubmit = () => {
+            console.log(cityActive.value);
+            console.log(areaActive.value);
+          }
+          
+          onMounted(() => {
+            axios.get('https://vue-lessons-api.vercel.app/city/list')
+              .then((res) => {
+                twZip.city = res.data.twzip.city;
+              })
+          })
+          return {
+            twZip,
+            cityActive,
+            areaActive,
+            handleSubmit,
+          };
         },
       };
 

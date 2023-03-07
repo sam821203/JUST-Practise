@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="app">
-      <div>
+      <div v-if="!isRegistered">
         <div class="input-box">
           <p>NAME</p>
           <input
@@ -17,7 +17,7 @@
             placeholder="輸入使用者名稱"
             v-model="registered.username"
           />
-          <p class="error"></p>
+          <p class="error" v-if="error_message.username">{{ error_message.username }}</p>
         </div>
         <div class="input-box">
           <p>PASSWORD</p>
@@ -26,7 +26,7 @@
             placeholder="輸入密碼"
             v-model="registered.password"
           />
-          <p class="error"></p>
+          <p class="error" v-if="error_message.password">{{ error_message.password }}</p>
         </div>
         <div class="input-box">
           <p>E-MAIL</p>
@@ -35,7 +35,7 @@
             placeholder="輸入email"
             v-model="registered.email"
           />
-          <p class="error"></p>
+          <p class="error" v-if="error_message.email">{{ error_message.email }}</p>
         </div>
         <div class="input-box">
           <p>年齡</p>
@@ -55,9 +55,9 @@
           <input type="checkbox" id="checkbox" v-model="registered.terms" />
           <label for="checkbox">我已閱讀使用者條款</label>
         </div>
-        <a class="btn">送出</a>
+        <a class="btn" @click="handleSubmit">送出</a>
       </div>
-      <div>
+      <div v-if="isRegistered">
         <h1>註冊成功</h1>
       </div>
     </div>
@@ -72,11 +72,13 @@
         age: '12'
         terms: false,
       }
-     -->
+    -->
     <script>
-      const { reactive } = Vue;
+      const { reactive, ref } = Vue;
       const app = {
         setup() {
+          const isRegistered = ref(false);
+
           const registered = reactive({
             username: "",
             password: "",
@@ -86,7 +88,31 @@
             terms: false,
           });
 
-          return { registered };
+          const error_message = reactive({});
+
+          const handleError = (err) => {
+            Object.keys(err).forEach(error => {
+              error_message[error] = err[error];
+            })
+            console.log(error_message);
+          }
+
+          const handleSubmit = () => {
+            axios.post('https://vue-lessons-api.vercel.app/auth/registered', registered)
+            .then((response) => {
+              isRegistered.value = true;
+              console.log(response);
+            })
+            .catch((error) => {
+              handleError(error.response.data.error_message);
+            });
+          }
+          return { 
+            registered,
+            handleSubmit,
+            isRegistered,
+            error_message,
+          };
         },
       };
 

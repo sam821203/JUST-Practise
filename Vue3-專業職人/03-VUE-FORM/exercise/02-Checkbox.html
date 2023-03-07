@@ -11,20 +11,21 @@
     <div id="app">
       <div>
         <ul>
-          <li>
-            <input type="checkbox" />
-            <label for=""></label>
+          <li v-for="item in courseslist.tags" :key="item.tag">
+            <input type="checkbox" :id="item.tag" :value="item.tag" v-model="courseslist.selectArr"/>
+            <label :for="item.tag">{{ item.tag }}</label>
           </li>
         </ul>
-        <a class="btn">送出</a>
+        <a class="btn" @click="handleSubmit">送出</a>
       </div>
     </div>
     <script src="./js/vue.js"></script>
     <script>
-      const { reactive } = Vue;
+      const { ref, reactive } = Vue;
       const App = {
         setup() {
           const courseslist = reactive({
+            selectArr: [], 
             tags: [
               { tag: "JavaScript" },
               { tag: "Html" },
@@ -37,7 +38,15 @@
               { tag: "Canvas" },
             ],
           });
-          return { courseslist };
+
+          const handleSubmit = () => {
+            console.log(courseslist.selectArr);
+          }
+
+          return { 
+            courseslist, 
+            handleSubmit,
+          };
         },
       };
 

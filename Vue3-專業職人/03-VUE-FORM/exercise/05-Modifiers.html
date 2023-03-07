@@ -22,15 +22,15 @@
   <body>
     <div id="app">
       <div class="input-box">
-        <input type="text" placeholder="lazy" v-model="lazyVal" />
+        <input type="text" placeholder="lazy" v-model.lazy="lazyVal" />
         <p>{{lazyVal}}</p>
       </div>
       <div class="input-box">
-        <input type="text" placeholder="number" v-model="numberVal" />
+        <input type="text" placeholder="number" v-model.number="numberVal" />
         <p>{{numberVal}}</p>
       </div>
       <div class="input-box">
-        <input type="text" placeholder="trim" v-model="trimVal" />
+        <input type="text" placeholder="trim" v-model.trim="trimVal" />
         <p>{{trimVal}}</p>
       </div>
     </div>
