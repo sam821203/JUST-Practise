@@ -79,7 +79,9 @@
           const handleImgLoad = (imageArr) => {
             let i = 0;
             imageArr.forEach(image => {
+
               const newImg = new Image();
+
               newImg.src = image.url;
               newImg.onload = () => {
                 i++;
