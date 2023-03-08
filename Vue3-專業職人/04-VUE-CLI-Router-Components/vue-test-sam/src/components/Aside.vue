@@ -15,21 +15,35 @@ export default {
   </aside>
 </template>
 
-<style>
+<style lang="scss">
   aside {
     width: 100%;
     height: 245px;
     background-color: #27212c;
+    @media screen and (max-width: 640px) {
+      width: 100%;
+      height: 75px;
+      background-color: #27212c;
+    }
   }
   aside > .mid {
     width: 1024px;
     height: 100%;
     margin: 0 auto;
+    @media screen and (max-width: 1044px) {
+      width: 100%;
+    }
   }
   aside > .mid > .text_content {
     width: 77%;
     height: 100%;
     float: left;
+    @media screen and (max-width: 1044px) {
+      width: 77%;
+    }
+    @media screen and (max-width: 640px) {
+      width: 85%;
+    }
   }
   aside > .mid > .text_content > h3 {
     line-height: 245px;
@@ -37,6 +51,19 @@ export default {
     letter-spacing: 2px;
     font-weight: 400;
     font-size: 20px;
+    @media screen and (max-width: 1044px) {
+      font-size: 18px;
+      padding-left: 3%;
+    }
+    @media screen and (max-width: 640px) {
+      width: 90%;
+      line-height: 75px;
+      letter-spacing: 0px;
+      font-size: 0.5em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
   aside > .mid > a {
     display: block;
@@ -47,5 +74,11 @@ export default {
     background-image: url("~@/assets/images/rightbtn.jpg");
     background-position: 50% 50%;
     background-repeat: no-repeat;
+    @media screen and (max-width: 1044px) {
+      width: 20%;
+    }
+    @media screen and (max-width: 640px) {
+      width: 15%;
+    }
   }
 </style>

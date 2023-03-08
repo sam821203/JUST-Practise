@@ -16,7 +16,7 @@ export default {
   </article>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   $color_1: #fff;
 
   article {

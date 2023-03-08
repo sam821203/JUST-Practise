@@ -1,12 +1,27 @@
 <script>
-export default {};
+import { ref } from 'vue';
+
+export default {
+  setup(){
+
+    const isOpen = ref(false);
+    const handleMenuOpen = () => {
+      isOpen.value = !isOpen.value;
+    };
+
+    return {
+      isOpen, 
+      handleMenuOpen,
+    }
+  }
+};
 </script>
 
 <template>
-  <header class="openMenu">
+  <header :class="{openMenu: isOpen}">
     <nav>
       <h1>Mike</h1>
-      <a id="moblie_menu" href="javascript:;"></a>
+      <a id="moblie_menu" href="javascript:;" @click="handleMenuOpen"></a>
       <div>
         <a href="javascript:;">RWD</a>
         <a href="javascript:;">VUEJS</a>
@@ -18,7 +33,7 @@ export default {};
   </header>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $color_1: #fff;
 $background-color_1: #373c3f;
 

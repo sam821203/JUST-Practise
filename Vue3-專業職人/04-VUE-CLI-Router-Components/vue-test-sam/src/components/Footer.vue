@@ -42,16 +42,25 @@ export default {
   </footer>
 </template>
 
-<style>
+<style lang="scss">
   footer {
     width: 100%;
     height: 562px;
     background-color: #ebebeb;
+    @media screen and (max-width: 640px) {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      background-color: #ebebeb;
+    }
   }
   footer > div {
     width: 1024px;
     height: 100%;
     margin: 0 auto;
+    @media screen and (max-width: 1044px) {
+      width: 100%;
+    }
   }
   .left_box {
     width: 50%;

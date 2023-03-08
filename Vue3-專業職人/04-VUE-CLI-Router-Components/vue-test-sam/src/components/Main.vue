@@ -14,23 +14,40 @@ export default {
   </main>
 </template>
 
-<style>
+<style lang="scss">
   main {
     width: 100%;
     height: 294px;
     background-color: #5b0fa1;
+    @media screen and (max-width: 640px) {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      background-color: #5b0fa1;
+    }
   }
   main > .mid {
     width: 1024px;
     height: 100%;
     margin: 0 auto;
     background-color: #5b0fa1;
+    @media screen and (max-width: 1044px) {
+      width: 100%;
+    }
+    @media screen and (max-width: 640px) {
+      width: 100%;
+      height: 294px;
+    }
   }
-
   main > .mid > div {
     width: 33.3333%;
     height: 100%;
     float: left;
+    @media screen and (max-width: 640px) {
+      width: 100%;
+      height: 277px;
+      float: left;
+    }
   }
   .box1 {
     cursor: pointer;
