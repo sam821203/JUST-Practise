@@ -1,6 +1,31 @@
 <script>
 export default {
-  props: ["msg"],
+  props: {
+    str: {
+      type: String,
+      default: "My name is Sam",
+    },
+    bool: {
+      type: Boolean,
+      default: true,
+    },
+    number: {
+      type: Number,
+      default: 0,
+    },
+    arr: {
+      type: Array,
+      default: () => [],
+    },
+    obj: {
+      type: Object,
+      default: () => ({}),
+    },
+    handleClickFunction: {
+      type: Function,
+      default: () => {},
+    }
+  },
   setup(props) {
     console.log(props);
     return {
@@ -11,7 +36,7 @@ export default {
 </script>
 
 <template>
-  <h1>{{ props.msg }}</h1>
+  <h1>{{ props.str }}</h1>
 </template>
 
 <style>

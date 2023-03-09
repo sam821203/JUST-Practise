@@ -1,31 +1,51 @@
 <script>
-import PropsTest from "@/components/PropsTest.vue"
-import { ref } from 'vue'
+import TitleBar from '@/components/TitleBar.vue'
+import ListItem from '@/components/ListItem.vue'
+import { ref, reactive } from 'vue'
 
 export default {
   components: {
-    PropsTest,
+    TitleBar,
+    ListItem,
   },
   setup() {
-    const data = ref("Hello world!")
+    const isOpen = ref(true);
+    const handleOpenClass = () => {
+      isOpen.value = !isOpen.value;
+    };
+
     return {
-      data,
+      isOpen,
+      handleOpenClass,
     }
   }
 }
 </script>
 
 <template>
-  <PropsTest :msg="data"/>
+  <TitleBar :handleOpenClass="handleOpenClass" />
+  <ListItem :isOpen="isOpen" />
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: slategray;
+  }
+  #app {
+    width: 400px;
+    overflow: hidden;
+    border: 1px solid #42b983;
+    border-radius: 10px;
+  }
 </style>
