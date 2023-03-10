@@ -25,25 +25,27 @@ export default {
 </script>
 
 <template>
-  <ul :class="['box', { open: props.isOpen }]">
-    <li v-for="(list, idx) in listArr" :key="list.name">
-      {{ idx + 1 }}. {{ list.name }}
-    </li>
-  </ul>
+  <transition name="open">
+    <ul class="box" v-show="props.isOpen">
+      <li v-for="(list, idx) in listArr" :key="list.name">
+        {{ idx + 1 }}. {{ list.name }}
+      </li>
+    </ul>
+  </transition>
 </template>
 
 <style>
   .box {
     display: block;
     width: 100%;
-    height: 0;
+    /* height: 0; */
     background-color: snow;
     transition: height 0.4s;
   }
 
-  .box.open {
+  /* .box.open {
     height: 200px;
-  }
+  } */
 
   .box > li {
     display: flex;
@@ -55,4 +57,20 @@ export default {
     font-size: 12px;
     color: darkslategray;
   }
+
+  .open-enter-active,
+  .open-leave-active {
+    transition: height .5s ease;
+  }
+
+  .open-leave-from,
+  .open-enter-to {
+    height: 200px;
+  }
+
+  .open-leave-to,
+  .open-enter-from {
+    height: 0px;
+  }
+  
 </style>
