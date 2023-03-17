@@ -4,12 +4,12 @@ export default {
 }
 </script>
 <template>
-  <div id="AboutView">
-    <h1>AboutView</h1>
+  <div id="VueJsPage">
+    <h1>VueJsPage</h1>
   </div>
 </template>
 <style>
-  #AboutView {
+  #VueJsPage {
     width: 100%;
     height: 500px;
     background-color: skyblue;

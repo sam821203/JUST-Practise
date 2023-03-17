@@ -20,11 +20,12 @@ export default {
 <template>
   <header :class="{openMenu: isOpen}">
     <nav>
-      <h1>Mike</h1>
+      <!-- <h1>Mike</h1> -->
+      <router-link class="title" to="/">Mike</router-link>
       <a id="moblie_menu" href="javascript:;" @click="handleMenuOpen"></a>
       <div>
-        <a href="javascript:;">RWD</a>
-        <a href="javascript:;">VUEJS</a>
+        <router-link to="/rwd">RWD</router-link>
+        <router-link to="/vuejs">VUEJS</router-link>
         <a href="javascript:;">REACTJS</a>
         <a href="javascript:;">HTML5</a>
         <a href="javascript:;">NODEJS</a>
@@ -61,18 +62,18 @@ header {
       width: 100%;
       height: 232px;
     }
-    > h1 {
-      line-height: 97px;
-      font-size: 18px;
-      float: left;
-      color: $color_1;
-      margin-right: 20px;
-      @media screen and (max-width: 1044px) {
-        margin-left: 5%;
-      }
-      @media screen and (max-width: 640px) {
-        line-height: 37px;
-      }
+    > .title {
+        line-height: 97px;
+        font-size: 18px;
+        float: left;
+        color: $color_1;
+        margin-right: 20px;
+        @media screen and (max-width: 1044px) {
+          margin-left: 5%;
+        }
+        @media screen and (max-width: 640px) {
+          line-height: 37px;
+        }
     }
     > div {
       width: 100%;

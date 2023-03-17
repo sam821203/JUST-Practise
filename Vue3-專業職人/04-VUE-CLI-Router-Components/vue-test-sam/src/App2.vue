@@ -1,16 +1,10 @@
 <script>
 import Header from "@/components/Header";
-import Article from "@/components/Article";
-import Aside from "@/components/Aside";
-import Main from "@/components/Main";
 import Footer from "@/components/Footer";
 
 export default {
   components: {
     Header,
-    Article,
-    Aside,
-    Main,
     Footer,
   }
 }
@@ -18,9 +12,7 @@ export default {
 
 <template>
   <Header />
-  <Article />
-  <Aside />
-  <Main />
+  <router-view></router-view>
   <Footer />
 </template>
 

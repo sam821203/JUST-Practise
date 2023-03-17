@@ -4,15 +4,15 @@ export default {
 }
 </script>
 <template>
-  <div id="AboutView">
-    <h1>AboutView</h1>
+  <div id="RWDPage">
+    <h1>RWD</h1>
   </div>
 </template>
 <style>
-  #AboutView {
+  #RWDPage {
     width: 100%;
     height: 500px;
-    background-color: skyblue;
+    background-color: tomato;
   }
 
   h1 {
