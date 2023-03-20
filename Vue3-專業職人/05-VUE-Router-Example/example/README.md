@@ -1,4 +1,4 @@
-# vue-router-example
+# vue-test-sam
 
 ## Project setup
 ```

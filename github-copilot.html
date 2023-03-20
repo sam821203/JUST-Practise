@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* Add blue h2 heading*/
+    h2 {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <!-- an h2 with inline styling -->
+  <h2 style="color: red;">Hello World</h2>
+  <!-- create a bulleted list -->
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+
+  <!-- add axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- add jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- add bootstrap script tag to the page -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // add axios
+    // const axios = require('axios');   
+
+    // add jquery
+    // const $ = require('jquery');
+    
+    // add bootstrap script tag to the page using require
+    // const bootstrap = require('bootstrap');
+
+    // regex to match the phone number in the format (xxx) xxx-xxxx
+    const regex = /^\(\d{3}\) \d{3}-\d{4}$/;
+
+    //test photoRegex against the phone number with console.log
+    console.log(regex.test('(555) 555-5555'));
+  </script>
+</body>
+</html>
