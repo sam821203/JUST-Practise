@@ -1,22 +1,42 @@
 <script>
+import axios from "axios";
+import { useRouter } from "vue-router";
+import { onMounted, reactive } from "vue";
 export default {
   setup() {
-    return {};
+    const coursesList = reactive({ data: {} });
+
+    // 假如是用 a 標籤，而不是 router-link，則需要用這種方式
+    const router = useRouter();
+    const goToNewRouter = (id) => {
+      router.push({ path: `/Courses/${ id }` })
+    }
+
+    onMounted(() => {
+      axios.get("https://vue-lessons-api.vercel.app/courses/list")
+        .then(res => {
+          coursesList.data = res.data;
+        })
+    })
+    return { 
+      coursesList,
+      goToNewRouter,
+    };
   },
 };
 </script>
 <template>
   <div id="courses">
-    <a class="card">
-      <img src="" alt="" />
+    <a class="card" v-for="item in coursesList.data" :key="item.id" @click="goToNewRouter(item.id)">
+      <img :src="item.photo" :alt="item.name" />
       <div class="content">
-        <h1></h1>
+        <h1>{{ item.name }}</h1>
         <div class="teacher-box">
           <div class="teach-img">
-            <img class="teacher" src="" alt="" />
-            <p></p>
+            <img class="teacher" :src="item.teacher.img" alt="" />
+            <p>{{ item.teacher.name }}</p>
           </div>
-          <h2>NTD:</h2>
+          <h2>NTD: {{ item.money }}</h2>
         </div>
       </div>
     </a>
