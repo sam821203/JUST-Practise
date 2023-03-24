@@ -11,8 +11,11 @@ export default {
     const goToNewRouter = (id) => {
       router.push({ path: `/Courses/${ id }` })
     }
+    const openNewTab = (id) => {
+      // const safeUrl = router.resolve({path:})
+    }
 
-    onMounted(() => {
+    onMounted(() => { 
       axios.get("https://vue-lessons-api.vercel.app/courses/list")
         .then(res => {
           coursesList.data = res.data;
@@ -21,13 +24,14 @@ export default {
     return { 
       coursesList,
       goToNewRouter,
+      openNewTab,
     };
   },
 };
 </script>
 <template>
   <div id="courses">
-    <a class="card" v-for="item in coursesList.data" :key="item.id" @click="goToNewRouter(item.id)">
+    <a class="card" v-for="item in coursesList.data" :key="item.id" @click.left="goToNewRouter(item.id)" @click.middle="openNewTab(item.id)">
       <img :src="item.photo" :alt="item.name" />
       <div class="content">
         <h1>{{ item.name }}</h1>

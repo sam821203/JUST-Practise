@@ -1,18 +1,35 @@
 <script>
+import { ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-    return {};
+    const routerArr = ['', 'about', 'Courses'];
+    const route = useRoute();
+    const router = useRouter();
+    const idx = ref(0);
+
+    watch(() => route.path, () => {
+      routerArr.forEach((item, index) => {
+        const rp = route.path.substring(1).split('/')[0];
+        if (rp === item) {
+          idx.value = index;
+        }
+      })
+    })
+    return {
+      idx,
+    };
   },
 };
 </script>
 
 <template>
   <div id="nav">
-    <router-link to="/"> Home </router-link>
+    <router-link to="/" :class="{ active: idx === 0 }"> Home </router-link>
     |
-    <router-link to="/about"> About </router-link>
+    <router-link to="/about" :class="{ active: idx === 1 }"> About </router-link>
     |
-    <router-link to="/Courses"> Courses </router-link>
+    <router-link to="/Courses" :class="{ active: idx === 2 }"> Courses </router-link>
   </div>
   <router-view />
 </template>
