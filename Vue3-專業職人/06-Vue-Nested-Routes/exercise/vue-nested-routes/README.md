@@ -1,4 +1,4 @@
-# vue-nested-routes
+# vue-router-example
 
 ## Project setup
 ```

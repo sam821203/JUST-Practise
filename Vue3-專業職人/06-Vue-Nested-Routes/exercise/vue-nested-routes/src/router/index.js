@@ -1,5 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import About from "../views/About.vue";
+import Guide from "../views/About/Guide.vue";
+import Reference from "../views/About/Reference.vue";
+import Changelog from "../views/About/Changelog.vue";
+import Github from "../views/About/Github.vue";
+import AboutHome from "../views/About/index.vue";
 const routes = [
   {
     path: "/",
@@ -9,7 +15,29 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    component: () => import("../views/About.vue"),
+    component: About,
+    children: [
+      {
+        path: "",
+        component: AboutHome,
+      },
+      {
+        path: "guide",
+        component: Guide,
+      },
+      {
+        path: "reference",
+        component: Reference,
+      },
+      {
+        path: "changelog",
+        component: Changelog,
+      },
+      {
+        path: "github",
+        component: Github,
+      },
+    ],
   },
 ];
 
