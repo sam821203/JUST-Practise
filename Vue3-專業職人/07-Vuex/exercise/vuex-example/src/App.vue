@@ -1,4 +1,6 @@
 <script>
+import { onMounted } from "vue";
+import { useStore } from "vuex";
 import MenuBtn from "../src/components/MenuBtn.vue";
 import MenuSlid from "../src/components/MenuSlid.vue";
 export default {
@@ -7,6 +9,16 @@ export default {
     MenuSlid,
   },
   setup() {
+    const store = useStore();
+
+    onMounted(() => {
+      console.log(store.getters['Auth/getToken']);
+
+      store.dispatch('Auth/handSetToken', 'aaaaa')
+
+      console.log(store.getters['Auth/getToken']);
+    })
+
     return {};
   },
 };

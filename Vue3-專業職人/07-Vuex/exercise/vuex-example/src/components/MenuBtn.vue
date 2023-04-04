@@ -1,7 +1,15 @@
 <script>
+import { useStore } from "vuex";
 export default {
   setup() {
-    const handClickMenu = () => {};
+    const store = useStore();
+
+    const handClickMenu = () => {
+      store.dispatch("handMenuOpen");
+
+      // 這種寫法不妥當，盡量整個網頁要統一寫法
+      // store.commit('handOpenState', true);
+    };
 
     return { handClickMenu };
   },

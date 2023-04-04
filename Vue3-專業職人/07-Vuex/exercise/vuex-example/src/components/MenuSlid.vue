@@ -10,8 +10,9 @@ export default {
     })
 
     const handClickMenu = () => {
-      console.log(isOpen);
+      store.dispatch("handMenuOpen");
     };
+    
     return { 
       handClickMenu,
       isOpen,
