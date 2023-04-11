@@ -13,7 +13,9 @@ export default {
 
     const handImgLoad = (imgArr) => {};
 
-    const init = () => {};
+    const init = () => {
+      store.dispatch('handleInit')
+    };
 
     onMounted(() => {
       init();
