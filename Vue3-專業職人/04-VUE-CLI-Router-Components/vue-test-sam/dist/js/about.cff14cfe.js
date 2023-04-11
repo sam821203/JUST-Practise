@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue_test_sam"]=self["webpackChunkvue_test_sam"]||[]).push([[443],{8940:function(e,t,u){u.r(t),u.d(t,{default:function(){return v}});var n=u(3396);const r={id:"AboutView"},s=(0,n._)("h1",null,"AboutView",-1),i=[s];function a(e,t,u,s,a,c){return(0,n.wg)(),(0,n.iD)("div",r,i)}var c={},o=u(89);const f=(0,o.Z)(c,[["render",a]]);var v=f}}]);
+//# sourceMappingURL=about.cff14cfe.js.map

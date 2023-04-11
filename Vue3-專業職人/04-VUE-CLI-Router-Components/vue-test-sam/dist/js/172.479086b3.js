@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue_test_sam"]=self["webpackChunkvue_test_sam"]||[]).push([[172],{1172:function(e,n,t){t.r(n),t.d(n,{default:function(){return d}});var u=t(3396);const r={id:"RWDPage"},s=(0,u._)("h1",null,"RWD",-1),a=[s];function c(e,n,t,s,c,i){return(0,u.wg)(),(0,u.iD)("div",r,a)}var i={},f=t(89);const v=(0,f.Z)(i,[["render",c]]);var d=v}}]);
+//# sourceMappingURL=172.479086b3.js.map
