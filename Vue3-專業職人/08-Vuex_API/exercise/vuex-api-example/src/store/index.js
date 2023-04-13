@@ -9,18 +9,29 @@ export default createStore({
   },
   actions: {
     handleInit({ commit }) {
-      axios.get('https://vue-lessons-api.vercel.app/photo/list')
-        .then(res => {
+      console.log("1");
+      // 因為 axios 本身就是一個 promise 的回傳
+      return axios
+        .get("https://vue-lessons-api.vercel.app/photo/list")
+        .then((res) => {
+          console.log("2");
           commit("init", res.data);
-        })
-      commit('init');
-    }
+          return res.data;
+        });
+      commit("init");
+    },
+    handleLoadState({ commit }, bool) {
+      commit("loadState", bool);
+    },
   },
   mutations: {
     init(state, payload) {
       state.photoArr = payload;
-      console.log(photoArr);
-    }
+      console.log(state.photoArr);
+    },
+    loadState(state, bool) {
+      state.isLoad = bool;
+    },
   },
   getters: {
     isLoad(state) {
