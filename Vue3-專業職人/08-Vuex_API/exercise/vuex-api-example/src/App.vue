@@ -19,7 +19,6 @@ export default {
         imgs.onload = () => {
           i++;
           store.dispatch("handleLoadState", i === imgArr.length);
-          // store.dispatch("handLoadState", i === imgArr.length);
         };
       });
     };
