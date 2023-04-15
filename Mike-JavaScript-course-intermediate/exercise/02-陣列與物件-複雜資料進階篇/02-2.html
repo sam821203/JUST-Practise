@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>常見物件的使用方法</title>
+</head>
+
+<body>
+    <script>
+        var person = {
+            name: 'Sam',
+            age: 29,
+        }
+        console.log(person.name);
+
+        // 如果沒有就會呈現 undefined
+        console.log(person.sex);
+
+        person.sex = 'male';
+        console.log(person);
+
+        // 另外一種取得物件裡的內容，但中括號裡面一定要是字串
+        var text = 'name'
+        console.log(person[text]);
+        console.log(person['age']);
+
+    </script>
+</body>
+
+</html>
