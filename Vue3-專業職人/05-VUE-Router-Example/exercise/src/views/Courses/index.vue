@@ -9,19 +9,21 @@ export default {
     // 假如是用 a 標籤，而不是 router-link，則需要用這種方式
     const router = useRouter();
     const goToNewRouter = (id) => {
-      router.push({ path: `/Courses/${ id }` })
-    }
+      router.push({ path: `/Courses/${id}` });
+    };
     const openNewTab = (id) => {
-      // const safeUrl = router.resolve({path:})
-    }
+      const safeUrl = router.resolve({ path: `/Courses/${id}` });
+      window.open(safeUrl.href);
+    };
 
-    onMounted(() => { 
-      axios.get("https://vue-lessons-api.vercel.app/courses/list")
-        .then(res => {
+    onMounted(() => {
+      axios
+        .get("https://vue-lessons-api.vercel.app/courses/list")
+        .then((res) => {
           coursesList.data = res.data;
-        })
-    })
-    return { 
+        });
+    });
+    return {
       coursesList,
       goToNewRouter,
       openNewTab,
@@ -31,7 +33,13 @@ export default {
 </script>
 <template>
   <div id="courses">
-    <a class="card" v-for="item in coursesList.data" :key="item.id" @click.left="goToNewRouter(item.id)" @click.middle="openNewTab(item.id)">
+    <a
+      class="card"
+      v-for="item in coursesList.data"
+      :key="item.id"
+      @click.left="goToNewRouter(item.id)"
+      @click.middle="openNewTab(item.id)"
+    >
       <img :src="item.photo" :alt="item.name" />
       <div class="content">
         <h1>{{ item.name }}</h1>
