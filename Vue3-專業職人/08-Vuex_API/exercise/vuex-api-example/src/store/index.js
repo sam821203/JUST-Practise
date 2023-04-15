@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import axios from "axios";
+// import axios from "axios";
 import { apiGetPhotoRequest } from "../api";
 
 export default createStore({
@@ -9,14 +9,20 @@ export default createStore({
     isLoad: false,
   },
   actions: {
-    handleInit({ commit }) {
-      console.log("1");
+    async handleInit({ commit }) {
+      try {
+        const res = await apiGetPhotoRequest();
+        commit("init", res.data);
+        return res.data;
+      } catch (error) {
+        console.error(error.response.data);
+      }
 
-      const res = apiGetPhotoRequest();
-      return es.then((response) => {
-        commit("init", response.data);
-        return response.data;
-      });
+      // return es.then((response) => {
+      //   commit("init", response.data);
+      //   return response.data;
+      // });
+
       // 因為 axios 本身就是一個 promise 的回傳
       // return axios
       //   .get("https://vue-lessons-api.vercel.app/photo/list")
@@ -40,7 +46,7 @@ export default createStore({
   mutations: {
     init(state, payload) {
       state.photoArr = payload;
-      console.log(state.photoArr);
+      // console.log(state.photoArr);
     },
     loadState(state, bool) {
       state.isLoad = bool;

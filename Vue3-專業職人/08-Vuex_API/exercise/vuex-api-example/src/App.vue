@@ -25,7 +25,7 @@ export default {
 
     const init = () => {
       store.dispatch("handleInit").then((res) => {
-        console.log("3");
+        // console.log("3");
         handImgLoad(res);
       });
     };
