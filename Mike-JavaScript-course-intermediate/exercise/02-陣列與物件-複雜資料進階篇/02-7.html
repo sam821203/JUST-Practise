@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,49 @@
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/02-5.css">
 </head>
+
 <body>
 
     <button id="btn">點我拿資料</button>
 
     <script>
-        
+        const btn = document.getElementById('btn');
+
+        // 因為箭頭函式的this已經是綁定了，它不能再指向另一個物件，所以不可用箭頭函式去處理DOM元素的事件監聽。
+        // 這裡的 e 有點類似 function 裡的 return 回來的值，當今天執行了 click 事件後，回傳了 e 值
+        // 監聽事件的 return 是包裝在監聽事件裡底層的 code
+        btn.addEventListener('click', function (e) {
+            console.log(e.target);
+        });
+
+        function dataFn() {
+            console.log(1 + 1);
+        }
+
+        // dataFn();
+
+        function init() {
+            console.log('init1');
+            console.log('init2');
+            console.log('init3');
+            return;
+            console.log('init4');
+            console.log('init5');
+        }
+
+        init();
+
+        // 用底下這種方式，return 也能執行
+        window.onload = function () {
+            console.log('init1');
+            console.log('init2');
+            console.log('init3');
+            return;
+            console.log('init4');
+            console.log('init5');
+        }
     </script>
-    
+
 </body>
+
 </html>
