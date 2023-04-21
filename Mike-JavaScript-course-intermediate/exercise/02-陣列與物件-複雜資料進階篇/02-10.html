@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,9 @@
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/02-10.css">
 </head>
+
 <body>
-    
+
     <button id="btn1">資料 1</button>
     <button id="btn2">資料 2</button>
     <button id="btn3">資料 3</button>
@@ -25,6 +27,37 @@
             money: '3800'
         }
 
+        function bindValue(obj, key, callBack) {
+            let val = obj[key];
+            console.log(val);
+            Object.defineProperty(obj, key, {
+                get: function () {
+                    return val;
+                },
+                set: function (value) {
+                    val = value;
+                    callBack(key);
+                }
+            });
+        }
+
+        bindValue(data, 'title', function (key) {
+            console.log(data);
+        });
+
+        bindValue(data, 'link', function (key) {
+            console.log(key);
+        });
+
+        bindValue(data, 'text', function (key) {
+            console.log(key);
+        });
+
+        bindValue(data, 'money', function (key) {
+            console.log(key);
+        });
+
+        data.title = '123';
 
 
 
@@ -32,11 +65,11 @@
 
 
 
-    
     </script>
 
 
 
 
 </body>
+
 </html>

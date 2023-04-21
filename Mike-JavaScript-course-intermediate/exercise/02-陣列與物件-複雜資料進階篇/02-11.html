@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/02-11.css">
 </head>
+
 <body>
 
 
@@ -63,16 +65,82 @@
         var newData = data;
         var itemList = document.getElementsByClassName("itemList")[0];
         var html = "";
-        for(var i = 0; i < data.length; i++){
-            html += '<ul class="tit2">'
-            html += '<li>'+data[i].name+'</li>'
-            html += '<li>'+data[i].money+'</li>'
-            html += '<li>'+data[i].age+'</li>'
-            html += '<li>'+data[i].sex+'</li>'
-            html += '</ul>'
+        const user_money = document.getElementById('user_money');
+        const user_age = document.getElementById('user_age');
+        const user_sex = document.getElementById('user_sex');
+
+        function domRender(arr) {
+            // 在 render 前先清空
+            html = '';
+            itemList.innerHTML = '';
+
+            arr.forEach((obj) => {
+                html += '<ul class="tit2">'
+                html += '<li>' + obj.name + '</li>'
+                html += '<li>' + obj.money + '</li>'
+                html += '<li>' + obj.age + '</li>'
+                html += '<li>' + obj.sex + '</li>'
+                html += '</ul>'
+            })
+            itemList.innerHTML = html;
         }
-        itemList.innerHTML = html;
+
+        // 在一剛進去畫面時，先把全部資料渲染出來
+        domRender(newData);
+
+        function userMoney(value) {
+            const m = Number(value);
+            let arr = [];
+
+            newData.forEach(function (obj) {
+                if (obj.money > m) {
+                    arr.push(obj);
+                }
+            })
+            domRender(arr);
+        }
+
+        function userAge(value) {
+            const m = Number(value);
+            let arr = [];
+
+            newData.forEach(function (obj) {
+                if (obj.age > m) {
+                    arr.push(obj);
+                }
+            })
+            domRender(arr);
+        }
+
+        function userSex(value) {
+            const m = value;
+            let arr = [];
+
+            newData.forEach(function (obj) {
+                if (obj.sex === m) {
+                    arr.push(obj);
+                }
+
+                if (m === 'no') {
+                    arr.push(obj);
+                }
+            })
+            domRender(arr);
+        }
+
+        user_money.addEventListener('change', function () {
+            userMoney(this.value)
+        })
+
+        user_age.addEventListener('change', function () {
+            userAge(this.value)
+        })
+
+        user_sex.addEventListener('change', function () {
+            userSex(this.value)
+        })
     </script>
 
 </body>
+
 </html>
