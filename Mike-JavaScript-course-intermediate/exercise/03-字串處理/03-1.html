@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +9,26 @@
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/03-1.css">
 </head>
+
 <body>
-    <div>  
+    <div>
         <input id="searchBar" type="text">
         <button id="submit">送出</button>
     </div>
 
 
     <script>
-        
+
         var searchBar = document.getElementById("searchBar")
         var submit = document.getElementById("submit")
-        
 
-        submit.addEventListener("click", function(){
-            
+
+        submit.addEventListener("click", function () {
+            const str = searchBar.value.trim();
+
+            if (str === 'sam') {
+                alert("輸入成功");
+            }
         })
 
 
@@ -31,4 +37,5 @@
 
 
 </body>
+
 </html>

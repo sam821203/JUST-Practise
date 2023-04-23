@@ -137,8 +137,26 @@
         })
 
         user_sex.addEventListener('change', function () {
-            userSex(this.value)
+            const self = this;
+            let arr = [];
+
+            newData.forEach(function (obj) {
+                if (obj.sex === self.value) {
+                    arr.push(obj);
+                }
+
+                if (self.value === 'no') {
+                    arr.push(obj);
+                }
+            })
+            domRender(arr);
         })
+
+        let newArr = [1, 2, 3, 4, 5];
+        const newArr2 = newArr.filter(function (obj) {
+            return obj < 3;
+        })
+        console.log(newArr2);
     </script>
 
 </body>

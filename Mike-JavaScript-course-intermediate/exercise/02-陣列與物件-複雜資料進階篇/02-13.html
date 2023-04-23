@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,11 @@
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/02-13.css">
 </head>
+
 <body>
-    
-    <div id="app">      
-        <h1>制度規章</h1> 
+
+    <div id="app">
+        <h1>制度規章</h1>
         <form>
             <div class="item">
                 <h3>● 規章一</h3>
@@ -34,19 +36,37 @@
                 <label for="query3">你願意遵守以上規章?</label></br>
             </div>
 
-            <button id="submit">送出</button>
+            <button id="submit" disabled>送出</button>
         </form>
     </div>
     <script>
 
         var submit = document.getElementById("submit");
 
-        function checkFn(){
-            
+        function checkFn() {
+            let arr = [
+                document.getElementById('query1'),
+                document.getElementById('query2'),
+                document.getElementById('query3'),
+            ]
+
+            let check = arr.every(function (el) {
+                return el.checked === true;
+            })
+
+            return check;
         }
 
-        function changeFn(){
-            
+        function changeFn() {
+            // 第一種寫法
+            // if (checkFn()) {
+            //     submit.disabled = false;
+            // } else {
+            //     submit.disabled = true;
+            // }
+
+            // 第二種寫法
+            submit.disabled = !checkFn();
         }
 
 
@@ -56,12 +76,12 @@
         changeFn();
 
 
-        submit.addEventListener("click", function(){
+        submit.addEventListener("click", function () {
             alert("送出成功")
         })
-    
-    
-    
+
+
+
     </script>
 
 
@@ -70,4 +90,5 @@
 
 
 </body>
+
 </html>

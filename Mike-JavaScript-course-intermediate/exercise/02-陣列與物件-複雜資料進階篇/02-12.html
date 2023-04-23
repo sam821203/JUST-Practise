@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/02-11.css">
 </head>
+
 <body>
 
 
@@ -69,66 +71,70 @@
         var newData = data;
 
         //畫面渲染
-        function DOMReader(arr){
+        function DOMReader(arr) {
             html = '';
             itemList.innerHTML = '';
-            arr.forEach(function(obj){
+            arr.forEach(function (obj) {
                 html += '<ul class="tit2">'
-                html += '<li>'+obj.name+'</li>'
-                html += '<li>'+obj.money+'</li>'
-                html += '<li>'+obj.age+'</li>'
-                html += '<li>'+obj.sex+'</li>'
+                html += '<li>' + obj.name + '</li>'
+                html += '<li>' + obj.money + '</li>'
+                html += '<li>' + obj.age + '</li>'
+                html += '<li>' + obj.sex + '</li>'
                 html += '</ul>'
             })
             itemList.innerHTML = html;
         }
 
         DOMReader(newData);
-        
-        // 選擇錢的處理
-        function userMoney(value){
-            var m = Number(value);
-            var arr = [];
-            
-            // filter
 
+        // 選擇錢的處理
+        function userMoney(value) {
+            var m = Number(value);
+
+            // filter
+            let arr = newData.filter(function (obj) {
+                return obj.money > m;
+            })
             DOMReader(arr);
         }
 
         // 選擇年齡的處理
-        function userAge(value){
+        function userAge(value) {
             var m = Number(value);
-            var arr = [];
 
             // filter
-
+            let arr = newData.filter(function (obj) {
+                return obj.age > m;
+            })
             DOMReader(arr);
         }
 
         // 選擇性別的處理
-        function userSex(value){
-            var arr = [];
-
+        function userSex(value) {
             // filter
-            
+            let arr = newData.filter(function (obj) {
+                if (value === 'no') return obj;
+                return obj.sex === value;
+            })
             DOMReader(arr);
         }
 
-        user_money.addEventListener('change', function(){
+        user_money.addEventListener('change', function () {
             userMoney(this.value);
         });
-        user_age.addEventListener('change', function(){
+        user_age.addEventListener('change', function () {
             userAge(this.value);
         });
-        user_sex.addEventListener('change', function(){
+        user_sex.addEventListener('change', function () {
             userSex(this.value)
         });
 
-        DOMrender();
+        DOMReader(newData);
 
 
-    
+
     </script>
 
 </body>
+
 </html>
