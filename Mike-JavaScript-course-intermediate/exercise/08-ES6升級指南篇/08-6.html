@@ -38,9 +38,17 @@
 
     <script src="./data.js"></script>
     <script>
-        
-        
+        document.getElementById("btn").addEventListener('click', (e) => {
+            console.log(e.target);
+        });
 
+        const fdata = data.filter((item) => item.sex === 'boy')
+
+        data.forEach((obj, idx) => {
+            
+        })
+
+        console.log(fdata);
     </script>
 
 

@@ -11,7 +11,14 @@
         
         let arr1 = [1, 2, 3, 4];
         let arr2 = ["a", "b", "c", "d"];
-        
+        let arr3 = [12, 11, 10];
+
+        let newArr = [].concat(arr1, arr2, arr3);
+        console.log(newArr);
+
+        let newArr2 = [...arr1, ...arr2, ...arr3];
+        console.log(newArr2);
+
     </script>
 </body>
 </html>

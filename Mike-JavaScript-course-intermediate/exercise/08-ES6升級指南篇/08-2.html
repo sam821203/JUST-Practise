@@ -16,10 +16,18 @@
             time: "2019/04/01"
         }
         
+        function dataSet() {
+            let {name, age, time} = data;
 
+            return {
+                name: name + '123',
+                age: age + 1,
+                time,
+            }
+        }
 
-        
-        
+        let objects = dataSet(data);
+        console.log(objects);
     </script>
 </body>
 </html>
