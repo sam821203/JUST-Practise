@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+  <script>
+    var arr1 = [1, 2, 3, 4, 5];
+
+    // 方法一：讓 arr1 和 arr2 指向不同個陣列
+    // slice 會複製一個新陣列，並從給予的索引開始，到給予的索引結束，但不包含給予的索引結束
+    var arr2 = arr1.slice(0);
+    arr1[0] = 6;
+
+    // console.log(arr1);
+    // console.log(arr2);
+
+    // 方法二
+    var arr3 = [...arr1];
+    arr1[1] = 7;
+    // console.log(arr3);
+    // console.log(arr1);
+
+    var obj1 = {
+      name: 'Sam',
+      list: {
+        age: 12,
+      }
+    }
+
+    var obj2 = {...obj1};
+    obj1.name = 'Mike'
+    console.log(obj2);
+
+    obj1.list.age = 50;
+    console.log(obj2);
+
+    var obj3 = _.cloneDeep(obj1);
+    obj1.list.age = 100;
+    console.log(obj3);
+
+  </script>
+</body>
+</html>

@@ -38,17 +38,41 @@
 
     <script src="./data.js"></script>
     <script>
-        document.getElementById("btn").addEventListener('click', (e) => {
-            console.log(e.target);
-        });
+        // document.getElementById("btn").addEventListener('click', (e) => {
+        //     console.log(e.target);
+        // });
 
-        const fdata = data.filter((item) => item.sex === 'boy')
+        // const fdata = data.filter((item) => item.sex === 'boy')
 
-        data.forEach((obj, idx) => {
+        // data.forEach((obj, idx) => {
             
-        })
+        // })
 
-        console.log(fdata);
+        // console.log(fdata);
+            
+        // const add = (a, b) => {
+        //     // es5 寫法
+        //     if (a === undefined) {
+        //         a = 1;
+        //     }
+        //     if (b === undefined) {
+        //         b = 2;
+        //     }
+        //     return a + b
+        // };
+        
+        // es6 寫法
+        const add2 = (a=1, b=2) => a + b;
+
+        // 如果未給參數，會顯示 NaN。兩個 undefined 加起來
+        console.log(add2());
+        console.log(add2(4, 5));
+        console.log(add2(2, ));
+
+        const YourName = (name="你沒有傳 name") => `${name}`;
+
+        console.log(YourName());
+        console.log(YourName('S'));
     </script>
 
 
