@@ -20,8 +20,14 @@
 
         var proxy = "https://cors-anywhere.herokuapp.com/";
         var url = "https://www.vscinemas.com.tw/VsWeb/api/GetLstDicCinema";
-        
-        
+
+        axios.get(proxy + url)
+            .then(function(res) {
+                console.log(res);
+            })
+            .catch(function(error){
+                console.error(error.response.data.msg);
+            })
     </script>
 </body>
 </html>

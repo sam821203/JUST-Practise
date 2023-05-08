@@ -1,22 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>非同步工具 axios</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- https://github.com/axios/axios -->
     <!-- https://www.mocky.io/ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script>
-        
-        // GET ./api/data.json
-        // GET http://www.mocky.io/v2/5ce0c2e8330000b937608c61
-        // POST http://www.mocky.io/v2/5cc3f1c43400007800765473 { userid: "123456789" }
-        
+      // GET ./api/data.json
+      // GET http://www.mocky.io/v2/5ce0c2e8330000b937608c61
+      // POST http://www.mocky.io/v2/5cc3f1c43400007800765473 { userid: "123456789" }
+      // Make a request for a user with a given ID
 
+      // get 的用法
+      // axios
+      //   .get("https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL")
+      //   .then(function (response) {
+      //     // handle success
+      //     console.log(response.data[0].animal_Variety);
+      //   })
+      //   .catch(function (error) {
+      //     // handle error
+      //     console.log(error);
+      //   });
+        
+      // post 的用法
+      // 假如後端那邊用的是 FormData 格式，就需要將資料先轉成 FormData 格式
+      var obj = {
+        userName: 'Sam',
+        password: 'samPassword'
+      };
+
+      // var formObject = new FormData();
+      // formObject.append('userName', "Sam");
+      // formObject.append('password', "samPassword");
+
+      axios.post('https://run.mocky.io/v3/22a2fd8a-5f2c-4120-a5ca-3226504c6acb', obj)
+      .then(function (response) {
+        if (response.data.status === 'ok') {
+          console.log(response.data);
+        } else {
+          console.log('登入失敗');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     </script>
-</body>
+  </body>
 </html>

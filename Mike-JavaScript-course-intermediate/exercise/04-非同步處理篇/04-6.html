@@ -1,44 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>非同步資料動態渲染列表實作 (GET) </title>
-    <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/04-6.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>非同步資料動態渲染列表實作 (GET)</title>
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/04-6.css" />
+  </head>
+  <body>
     <!-- https://www.mocky.io/ -->
 
     <div id="app">
-        
-        <img id="logo" src="./images/logo2.png" alt="">
-        
-        <select id="city" name="city">
-            <!-- <option value=""></option> -->
-        </select>
-        
-        <select id="area" name="area">
-            <!-- <option value=""></option> -->
-        </select>
-        
+      <img id="logo" src="./images/logo2.png" alt="" />
+
+      <select id="city" name="city">
+        <!-- <option value=""></option> -->
+      </select>
+
+      <select id="area" name="area">
+        <!-- <option value=""></option> -->
+      </select>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script>
-        // 鄉鎮資料 "http://www.mocky.io/v2/5cc3f5723400005d00765480"
+      // 鄉鎮資料 "http://www.mocky.io/v2/5cc3f5723400005d00765480"
 
-        window.onload = function(){
+      let city = [];
+      let cityHTML = "";
+      let areaHTML = "";
+      window.onload = function () {
+        axios
+          .get("http://www.mocky.io/v2/5cc3f5723400005d00765480")
+          .then(function (res) {
+            city = res.data.twzip.city;
+            renderCity(city);
+            changeCity();
+          });
 
-
-            
-
+        function renderCity(city) {
+          
+          city.forEach((item) => {
+            cityHTML +=
+            '<option value="' + item.name + '">' + item.name + "</option>";
+          });
+          
+          document.getElementById("city").innerHTML = cityHTML;
+          
+          const startValue = document.getElementById("city").value;
+          areaRender(startValue);
         }
 
+        function areaRender(value) {
+          areaHTML = "";
+
+          let areaObj = city.filter((area) => {
+            return area.name === value;
+          });
+          const area = areaObj[0].area;
+          console.log(area);
+          area.forEach((area) => {
+            areaHTML +=
+              '<option value="' + area.name + '">' + area.name + "</option>";
+          });
+
+          document.getElementById("area").innerHTML = areaHTML;
+        }
+
+        // change 監聽事件
+        function changeCity() {
+          const cityEl = document.getElementById("city");
+          cityEl.addEventListener("change", function () {
+            areaRender(this.value);
+          });
+        }
+      };
     </script>
-
-
-
-</body>
+  </body>
 </html>
