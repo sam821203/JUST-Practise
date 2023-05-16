@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Hi</h1>
+  <script>
+    'use strict';
+
+    const Person = function(firstName, birthYear) {
+      // instance properties
+      this.firstName = firstName;
+      this.birthYear = birthYear;
+
+      // 這樣的寫法不好，因為不管需不需要，新的 instance 都會繼承
+      // this.calcAge = function() {
+      //   console.log(2023 - this.birthYear);
+      // }
+    }
+
+    // 1. New() object is created
+    // 2. function is called, this = New() object
+    // 3. new created object is linked to prototype
+    // 4. object is created at the beginning, is then automatically return {}
+    const user1 = new Person('Sam', 1993);
+    console.log(user1.firstName);
+
+    const user2 = new Person('Matilda', 2000);
+    console.log(user2.birthYear);
+
+    console.log(user2 instanceof Person);
+
+    // Prototypes
+    Person.prototype.calcAge = function() {
+      console.log(2023 - this.birthYear);
+    }
+    user2.calcAge();
+    user1.calcAge();
+
+    console.log(user1.__proto__ === Person.prototype);
+    console.log(Person.__proto__ === Person.prototype);
+
+    console.log(Person.prototype.isPrototypeOf(user1));
+
+    Person.prototype.species = 'Homo Sapiens';
+    console.log(user1.species, user2.species);
+
+    user1.test = function() {
+      console.log('test');
+    };
+    user1.test(); 
+
+    console.log(user1.hasOwnProperty('firstName'));
+    console.log(user1.hasOwnProperty('species'));
+
+    console.log(user1.__proto__.__proto__ === Object.prototype);
+    console.log(user1.__proto__.__proto__.__proto__);
+
+    console.dir(Person.prototype.constructor);
+
+    console.log('Array ==========================');
+
+    const arr = [1, 1, 2, 1, 3, 6, 7, 8, 4, 10, 8, 4, 10]
+    console.log(arr.__proto__ === Array.prototype);
+
+    console.log(arr.__proto__);
+    console.log(arr.__proto__.__proto__ === user1.__proto__.__proto__);
+
+    Array.prototype.unique = function() {
+      return [...new Set(this)];
+    }
+
+    console.log(arr.unique());
+
+    const h1 = document.querySelector('h1');
+    // console.dir(h1);
+    function test2(x) {
+      return x => x + 1;
+    }
+    console.dir(test2);
+  </script>
+</body>
+</html>
