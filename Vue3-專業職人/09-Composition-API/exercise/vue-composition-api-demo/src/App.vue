@@ -2,6 +2,7 @@
 import MousePosition from "./components/MousePosition.vue";
 import StateTodo from "./components/StateTodo.vue";
 import FetchData from "./components/FetchData.vue";
+
 export default {
   components: { MousePosition, StateTodo, FetchData },
   setup() {
@@ -13,6 +14,7 @@ export default {
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
   <!-- <MousePosition /> -->
+  <mouse-position></mouse-position>
   <!-- <StateTodo /> -->
   <!-- <StateTodo /> -->
   <!-- <FetchData /> -->
