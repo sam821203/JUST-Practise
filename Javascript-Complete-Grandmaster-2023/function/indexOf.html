@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = ["first", "second", "third"];
+      let sentence = "Hello world, the universe welcomes you, Hello world";
+      let searchWord = "world";
+
+      console.log(arr.indexOf("second", 1));
+
+      let n = sentence.indexOf("welcomes");
+      console.log(n);
+
+      let w1 = sentence.indexOf(searchWord);
+      let w2 = sentence.indexOf(searchWord, w1 + 1);
+      console.log(w1);
+      console.log(w2);
+
+      const word = "Red dog";
+
+      if (word.indexOf("red") === -1) {
+        console.log("hi1");
+      } else {
+        console.log("hi2");
+      }
+    </script>
+  </body>
+</html>

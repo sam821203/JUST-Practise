@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // implicit coercion
+      console.log("50" - 10);
+
+      console.log("50" + 10);
+
+      // explicity coercion
+      console.log(String(123));
+      console.log(String(true), typeof String(true));
+
+      // ========== Booleans ==========
+      // implicit coercion
+      console.log(1 > 2);
+      console.log(5 == 5);
+
+      // explicity coercion
+      let a = Boolean(0);
+      console.log(a);
+
+      // ========== Numbers ==========
+      // implicit coercion
+      let j = 4 > "3";
+      console.log(j);
+
+      // explicity coercion
+      let k = "123";
+      console.log(Number(k));
+
+      // ========== == v.s === ==========
+      let y = 40;
+      let z = "40";
+      console.log(y == z, typeof y, typeof z);
+
+      console.log("10" + 10);
+      console.log("true" == true, "true" == "10");
+    </script>
+  </body>
+</html>

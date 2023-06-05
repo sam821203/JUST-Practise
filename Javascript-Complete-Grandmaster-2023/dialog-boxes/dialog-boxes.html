@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="alert" />
+    <input id="confirmBtn" type="button" value="click me confirm" />
+    <input id="promptBtn" type="button" value="click me prompt" />
+    <script>
+      const myInput = document.querySelector("input");
+      const confirmBtn = document.getElementById("confirmBtn");
+      const promptBtn = document.getElementById("promptBtn");
+
+      // alert
+      myInput.addEventListener("click", function showAlert() {
+        alert("This is alert");
+        document.write("Replace");
+      });
+
+      // confirm
+      confirmBtn.addEventListener("click", function getConfirmation() {
+        let result = confirm("Do you want ot continue ?");
+
+        if (result) {
+          // document.write("Yes !");
+          confirmBtn.value = "yes";
+        } else {
+          document.write("No !");
+        }
+      });
+
+      // prompt
+      promptBtn.addEventListener("click", function getPrompt() {
+        let number = prompt("Do you want ot prompt ?");
+        document.write(`My number is ${number}`);
+      });
+    </script>
+  </body>
+</html>

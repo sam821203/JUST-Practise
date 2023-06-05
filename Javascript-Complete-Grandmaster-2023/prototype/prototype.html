@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let food = {
+        yummy: true,
+      };
+
+      function Carrot(color) {
+        this.color = color;
+      }
+
+      Carrot.prototype = food;
+
+      let carrot = new Carrot("orange");
+      // console.log(carrot);
+
+      let user = {
+        member: false,
+      };
+
+      let guestUser = {
+        name: "Sam",
+      };
+
+      Object.setPrototypeOf(guestUser, user);
+
+      // console.log(guestUser);
+
+      function Car() {}
+
+      Car.prototype.sound = "hey hey";
+
+      let myCar = new Car();
+    </script>
+  </body>
+</html>
