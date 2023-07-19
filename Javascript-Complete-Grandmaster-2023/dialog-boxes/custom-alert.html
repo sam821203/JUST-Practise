@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .confirm {
+        position: fixed;
+        left: 50%;
+        display: none;
+        width: 15em;
+        margin-left: -100px;
+        padding: 30px 8px 38px;
+        background-color: #323232;
+        text-align: center;
+        border-radius: 6px;
+      }
+
+      .confirm .message {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        color: white;
+      }
+
+      .confirm button {
+        width: 25%;
+        padding: 2% 8%;
+        background-color: skyblue;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="confirm" class="confirm">
+      <div class="message">warning message</div>
+      <button class="yes">OK</button>
+    </div>
+    <input type="button" value="click me" />
+    <script>
+      const myInput = document.querySelector("input");
+
+      function alertMe() {
+        let confirmBox = document.getElementById("confirm");
+
+        // 顯示警告視窗
+        confirmBox.style.display = "block";
+
+        // 點擊 ok 按鈕後， alert 視窗會消失
+        let okayBtn = document.getElementsByClassName("yes")[0];
+
+        okayBtn.onclick = function () {
+          confirmBox.setAttribute("style", "display: none");
+        };
+      }
+
+      myInput.addEventListener("click", alertMe);
+    </script>
+  </body>
+</html>

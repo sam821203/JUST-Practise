@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. constructor function
+      function Person(name) {
+        this.name = name;
+      }
+
+      Person.prototype.greeting = function () {
+        console.log(`Hi ${this.name}`);
+      };
+
+      let user1 = new Person("Wally");
+      user1.greeting();
+
+      // 2. class syntax
+      class Member {
+        constructor(name) {
+          this.name = name;
+        }
+        greeting() {
+          console.log(`Hi ${this.name}`);
+        }
+      }
+
+      let member1 = new Member("Sam");
+      console.log(member1, typeof Member);
+      member1.greeting();
+
+      console.log(Member.prototype);
+      console.log(Member === Member.prototype.constructor);
+
+      console.log(Object.getOwnPropertyNames(Member.prototype));
+    </script>
+  </body>
+</html>

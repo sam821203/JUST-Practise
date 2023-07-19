@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      dogPrototype = {
+        woof: function () {
+          console.log(this.sound);
+        },
+      };
+
+      let dog = Object.create(dogPrototype);
+      dog.sound = "Woooooof";
+      dog.woof();
+
+      let dog2 = Object.create(dogPrototype, {
+        sound: {
+          value: "Bow wow",
+        },
+      });
+
+      dog2.woof();
+
+      // example
+      let dogFactoryPrototype = {
+        company: "The dog Factory",
+      };
+
+      let catFactoryPrototype = {
+        company: "The cat Factory",
+      };
+
+      // create employee
+      let employee1 = Object.create(dogFactoryPrototype);
+      employee1.name = "Frank";
+
+      let employee2 = Object.create(catFactoryPrototype);
+      employee2.name = "Linn";
+    </script>
+  </body>
+</html>

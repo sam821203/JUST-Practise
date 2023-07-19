@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. define object
+      function Motorbike(name, color) {
+        this.name = name;
+        this.color = color;
+      }
+
+      // 2. call your object
+      let myBike = new Motorbike("Yamaha", "Black");
+      console.log(myBike);
+
+      // Object()，JS 的內建方法
+      let person = new Object();
+      person.name = "Sam";
+      person.age = "29";
+
+      // constructor function
+      function Person(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      let person2 = new Person("Linn", "27");
+      console.log(person2);
+
+      // constructor v.s literal
+      function SinglePerson() {
+        this.membership = false;
+        this.name = "Wally";
+        this.talk = function () {
+          return `Ths membership status of ${this.name} is ${this.membership}`;
+        };
+      }
+
+      // instantiate
+      let person3 = new SinglePerson();
+      console.log(person3.talk());
+
+      let person4 = new SinglePerson();
+      person4.name = "John";
+      console.log(person4.talk());
+
+      // constructor our object with parameters we pass into it
+      function WebsiteUrl(url) {
+        this.url = url;
+        this.showUrl = function () {
+          console.log(this.url);
+        };
+      }
+
+      let myWebUrl = new WebsiteUrl("http://etmall");
+      myWebUrl.showUrl();
+
+      let website = {
+        init: function (url) {
+          this.url = url;
+        },
+        showUrl: function () {
+          console.log(this.url);
+        },
+      };
+
+      website.init("http://etmall2");
+      website.showUrl();
+    </script>
+  </body>
+</html>

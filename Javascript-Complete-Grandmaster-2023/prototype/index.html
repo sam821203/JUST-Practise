@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // food object
+      let food = {
+        init: function (type) {
+          this.type = type;
+        },
+        recipe: function () {
+          console.log(`This a recipe for ${this.type}`);
+        },
+      };
+
+      // food.init("Donuts");
+      // food.recipe();
+
+      let donut = Object.create(food);
+      let orange = Object.create(food);
+
+      donut.init("Donuts");
+
+      // 就算這裡將原本的 food object 做修改，也不會影響到 donuts 的物件
+      food.type = "hi hi hi";
+      donut.recipe();
+
+      console.log(food.isPrototypeOf(donut));
+    </script>
+  </body>
+</html>
