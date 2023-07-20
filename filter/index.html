@@ -8,13 +8,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="asset/css/main.css" />
   </head>
   <body>
     <section class="filter layout--main">
       <h2>Sort by</h2>
-      <div class="sort-items">
-        <span>全部</span>
+      <div class="sort-items-w">
+        <span class="active">全部</span>
         <span>百貨量販</span>
         <span>飯店優惠</span>
         <span>餐廳美食</span>
@@ -22,9 +23,17 @@
         <span>愜意生活</span>
         <span>紅利點數</span>
       </div>
+      <select class="sort-items-m">
+        <option>全部</option>
+        <option>百貨量販</option>
+        <option>餐廳美食</option>
+        <option>電視網路購物</option>
+        <option>愜意生活</option>
+        <option>紅利點數</option>
+      </select>
     </section>
     <section class="container layout--main">
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="img-wrap">
           <img src="asset/img/img1.jpg" />
         </div>
@@ -41,7 +50,7 @@
               <span class="tag6">＃飯店優惠</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -51,7 +60,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="img-wrap">
           <img src="asset/img/img2.jpg" />
         </div>
@@ -69,7 +78,7 @@
               <span class="tag6">＃愜意生活</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -79,7 +88,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="special-tag">需登錄</div>
         <div class="img-wrap">
           <img src="asset/img/img3.jpg" />
@@ -99,7 +108,7 @@
               <span class="tag6">＃電視網路購物</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -109,7 +118,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="img-wrap">
           <img src="asset/img/img4.jpg" />
         </div>
@@ -126,7 +135,7 @@
               <span class="tag6">＃飯店優惠</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -136,7 +145,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="img-wrap">
           <img src="asset/img/img5.jpg" />
         </div>
@@ -152,7 +161,7 @@
               <span class="tag6">＃飯店優惠</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -162,7 +171,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="img-wrap">
           <img src="asset/img/img6.jpg" />
         </div>
@@ -178,7 +187,7 @@
               <span class="tag6">＃電視網路購物</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -188,7 +197,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="special-tag">需登錄</div>
         <div class="img-wrap">
           <img src="asset/img/img7.jpg" />
@@ -206,7 +215,7 @@
               <span class="tag6">＃電視網路購物</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -216,7 +225,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="special-tag">需登錄</div>
         <div class="img-wrap">
           <img src="asset/img/img8.jpg" />
@@ -234,7 +243,7 @@
               <span class="tag6">＃紅利點數</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -244,7 +253,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="img-wrap">
           <img src="asset/img/img9.jpg" />
         </div>
@@ -261,7 +270,7 @@
               <span class="tag6">＃電視網路購物</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -271,7 +280,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="img-wrap">
           <img src="asset/img/img10.jpg" />
         </div>
@@ -288,7 +297,7 @@
               <span class="tag6">＃紅利點數</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -298,7 +307,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="img-wrap">
           <img src="asset/img/img11.jpg" />
         </div>
@@ -314,7 +323,7 @@
               <span class="tag6">＃紅利點數</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -324,7 +333,7 @@
           </div>
         </div>
       </div>
-      <div class="item card">
+      <div class="item card" data-aos="fade-up">
         <div class="special-tag">需登錄</div>
         <div class="img-wrap">
           <img src="asset/img/img12.jpg" />
@@ -342,7 +351,7 @@
               <span class="tag6">＃電視網路購物</span>
             </div>
             <span class="read-more">
-              <a href="#">了解更多...</a>
+              <a href="#">了解更多<span>...</span></a>
             </span>
           </div>
           <div class="btn-row">
@@ -353,6 +362,14 @@
         </div>
       </div>
     </section>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: true,
+        easing: "ease-out",
+      });
+    </script>
   </body>
 </html>
 <meta charset="utf-8" />
