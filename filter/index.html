@@ -8,22 +8,22 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link rel="stylesheet" href="asset/css/main.css" />
+    <!-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="./main.css" />
   </head>
   <body>
     <section class="filter layout--main">
       <h2>Sort by</h2>
-      <div class="sort-items-w">
-        <span class="active">全部</span>
-        <span>百貨量販</span>
-        <span>飯店優惠</span>
-        <span>餐廳美食</span>
-        <span>電視網路購物</span>
-        <span>愜意生活</span>
-        <span>紅利點數</span>
+      <div class="filter-items filter-items-w">
+        <span class="filter-tag active" id="tagAll">全部</span>
+        <span class="filter-tag" id="tag1">百貨量販</span>
+        <span class="filter-tag" id="tag2">飯店優惠</span>
+        <span class="filter-tag" id="tag3">餐廳美食</span>
+        <span class="filter-tag" id="tag4">電視網路購物</span>
+        <span class="filter-tag" id="tag5">愜意生活</span>
+        <span class="filter-tag" id="tag6">紅利點數</span>
       </div>
-      <select class="sort-items-m">
+      <select class="filter-items filter-items-m">
         <option>全部</option>
         <option>百貨量販</option>
         <option>餐廳美食</option>
@@ -33,9 +33,9 @@
       </select>
     </section>
     <section class="container layout--main">
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag1 tag2" data-aos="fade-up">
         <div class="img-wrap">
-          <img src="asset/img/img1.jpg" />
+          <img src="./img/img1.jpg" />
         </div>
         <div class="info">
           <div>
@@ -46,8 +46,8 @@
               <li>樂活網訂票享電影優惠</li>
             </ul>
             <div class="hashtag">
-              <span class="tag2">＃百貨量販</span>
-              <span class="tag6">＃飯店優惠</span>
+              <span>＃百貨量販</span>
+              <span>＃飯店優惠</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -60,9 +60,9 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag2 tag5" data-aos="fade-up">
         <div class="img-wrap">
-          <img src="asset/img/img2.jpg" />
+          <img src="./img/img2.jpg" />
         </div>
         <div class="info">
           <div>
@@ -73,9 +73,8 @@
               <li>樂活網訂票享電影優惠</li>
             </ul>
             <div class="hashtag">
-              <span class="tag2">＃百貨量販</span>
-              <span class="tag6">＃飯店優惠</span>
-              <span class="tag6">＃愜意生活</span>
+              <span>＃飯店優惠</span>
+              <span>＃愜意生活</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -88,10 +87,10 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag1 tag2 tag4" data-aos="fade-up">
         <div class="special-tag">需登錄</div>
         <div class="img-wrap">
-          <img src="asset/img/img3.jpg" />
+          <img src="./img/img3.jpg" />
         </div>
         <div class="info">
           <div>
@@ -102,10 +101,9 @@
               <li>樂活網訂票享電影優惠</li>
             </ul>
             <div class="hashtag">
-              <span class="tag2">＃百貨量販</span>
-              <span class="tag6">＃飯店優惠</span>
-              <span class="tag2">＃紅利點數</span>
-              <span class="tag6">＃電視網路購物</span>
+              <span>＃百貨量販</span>
+              <span>＃飯店優惠</span>
+              <span>＃紅利點數</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -118,9 +116,9 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag1 tag2" data-aos="fade-up">
         <div class="img-wrap">
-          <img src="asset/img/img4.jpg" />
+          <img src="./img/img4.jpg" />
         </div>
         <div class="info">
           <div>
@@ -131,8 +129,8 @@
               <li>樂活網訂票享電影優惠</li>
             </ul>
             <div class="hashtag">
-              <span class="tag2">＃百貨量販</span>
-              <span class="tag6">＃飯店優惠</span>
+              <span>＃百貨量販</span>
+              <span>＃飯店優惠</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -145,9 +143,9 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag2" data-aos="fade-up">
         <div class="img-wrap">
-          <img src="asset/img/img5.jpg" />
+          <img src="./img/img5.jpg" />
         </div>
         <div class="info">
           <div>
@@ -158,7 +156,7 @@
               <li>本行特別提供接送之服務</li>
             </ul>
             <div class="hashtag">
-              <span class="tag6">＃飯店優惠</span>
+              <span>＃飯店優惠</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -171,9 +169,9 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag4 tag6" data-aos="fade-up">
         <div class="img-wrap">
-          <img src="asset/img/img6.jpg" />
+          <img src="./img/img6.jpg" />
         </div>
         <div class="info">
           <div>
@@ -183,8 +181,8 @@
               <li>讓您旅途玩得開心、更放心！</li>
             </ul>
             <div class="hashtag">
-              <span class="tag2">＃紅利點數</span>
-              <span class="tag6">＃電視網路購物</span>
+              <span>＃紅利點數</span>
+              <span>＃電視網路購物</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -197,10 +195,10 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag1 tag3" data-aos="fade-up">
         <div class="special-tag">需登錄</div>
         <div class="img-wrap">
-          <img src="asset/img/img7.jpg" />
+          <img src="./img/img7.jpg" />
         </div>
         <div class="info">
           <div>
@@ -210,9 +208,9 @@
               <li>網購最高4%回饋</li>
             </ul>
             <div class="hashtag">
-              <span class="tag2">＃百貨量販</span>
-              <span class="tag2">＃餐廳美食</span>
-              <span class="tag6">＃電視網路購物</span>
+              <span>＃百貨量販</span>
+              <span>＃餐廳美食</span>
+              <span>＃電視網路購物</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -225,10 +223,10 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag3 tag6" data-aos="fade-up">
         <div class="special-tag">需登錄</div>
         <div class="img-wrap">
-          <img src="asset/img/img8.jpg" />
+          <img src="./img/img8.jpg" />
         </div>
         <div class="info">
           <div>
@@ -239,8 +237,8 @@
               <li>樂活網訂票享電影優惠</li>
             </ul>
             <div class="hashtag">
-              <span class="tag2">＃餐廳美食</span>
-              <span class="tag6">＃紅利點數</span>
+              <span>＃餐廳美食</span>
+              <span>＃紅利點數</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -253,9 +251,9 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag1 tag4 tag6" data-aos="fade-up">
         <div class="img-wrap">
-          <img src="asset/img/img9.jpg" />
+          <img src="./img/img9.jpg" />
         </div>
         <div class="info">
           <div>
@@ -265,9 +263,9 @@
               <li>最快3分鐘立即撥款至本人台幣帳戶</li>
             </ul>
             <div class="hashtag">
-              <span class="tag2">＃百貨量販</span>
-              <span class="tag6">＃紅利點數</span>
-              <span class="tag6">＃電視網路購物</span>
+              <span>＃百貨量販</span>
+              <span>＃紅利點數</span>
+              <span>＃電視網路購物</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -280,9 +278,9 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag3 tag5 tag6" data-aos="fade-up">
         <div class="img-wrap">
-          <img src="asset/img/img10.jpg" />
+          <img src="./img/img10.jpg" />
         </div>
         <div class="info">
           <div>
@@ -292,9 +290,9 @@
               <li>24小時ATM提領現金好便利</li>
             </ul>
             <div class="hashtag">
-              <span class="tag2">＃餐廳美食</span>
-              <span class="tag6">＃愜意生活</span>
-              <span class="tag6">＃紅利點數</span>
+              <span>＃餐廳美食</span>
+              <span>＃愜意生活</span>
+              <span>＃紅利點數</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -307,9 +305,9 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag3 tag6" data-aos="fade-up">
         <div class="img-wrap">
-          <img src="asset/img/img11.jpg" />
+          <img src="./img/img11.jpg" />
         </div>
         <div class="info">
           <div>
@@ -319,8 +317,8 @@
               <li>兌換點數 6,000 點</li>
             </ul>
             <div class="hashtag">
-              <span class="tag6">＃飯店優惠</span>
-              <span class="tag6">＃紅利點數</span>
+              <span>＃飯店優惠</span>
+              <span>＃紅利點數</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -333,10 +331,10 @@
           </div>
         </div>
       </div>
-      <div class="item card" data-aos="fade-up">
+      <div class="item card tag1 tag4" data-aos="fade-up">
         <div class="special-tag">需登錄</div>
         <div class="img-wrap">
-          <img src="asset/img/img12.jpg" />
+          <img src="./img/img12.jpg" />
         </div>
         <div class="info">
           <div>
@@ -347,8 +345,8 @@
               <li>兌換點數 6,000 點</li>
             </ul>
             <div class="hashtag">
-              <span class="tag2">＃百貨量販</span>
-              <span class="tag6">＃電視網路購物</span>
+              <span>＃百貨量販</span>
+              <span>＃電視網路購物</span>
             </div>
             <span class="read-more">
               <a href="#">了解更多<span>...</span></a>
@@ -363,13 +361,7 @@
       </div>
     </section>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init({
-        duration: 1000,
-        once: true,
-        easing: "ease-out",
-      });
-    </script>
+    <script src="./script.js"></script>
   </body>
 </html>
 <meta charset="utf-8" />
